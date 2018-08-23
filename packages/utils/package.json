@@ -1,0 +1,28 @@
+{
+  "name": "@auto/utils",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": "",
+  "repository": "deepsweet/auto",
+  "homepage": "https://github.com/deepsweet/start/tree/master/packages/utils",
+  "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
+  "contributors": [
+    "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"
+  ],
+  "license": "MIT",
+  "main": "build/index.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "esm": "^3.0.80"
+  }
+}

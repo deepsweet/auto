@@ -1,0 +1,6 @@
+export { default as getBumps } from './get-bumps'
+export { default as getCommitMessages } from './get-commit-messages'
+export { default as getLog } from './get-log'
+export { default as parseCommitMessage } from './parse-commit-message'
+export { default as writeCommitsTags } from './write-commits-tags'
+export * from './types'

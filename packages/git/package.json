@@ -1,0 +1,33 @@
+{
+  "name": "@auto/git",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": "",
+  "repository": "deepsweet/auto",
+  "homepage": "https://github.com/deepsweet/start/tree/master/packages/git",
+  "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
+  "contributors": [
+    "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"
+  ],
+  "license": "MIT",
+  "main": "build/esm-loader.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@auto/utils": "^0.0.1",
+    "esm": "^3.0.80",
+    "execa": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/execa": "^0.9.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@auto/bump",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": "",
+  "repository": "deepsweet/auto",
+  "homepage": "https://github.com/deepsweet/start/tree/master/packages/bump",
+  "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
+  "contributors": [
+    "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"
+  ],
+  "license": "MIT",
+  "main": "build/esm-loader.js",
+  "module": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@auto/deps": "^0.0.1",
+    "@auto/utils": "^0.0.1",
+    "esm": "^3.0.80",
+    "semver": "^5.5.1"
+  },
+  "devDependencies": {
+    "@types/semver": "^5.5.0"
+  }
+}
