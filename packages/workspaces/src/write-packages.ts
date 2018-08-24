@@ -24,7 +24,7 @@ export const writePackages = async (bumpStack: TBumpStack) => {
       }
     }
 
-    const packageData = JSON.stringify(packageJson, null, 2)
+    const packageData = JSON.stringify(packageJson, null, 2) + '\n'
 
     await pWriteFile(item.path, packageData, { encoding: 'utf8' })
   }
