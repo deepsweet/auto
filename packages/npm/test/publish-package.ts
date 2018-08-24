@@ -2,7 +2,6 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { ExecaError } from 'execa'
 
 test('npm:publishPackage', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -22,6 +21,28 @@ test('npm:publishPackage', async (t) => {
     ],
     'should spawn NPM with necessary arguments'
   )
+
+  unmock('../src/publish-package')
+})
+
+test('npm:publishPackage: throw error', async (t) => {
+  const execaSpy = createSpy(() => {
+    throw new Error('error')
+  })
+
+  mock('../src/publish-package', {
+    execa: { default: execaSpy }
+  })
+
+  const { publishPackage } = await import('../src/publish-package')
+
+  try {
+    await publishPackage('/foo/bar/baz')
+
+    t.fail('should not get here')
+  } catch (err) {
+    t.equal(err, null, 'error should be null')
+  }
 
   unmock('../src/publish-package')
 })

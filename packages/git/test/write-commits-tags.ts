@@ -123,3 +123,35 @@ test('git:writeCommitsTags: no packages to publish', async (t) => {
 
   unmock('../src/write-commits-tags')
 })
+
+test('git:writeCommitsTags: throw error', async (t) => {
+  const execaSpy = createSpy(() => {
+    throw new Error('error')
+  })
+
+  mock('../src/write-commits-tags', {
+    execa: { default: execaSpy }
+  })
+
+  const { writeCommitsTags } = await import('../src/write-commits-tags')
+
+  try {
+    await writeCommitsTags({
+      '@ns/a': {
+        path: 'fakes/a/package.json',
+        type: 'major',
+        version: '1.0.0',
+        deps: {
+          '@ns/b': '~0.2.0'
+        },
+        devDeps: null
+      }
+    }, gitOptions)
+
+    t.fail('should not get here')
+  } catch (err) {
+    t.equal(err, null, 'error should be null')
+  }
+
+  unmock('../src/write-commits-tags')
+})
