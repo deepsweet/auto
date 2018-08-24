@@ -16,7 +16,7 @@ test('npm:publishPackage', async (t) => {
   await publishPackage('/foo/bar/baz')
 
   t.deepEquals(
-    getSpyCalls(execaSpy),
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
       ['npm', ['publish', '/foo/bar/baz']]
     ],
