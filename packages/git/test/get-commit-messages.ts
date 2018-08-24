@@ -20,7 +20,7 @@ test('git:getCommitMessages', async (t) => {
   )
 
   t.deepEquals(
-    getSpyCalls(execaSpy),
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
       ['git', ['log', '--pretty=format:%s']]
     ],

@@ -1,7 +1,13 @@
 import execa from 'execa'
 
 export const getCommitMessages = async (): Promise<string[]> => {
-  const { stdout } = await execa('git', ['log', '--pretty=format:%s'])
+  try {
+    const { stdout } = await execa('git', ['log', '--pretty=format:%s'], {
+      stderr: process.stderr
+    })
 
-  return stdout.split('\n')
+    return stdout.split('\n')
+  } catch (err) {
+    throw null // eslint-disable-line no-throw-literal
+  }
 }

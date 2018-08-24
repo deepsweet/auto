@@ -9,27 +9,34 @@ const removeNamespace = (name: string, namespace: string) => {
 export const writeCommitsTags = async (bumps: TBumpStack, gitOptions: TGitOptions) => {
   for (const [nsName, bump] of Object.entries(bumps).reverse()) {
     const name = removeNamespace(nsName, gitOptions.namespace)
+    const execaOptions = { stderr: process.stderr }
 
     if (bump.type !== null && bump.version !== null) {
-      await execa(
-        'git',
-        [
-          'commit',
-          '-m',
-          `${gitOptions.prefixes['publish']} ${name}: v${bump.version}`,
-          bump.path
-        ]
-      )
+      try {
+        await execa(
+          'git',
+          [
+            'commit',
+            '-m',
+            `${gitOptions.prefixes['publish']} ${name}: v${bump.version}`,
+            bump.path
+          ],
+          execaOptions
+        )
 
-      await execa(
-        'git',
-        [
-          'tag',
-          '-m',
-          `${name}@${bump.version}`,
-          `${name}@${bump.version}`
-        ]
-      )
+        await execa(
+          'git',
+          [
+            'tag',
+            '-m',
+            `${name}@${bump.version}`,
+            `${name}@${bump.version}`
+          ],
+          execaOptions
+        )
+      } catch (err) {
+        throw null // eslint-disable-line no-throw-literal
+      }
     }
   }
 }

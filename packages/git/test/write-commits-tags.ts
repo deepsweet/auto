@@ -23,7 +23,7 @@ test('git:writeCommitsTags: single package', async (t) => {
   }, gitOptions)
 
   t.deepEquals(
-    getSpyCalls(execaSpy),
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
       ['git', ['commit', '-m', '📦 a: v0.1.1', 'fakes/a/package.json']],
       ['git', ['tag', '-m', 'a@0.1.1', 'a@0.1.1']]
@@ -72,7 +72,7 @@ test('git:writeCommitsTags: multiple packages', async (t) => {
   }, gitOptions)
 
   t.deepEquals(
-    getSpyCalls(execaSpy),
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
       ['git', ['commit', '-m', '📦 c: v1.2.0', 'fakes/c/package.json']],
       ['git', ['tag', '-m', 'c@1.2.0', 'c@1.2.0']],
