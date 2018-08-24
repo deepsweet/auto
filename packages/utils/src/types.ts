@@ -18,18 +18,20 @@ export type TBump = {
   type: TBumpType
 }
 
+export type TBumpStackItem = {
+  path: string,
+  version: string | null,
+  type: TBumpType | null,
+  deps: {
+    [name: string]: string
+  } | null,
+  devDeps: {
+    [name: string]: string
+  } | null
+}
+
 export type TBumpStack = {
-  [name: string]: {
-    path: string,
-    version: string | null,
-    type: TBumpType | null,
-    deps: {
-      [name: string]: string
-    } | null,
-    devDeps: {
-      [name: string]: string
-    } | null
-  }
+  [name: string]: TBumpStackItem
 }
 
 export type TChangelog = {
