@@ -1,4 +1,4 @@
-export type TCommitPrefixType = 'major' | 'minor' | 'patch' | 'publish'
+export type TCommitPrefixType = 'major' | 'minor' | 'patch' | 'publish' | 'dependencies'
 
 export type TGitOptions = {
   prefixes: {

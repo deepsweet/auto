@@ -5,7 +5,8 @@ export const gitOptions: TGitOptions = {
     patch: ['✔️'],
     minor: ['➕'],
     major: ['💥', '🚨'],
-    publish: ['📦']
+    publish: ['📦'],
+    dependencies: ['♻️']
   },
   namespace: 'ns'
 }
