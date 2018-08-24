@@ -1,6 +1,6 @@
 {
   "name": "@auto/bump",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,8 +23,8 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/workspaces": "^0.0.4",
-    "@auto/utils": "^0.0.1",
+    "@auto/workspaces": "^0.0.5",
+    "@auto/utils": "^0.0.2",
     "esm": "^3.0.80",
     "semver": "^5.5.1"
   },
