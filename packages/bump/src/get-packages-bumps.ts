@@ -1,16 +1,16 @@
-import { getDependentsOf, TPackages } from '@auto/workspaces/src/'
-import { compareReleaseTypes, TBump, TBumpStack, TBumpType } from '@auto/utils/src/'
+import { getDependentsCount, getDependentsOf, TPackages } from '@auto/workspaces/src/'
+import { compareReleaseTypes, TGitBump, TPackageBump, TBumpType } from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
 
-export const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack => {
+export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPackageBump[] => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)
     }
   }
 
-  const bumpStack: TBumpStack = {}
+  const bumpStack: { [name: string]: TPackageBump } = {}
 
   const getStackDepsRange = (name: string, depName: string): string | null => {
     if (!Reflect.has(bumpStack, name)) {
@@ -82,6 +82,7 @@ export const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack =>
         }
       } else {
         bumpStack[dependent.name] = {
+          name: dependent.name,
           path: dependentPackage.path,
           version: null,
           type: null,
@@ -133,6 +134,7 @@ export const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack =>
       }
     } else {
       bumpStack[bump.name] = {
+        name: bump.name,
         path: packageItem.path,
         version: bumpVersion(packageItem.json.version, bump.type),
         type: bump.type,
@@ -144,5 +146,5 @@ export const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack =>
     bumpDependents(bump.name, packageItem.json.version, bump.type)
   }
 
-  return bumpStack
+  return Object.values(bumpStack).sort((a, b) => getDependentsCount(b) - getDependentsCount(a))
 }

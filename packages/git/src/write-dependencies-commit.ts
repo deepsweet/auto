@@ -1,16 +1,12 @@
 import execa from 'execa'
 import { TGitOptions } from './types'
-import { TBumpStackItem } from '@auto/utils/src/'
+import { TPackageBump } from '@auto/utils/src/'
 
-const removeNamespace = (name: string, namespace: string) => {
-  return name.replace(`@${namespace}/`, '')
-}
-
-export const writeDependenciesCommit = async (packageName: string, bumpStackItem: TBumpStackItem, gitOptions: TGitOptions) => {
-  const name = removeNamespace(packageName, gitOptions.namespace)
+export const writeDependenciesCommit = async (packageBump: TPackageBump, gitOptions: TGitOptions) => {
+  const name = packageBump.name.replace(`@${gitOptions.namespace}/`, '')
   const execaOptions = { stderr: process.stderr }
 
-  if (bumpStackItem.deps !== null || bumpStackItem.devDeps !== null) {
+  if (packageBump.deps !== null || packageBump.devDeps !== null) {
     try {
       await execa(
         'git',
@@ -18,7 +14,7 @@ export const writeDependenciesCommit = async (packageName: string, bumpStackItem
           'commit',
           '-m',
           `${gitOptions.prefixes['dependencies']} ${name}: upgrade dependencies`,
-          bumpStackItem.path
+          packageBump.path
         ],
         execaOptions
       )

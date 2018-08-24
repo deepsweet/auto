@@ -26,6 +26,7 @@ test('writePackageDependencies: ignore version bump', async (t) => {
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
   await writePackageDependencies({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,
@@ -71,6 +72,7 @@ test('writePackageDependencies: multiple dependencies bump', async (t) => {
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
   await writePackageDependencies({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,
@@ -123,6 +125,7 @@ test('writePackageDependencies: multiple dev dependencies bump', async (t) => {
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
   await writePackageDependencies({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,

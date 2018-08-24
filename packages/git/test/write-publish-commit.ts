@@ -13,8 +13,8 @@ test('git:writePublishCommit: single package', async (t) => {
   const { writePublishCommit } = await import('../src/write-publish-commit')
 
   await writePublishCommit(
-    '@ns/a',
     {
+      name: '@ns/a',
       path: 'fakes/a/package.json',
       type: 'patch',
       version: '0.1.1',
@@ -46,8 +46,8 @@ test('git:writePublishCommit: no packages to publish', async (t) => {
   const { writePublishCommit } = await import('../src/write-publish-commit')
 
   await writePublishCommit(
-    '@ns/a',
     {
+      name: '@ns/a',
       path: 'fakes/a/package.json',
       type: null,
       version: null,
@@ -81,8 +81,8 @@ test('git:writePublishCommit: throw error', async (t) => {
 
   try {
     await writePublishCommit(
-      '@ns/a',
       {
+        name: '@ns/a',
         path: 'fakes/a/package.json',
         type: 'major',
         version: '1.0.0',

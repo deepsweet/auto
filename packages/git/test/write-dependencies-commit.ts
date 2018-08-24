@@ -13,8 +13,8 @@ test('git:writeDependenciesCommit: no dependencies', async (t) => {
   const { writeDependenciesCommit } = await import('../src/write-dependencies-commit')
 
   await writeDependenciesCommit(
-    '@ns/a',
     {
+      name: '@ns/a',
       path: 'fakes/a/package.json',
       type: 'patch',
       version: '0.1.1',
@@ -43,8 +43,8 @@ test('git:writeDependenciesCommit: single dependency', async (t) => {
   const { writeDependenciesCommit } = await import('../src/write-dependencies-commit')
 
   await writeDependenciesCommit(
-    '@ns/a',
     {
+      name: '@ns/a',
       path: 'fakes/a/package.json',
       type: null,
       version: null,
@@ -80,7 +80,8 @@ test('git:writeDependenciesCommit: throw error', async (t) => {
 
   try {
     await writeDependenciesCommit(
-      '@ns/a', {
+      {
+        name: '@ns/a',
         path: 'fakes/a/package.json',
         type: 'major',
         version: '1.0.0',

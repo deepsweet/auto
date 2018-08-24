@@ -13,12 +13,13 @@ export type TPackageJson = {
 
 export type TBumpType = 'major' | 'minor' | 'patch'
 
-export type TBump = {
+export type TGitBump = {
   name: string,
   type: TBumpType
 }
 
-export type TBumpStackItem = {
+export type TPackageBump = {
+  name: string,
   path: string,
   version: string | null,
   type: TBumpType | null,
@@ -28,10 +29,6 @@ export type TBumpStackItem = {
   devDeps: {
     [name: string]: string
   } | null
-}
-
-export type TBumpStack = {
-  [name: string]: TBumpStackItem
 }
 
 export type TChangelog = {

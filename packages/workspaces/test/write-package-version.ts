@@ -23,6 +23,7 @@ test('writePackageVersion: single version bump', async (t) => {
   const { writePackageVersion } = await import('../src/write-package-version')
 
   await writePackageVersion({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,
@@ -68,6 +69,7 @@ test('writePackageVersion: ignore dependencies', async (t) => {
   const { writePackageVersion } = await import('../src/write-package-version')
 
   await writePackageVersion({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,
@@ -120,6 +122,7 @@ test('writePackageVersion: ignore devDependencies', async (t) => {
   const { writePackageVersion } = await import('../src/write-package-version')
 
   await writePackageVersion({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: '1.0.1',
     type: null,
@@ -171,6 +174,7 @@ test('writePackageVersion: no version bump', async (t) => {
   const { writePackageVersion } = await import('../src/write-package-version')
 
   await writePackageVersion({
+    name: '@ns/a',
     path: `${rootDir}/fakes/a/package.json`,
     version: null,
     type: null,
