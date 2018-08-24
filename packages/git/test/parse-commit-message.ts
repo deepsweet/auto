@@ -1,6 +1,6 @@
 import test from 'blue-tape'
-import gitOptions from './git-options'
-import parseCommitMessage from '../src/parse-commit-message'
+import { gitOptions } from './git-options'
+import { parseCommitMessage } from '../src/parse-commit-message'
 
 test('git:parseCommitMessage', async (t) => {
   t.equal(

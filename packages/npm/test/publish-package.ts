@@ -11,7 +11,7 @@ test('npm:publishPackage', async (t) => {
     execa: { default: execaSpy }
   })
 
-  const { default: publishPackage } = await import('../src/publish-package')
+  const { publishPackage } = await import('../src/publish-package')
 
   await publishPackage('/foo/bar/baz')
 

@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import gitOptions from './git-options'
+import { gitOptions } from './git-options'
 import { mock, unmock } from 'mocku'
 
 test('git:getLog single package', async (t) => {
@@ -13,7 +13,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -41,7 +41,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -69,7 +69,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -98,7 +98,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -128,7 +128,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -158,7 +158,7 @@ test('git:getLog single package', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -190,7 +190,7 @@ test('git:getLog multiple packages', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),
@@ -221,7 +221,7 @@ test('git:getLog skipped commits', async (t) => {
     }
   })
 
-  const { default: getLog } = await import('../src/get-log')
+  const { getLog } = await import('../src/get-log')
 
   t.deepEquals(
     await getLog(gitOptions),

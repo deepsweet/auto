@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import bumpVersion from '../src/bump-version'
+import { bumpVersion } from '../src/bump-version'
 import { TBumpType } from '@auto/utils/src/'
 
 test('semver:bump', (t) => {

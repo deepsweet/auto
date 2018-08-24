@@ -37,19 +37,19 @@ test('npm:publish', async (t) => {
 
   mock('../src/publish-packages', {
     './get-packages': {
-      default: getPackagesSpy
+      getPackages: getPackagesSpy
     },
     './get-remote-version': {
-      default: getRemoteVersionSpy
+      getRemoteVersion: getRemoteVersionSpy
     },
     './publish-package': {
-      default: publishPackageSpy
+      publishPackage: publishPackageSpy
     }
   })
 
-  const { default: publish } = await import('../src/publish-packages')
+  const { publishPackages } = await import('../src/publish-packages')
 
-  await publish()
+  await publishPackages()
 
   t.deepEquals(
     getSpyCalls(getPackagesSpy),

@@ -1,6 +1,6 @@
 import { TGitOptions, TCommitPrefixType } from './types'
 
-const parseCommitMessage = (message: string, options: TGitOptions) => {
+export const parseCommitMessage = (message: string, options: TGitOptions) => {
   for (const entry of Object.entries(options.prefixes)) {
     const [type, values] = entry as [TCommitPrefixType, string[]]
     const regexp = new RegExp(`^(${values.join('|')})\\s(.+?):\\s((?:[\r\n]|.)+)$`, 'm')
@@ -20,5 +20,3 @@ const parseCommitMessage = (message: string, options: TGitOptions) => {
 
   return null
 }
-
-export default parseCommitMessage

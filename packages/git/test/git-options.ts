@@ -1,6 +1,6 @@
 import { TGitOptions } from '../src/types'
 
-const gitOptions: TGitOptions = {
+export const gitOptions: TGitOptions = {
   prefixes: {
     patch: ['✔️'],
     minor: ['➕'],
@@ -9,5 +9,3 @@ const gitOptions: TGitOptions = {
   },
   namespace: 'ns'
 }
-
-export default gitOptions

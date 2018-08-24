@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import compareReleaseTypes from '../src/compare-release-types'
+import { compareReleaseTypes } from '../src/compare-release-types'
 import { TBumpType } from '../src/types'
 
 test('compare-release-type', (t) => {

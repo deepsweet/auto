@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import gitOptions from './git-options'
+import { gitOptions } from './git-options'
 import { mock, unmock } from 'mocku'
 
 test('git:getBumps single package', async (t) => {
@@ -13,7 +13,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -38,7 +38,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -63,7 +63,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -89,7 +89,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -115,7 +115,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -141,7 +141,7 @@ test('git:getBumps single package', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -169,7 +169,7 @@ test('git:getBumps multiple packages', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),
@@ -200,7 +200,7 @@ test('git:getBumps skipped commits', async (t) => {
     }
   })
 
-  const { default: getBumps } = await import('../src/get-bumps')
+  const { getBumps } = await import('../src/get-bumps')
 
   t.deepEquals(
     await getBumps(gitOptions),

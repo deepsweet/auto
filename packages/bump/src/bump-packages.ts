@@ -1,9 +1,9 @@
 import { getDependentsOf, TPackages } from '@auto/workspaces/src/'
 import { compareReleaseTypes, TBump, TBumpStack, TBumpType } from '@auto/utils/src/'
-import bumpRange from './bump-range'
-import bumpVersion from './bump-version'
+import { bumpRange } from './bump-range'
+import { bumpVersion } from './bump-version'
 
-const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack => {
+export const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)
@@ -146,5 +146,3 @@ const bumpPackages = (packages: TPackages, bumps: TBump[]): TBumpStack => {
 
   return bumpStack
 }
-
-export default bumpPackages

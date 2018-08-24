@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import gitOptions from './git-options'
+import { gitOptions } from './git-options'
 
 test('git:writeCommitsTags: single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -10,7 +10,7 @@ test('git:writeCommitsTags: single package', async (t) => {
     execa: { default: execaSpy }
   })
 
-  const { default: writeCommitsTags } = await import('../src/write-commits-tags')
+  const { writeCommitsTags } = await import('../src/write-commits-tags')
 
   await writeCommitsTags({
     '@ns/a': {
@@ -41,7 +41,7 @@ test('git:writeCommitsTags: multiple packages', async (t) => {
     execa: { default: execaSpy }
   })
 
-  const { default: writeCommitsTags } = await import('../src/write-commits-tags')
+  const { writeCommitsTags } = await import('../src/write-commits-tags')
 
   await writeCommitsTags({
     '@ns/a': {
@@ -92,7 +92,7 @@ test('git:writeCommitsTags: no packages to publish', async (t) => {
     execa: { default: execaSpy }
   })
 
-  const { default: writeCommitsTags } = await import('../src/write-commits-tags')
+  const { writeCommitsTags } = await import('../src/write-commits-tags')
 
   await writeCommitsTags({
     '@ns/a': {

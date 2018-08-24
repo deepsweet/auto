@@ -1,11 +1,10 @@
 import { writeFile } from 'fs'
 import { promisify } from 'util'
-import { TPackageJson } from '@auto/deps/src/'
-import { isDependencyObject, TBumpStack } from '@auto/utils/src/'
+import { isDependencyObject, TBumpStack, TPackageJson } from '@auto/utils/src/'
 
 const pWriteFile = promisify(writeFile)
 
-const writeBumps = async (bumpStack: TBumpStack) => {
+export const writeBumps = async (bumpStack: TBumpStack) => {
   for (const item of Object.values(bumpStack)) {
     const packageJson: TPackageJson = await import(item.path)
 
@@ -30,5 +29,3 @@ const writeBumps = async (bumpStack: TBumpStack) => {
     await pWriteFile(item.path, packageData, { encoding: 'utf8' })
   }
 }
-
-export default writeBumps

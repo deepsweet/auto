@@ -1,6 +1,6 @@
 import execa, { ExecaError } from 'execa'
 
-const getRemoteVersion = async (name: string) => {
+export const getRemoteVersion = async (name: string) => {
   try {
     const { stdout } = await execa('npm', ['view', name, 'version'])
 
@@ -15,5 +15,3 @@ const getRemoteVersion = async (name: string) => {
     throw err
   }
 }
-
-export default getRemoteVersion

@@ -1,9 +1,9 @@
 import { dirname } from 'path'
-import getRemoteVersion from './get-remote-version'
-import publishPackage from './publish-package'
 import { getPackages } from '@auto/workspaces/src/'
+import { getRemoteVersion } from './get-remote-version'
+import { publishPackage } from './publish-package'
 
-const publish = async () => {
+export const publishPackages = async () => {
   const packages = await getPackages()
 
   for (const { path, json } of Object.values(packages)) {
@@ -16,5 +16,3 @@ const publish = async () => {
     }
   }
 }
-
-export default publish

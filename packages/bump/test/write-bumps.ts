@@ -18,7 +18,7 @@ test('writeBumps: single version bump', async (t) => {
     fs
   })
 
-  const { default: writeBumps } = await import('../src/write-bumps')
+  const { writeBumps } = await import('../src/write-bumps')
 
   await writeBumps({
     '@ns/a': {
@@ -63,7 +63,7 @@ test('writeBumps: multiple dependencies bump', async (t) => {
     fs
   })
 
-  const { default: writeBumps } = await import('../src/write-bumps')
+  const { writeBumps } = await import('../src/write-bumps')
 
   await writeBumps({
     '@ns/a': {
@@ -115,7 +115,7 @@ test('writeBumps: multiple dev dependencies bump', async (t) => {
     fs
   })
 
-  const { default: writeBumps } = await import('../src/write-bumps')
+  const { writeBumps } = await import('../src/write-bumps')
 
   await writeBumps({
     '@ns/a': {
@@ -180,7 +180,7 @@ test('writeBumps: everything', async (t) => {
     fs
   })
 
-  const { default: writeBumps } = await import('../src/write-bumps')
+  const { writeBumps } = await import('../src/write-bumps')
 
   await writeBumps({
     '@ns/a': {

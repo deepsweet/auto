@@ -1,3 +1,16 @@
+import { TJsonMap } from 'typeon'
+
+export type TPackageJson = {
+  name: string,
+  version: string,
+  dependencies?: {
+    [k: string]: string
+  },
+  devDependencies?: {
+    [k: string]: string
+  }
+} & TJsonMap
+
 export type TBumpType = 'major' | 'minor' | 'patch'
 
 export type TBump = {

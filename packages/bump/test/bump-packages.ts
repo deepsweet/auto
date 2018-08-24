@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import bumpPackages from '../src/bump-packages'
+import { bumpPackages } from '../src/bump-packages'
 
 test('bump-packages: single package', (t) => {
   t.deepEquals(

@@ -1,13 +1,13 @@
 import { compareReleaseTypes, TBump, TBumpType } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
-import parseCommitMessage from './parse-commit-message'
+import { parseCommitMessage } from './parse-commit-message'
 import { TGitOptions } from './types'
 
 type TGitBumps = {
   [key: string]: TBumpType
 }
 
-const getBumps = async (options: TGitOptions): Promise<TBump[]> => {
+export const getBumps = async (options: TGitOptions): Promise<TBump[]> => {
   const messages = await getCommitMessages()
   const bumps: TGitBumps = {}
   const completedPackages: string[] = []
@@ -44,5 +44,3 @@ const getBumps = async (options: TGitOptions): Promise<TBump[]> => {
     })
   }, [] as TBump[])
 }
-
-export default getBumps

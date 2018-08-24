@@ -2,7 +2,7 @@ import { TBumpType } from './types'
 
 const types: TBumpType[] = ['patch', 'minor', 'major']
 
-const compareReleaseTypes = (a: TBumpType | null, b: TBumpType | null) => {
+export const compareReleaseTypes = (a: TBumpType | null, b: TBumpType | null) => {
   if (a === null) {
     return -1
   }
@@ -24,5 +24,3 @@ const compareReleaseTypes = (a: TBumpType | null, b: TBumpType | null) => {
 
   return ia - ib
 }
-
-export default compareReleaseTypes

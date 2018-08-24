@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import bumpRange from '../src/bump-range'
+import { bumpRange } from '../src/bump-range'
 import { TBumpType } from '@auto/utils/src/'
 
 test('semver:bumpRange', (t) => {

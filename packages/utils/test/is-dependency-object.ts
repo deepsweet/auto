@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import isDependencyObject from '../src/is-dependency-object'
+import { isDependencyObject } from '../src/is-dependency-object'
 
 test('utils/isDependencyObject', (t) => {
   t.true(

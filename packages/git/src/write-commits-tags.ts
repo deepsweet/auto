@@ -6,7 +6,7 @@ const removeNamespace = (name: string, namespace: string) => {
   return name.replace(`@${namespace}/`, '')
 }
 
-const writeCommitsTags = async (bumps: TBumpStack, gitOptions: TGitOptions) => {
+export const writeCommitsTags = async (bumps: TBumpStack, gitOptions: TGitOptions) => {
   for (const [nsName, bump] of Object.entries(bumps)) {
     const name = removeNamespace(nsName, gitOptions.namespace)
 
@@ -33,5 +33,3 @@ const writeCommitsTags = async (bumps: TBumpStack, gitOptions: TGitOptions) => {
     }
   }
 }
-
-export default writeCommitsTags

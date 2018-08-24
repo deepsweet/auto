@@ -1,4 +1,4 @@
-import parseCommitMessage from './parse-commit-message'
+import { parseCommitMessage } from './parse-commit-message'
 import { TGitOptions } from './types'
 import { TChangelog } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
@@ -7,7 +7,7 @@ type TGitLogs = {
   [key: string]: string[]
 }
 
-const getLog = async (options: TGitOptions): Promise<TChangelog[]> => {
+export const getLog = async (options: TGitOptions): Promise<TChangelog[]> => {
   const messages = await getCommitMessages()
   const logs: TGitLogs = {}
   const completedPackages: string[] = []
@@ -44,5 +44,3 @@ const getLog = async (options: TGitOptions): Promise<TChangelog[]> => {
     })
   }, [] as TChangelog[])
 }
-
-export default getLog

@@ -27,7 +27,7 @@ test('npm:getRemoteVersion', async (t) => {
     execa: { default: execaSpy }
   })
 
-  const { default: getRemoteVersion } = await import('../src/get-remote-version')
+  const { getRemoteVersion } = await import('../src/get-remote-version')
 
   t.equal(
     await getRemoteVersion('foo'),
