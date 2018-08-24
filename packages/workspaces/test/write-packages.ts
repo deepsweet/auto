@@ -4,23 +4,25 @@ import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
 
-test('writeBumps: single version bump', async (t) => {
+test('writePackages: single version bump', async (t) => {
   const vol = Volume.fromJSON({
     [`${rootDir}/fakes/a/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
 
-  mock('../src/write-bumps', {
+  mock('../src/write-packages', {
     [`${rootDir}/fakes/a/package.json`]: {
-      name: '@ns/a',
-      version: '1.0.0'
+      default: {
+        name: '@ns/a',
+        version: '1.0.0'
+      }
     },
     fs
   })
 
-  const { writeBumps } = await import('../src/write-bumps')
+  const { writePackages } = await import('../src/write-packages')
 
-  await writeBumps({
+  await writePackages({
     '@ns/a': {
       path: `${rootDir}/fakes/a/package.json`,
       version: '1.0.1',
@@ -42,30 +44,32 @@ test('writeBumps: single version bump', async (t) => {
     'should write bumps'
   )
 
-  unmock('../src/write-bumps')
+  unmock('../src/write-packages')
 })
 
-test('writeBumps: multiple dependencies bump', async (t) => {
+test('writePackages: multiple dependencies bump', async (t) => {
   const vol = Volume.fromJSON({
     [`${rootDir}/fakes/a/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
 
-  mock('../src/write-bumps', {
+  mock('../src/write-packages', {
     [`${rootDir}/fakes/a/package.json`]: {
-      name: '@ns/a',
-      version: '1.0.0',
-      dependencies: {
-        '@ns/b': '0.0.1',
-        '@ns/c': '0.0.2'
+      default: {
+        name: '@ns/a',
+        version: '1.0.0',
+        dependencies: {
+          '@ns/b': '0.0.1',
+          '@ns/c': '0.0.2'
+        }
       }
     },
     fs
   })
 
-  const { writeBumps } = await import('../src/write-bumps')
+  const { writePackages } = await import('../src/write-packages')
 
-  await writeBumps({
+  await writePackages({
     '@ns/a': {
       path: `${rootDir}/fakes/a/package.json`,
       version: '1.0.1',
@@ -94,30 +98,32 @@ test('writeBumps: multiple dependencies bump', async (t) => {
     'should write bumps'
   )
 
-  unmock('../src/write-bumps')
+  unmock('../src/write-packages')
 })
 
-test('writeBumps: multiple dev dependencies bump', async (t) => {
+test('writePackages: multiple dev dependencies bump', async (t) => {
   const vol = Volume.fromJSON({
     [`${rootDir}/fakes/a/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
 
-  mock('../src/write-bumps', {
+  mock('../src/write-packages', {
     [`${rootDir}/fakes/a/package.json`]: {
-      name: '@ns/a',
-      version: '1.0.0',
-      devDependencies: {
-        '@ns/b': '0.0.1',
-        '@ns/c': '0.0.2'
+      default: {
+        name: '@ns/a',
+        version: '1.0.0',
+        devDependencies: {
+          '@ns/b': '0.0.1',
+          '@ns/c': '0.0.2'
+        }
       }
     },
     fs
   })
 
-  const { writeBumps } = await import('../src/write-bumps')
+  const { writePackages } = await import('../src/write-packages')
 
-  await writeBumps({
+  await writePackages({
     '@ns/a': {
       path: `${rootDir}/fakes/a/package.json`,
       version: '1.0.1',
@@ -146,43 +152,47 @@ test('writeBumps: multiple dev dependencies bump', async (t) => {
     'should write bumps'
   )
 
-  unmock('../src/write-bumps')
+  unmock('../src/write-packages')
 })
 
-test('writeBumps: everything', async (t) => {
+test('writePackages: everything', async (t) => {
   const vol = Volume.fromJSON({
     [`${rootDir}/fakes/a/package.json`]: '',
     [`${rootDir}/fakes/b/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
 
-  mock('../src/write-bumps', {
+  mock('../src/write-packages', {
     [`${rootDir}/fakes/a/package.json`]: {
-      name: '@ns/a',
-      version: '1.0.0',
-      dependencies: {
-        '@ns/b': '0.0.1'
-      },
-      devDependencies: {
-        '@ns/c': '0.0.2'
+      default: {
+        name: '@ns/a',
+        version: '1.0.0',
+        dependencies: {
+          '@ns/b': '0.0.1'
+        },
+        devDependencies: {
+          '@ns/c': '0.0.2'
+        }
       }
     },
     [`${rootDir}/fakes/b/package.json`]: {
-      name: '@ns/b',
-      version: '2.0.0',
-      dependencies: {
-        '@ns/a': '0.1.0'
-      },
-      devDependencies: {
-        '@ns/c': '0.2.0'
+      default: {
+        name: '@ns/b',
+        version: '2.0.0',
+        dependencies: {
+          '@ns/a': '0.1.0'
+        },
+        devDependencies: {
+          '@ns/c': '0.2.0'
+        }
       }
     },
     fs
   })
 
-  const { writeBumps } = await import('../src/write-bumps')
+  const { writePackages } = await import('../src/write-packages')
 
-  await writeBumps({
+  await writePackages({
     '@ns/a': {
       path: `${rootDir}/fakes/a/package.json`,
       version: null,
@@ -243,5 +253,5 @@ test('writeBumps: everything', async (t) => {
     'should write bump B'
   )
 
-  unmock('../src/write-bumps')
+  unmock('../src/write-packages')
 })

@@ -4,9 +4,9 @@ import { isDependencyObject, TBumpStack, TPackageJson } from '@auto/utils/src/'
 
 const pWriteFile = promisify(writeFile)
 
-export const writeBumps = async (bumpStack: TBumpStack) => {
+export const writePackages = async (bumpStack: TBumpStack) => {
   for (const item of Object.values(bumpStack)) {
-    const packageJson: TPackageJson = await import(item.path)
+    const { default: packageJson }: { default: TPackageJson } = await import(item.path)
 
     if (item.version !== null) {
       packageJson.version = item.version
