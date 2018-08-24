@@ -194,6 +194,7 @@ test('git:getBumps skipped commits', async (t) => {
         '➕ foo',
         '💥',
         'beep',
+        '♻️ foo: upgrade dependencies',
         '✔️ foo: patch',
         '📦 foo: v1.0.1'
       ])
