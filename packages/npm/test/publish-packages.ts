@@ -60,8 +60,8 @@ test('npm:publish', async (t) => {
   t.deepEquals(
     getSpyCalls(getRemoteVersionSpy),
     [
-      ['@ns/a'],
-      ['@ns/b']
+      ['@ns/b'],
+      ['@ns/a']
     ],
     'should call getRemoteVersion'
   )

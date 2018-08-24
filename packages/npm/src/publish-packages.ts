@@ -6,7 +6,7 @@ import { publishPackage } from './publish-package'
 export const publishPackages = async () => {
   const packages = await getPackages()
 
-  for (const { path, json } of Object.values(packages)) {
+  for (const { path, json } of Object.values(packages).reverse()) {
     const remoteVersion = await getRemoteVersion(json.name)
 
     if (remoteVersion !== json.version) {
