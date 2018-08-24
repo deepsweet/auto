@@ -1,7 +1,7 @@
 import { dirname } from 'path'
-import { getPackages } from '@auto/deps/src/'
 import getRemoteVersion from './get-remote-version'
 import publishPackage from './publish-package'
+import { getPackages } from '@auto/workspaces/src/'
 
 const publish = async () => {
   const packages = await getPackages()

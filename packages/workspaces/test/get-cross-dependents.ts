@@ -1,7 +1,7 @@
 import test from 'blue-tape'
-import getCrossDependents from '../src/get-cross-dependents'
+import { getCrossDependents } from '../src/get-cross-dependents'
 
-test('deps:getCrossDependents no cross dependencies', async (t) => {
+test('workspace:getCrossDependents no cross dependencies', async (t) => {
   const packages = {
     a: {
       path: '/fakes/a/package.json',
@@ -39,7 +39,7 @@ test('deps:getCrossDependents no cross dependencies', async (t) => {
   )
 })
 
-test('deps:getCrossDependents one cross dependency', async (t) => {
+test('workspace:getCrossDependents one cross dependency', async (t) => {
   const packages = {
     a: {
       path: '/fakes/a/package.json',
@@ -77,7 +77,7 @@ test('deps:getCrossDependents one cross dependency', async (t) => {
   )
 })
 
-test('deps:getCrossDependents multiple cross dependencies', async (t) => {
+test('workspace:getCrossDependents multiple cross dependencies', async (t) => {
   const packages = {
     a: {
       path: '/fakes/a/package.json',
@@ -120,7 +120,7 @@ test('deps:getCrossDependents multiple cross dependencies', async (t) => {
   )
 })
 
-test('deps:getCrossDependents circular dependencies', async (t) => {
+test('workspace:getCrossDependents circular dependencies', async (t) => {
   const packages = {
     a: {
       path: '/fakes/a/package.json',

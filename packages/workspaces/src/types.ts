@@ -1,15 +1,4 @@
-import { TJsonMap } from 'typeon'
-
-export type TPackageJson = {
-  name: string,
-  version: string,
-  dependencies?: {
-    [k: string]: string
-  },
-  devDependencies?: {
-    [k: string]: string
-  }
-} & TJsonMap
+import { TPackageJson } from '@auto/utils/src/'
 
 export type TPackages = {
   [name: string]: {

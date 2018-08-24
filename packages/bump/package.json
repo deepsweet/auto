@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/deps": "^0.0.1",
+    "@auto/workspaces": "^0.0.1",
     "@auto/utils": "^0.0.1",
     "esm": "^3.0.80",
     "semver": "^5.5.1"

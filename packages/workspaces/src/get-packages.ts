@@ -1,7 +1,8 @@
-import getPackageDirs from './get-package-dirs'
-import { TPackageJson, TPackages } from './types'
+import { getPackageDirs } from './get-package-dirs'
+import { TPackages } from './types'
+import { TPackageJson } from '@auto/utils/src/'
 
-const getPackages = async () => {
+export const getPackages = async () => {
   const dirs = await getPackageDirs()
 
   return dirs.reduce(
@@ -20,5 +21,3 @@ const getPackages = async () => {
     Promise.resolve({} as TPackages)
   )
 }
-
-export default getPackages

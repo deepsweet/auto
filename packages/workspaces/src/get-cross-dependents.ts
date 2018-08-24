@@ -1,5 +1,5 @@
-import { isDependencyObject } from '@auto/utils/src/'
-import { TCrossDependents, TPackageJson, TPackages } from './types'
+import { isDependencyObject, TPackageJson } from '@auto/utils/src/'
+import { TCrossDependents, TPackages } from './types'
 
 const isDependent = (pkg: TPackageJson, dependsOnName: string): boolean => {
   let isDep = false
@@ -25,7 +25,7 @@ const getDevDependencyRange = ({ devDependencies }: TPackageJson, name: string) 
     ? devDependencies[name]
     : null
 
-const getCrossDependents = (packages: TPackages): TCrossDependents =>
+export const getCrossDependents = (packages: TPackages): TCrossDependents =>
   Object.keys(packages).reduce(
     (pkgs, name) => {
       const dependentNames = Object.keys(packages)
@@ -43,5 +43,3 @@ const getCrossDependents = (packages: TPackages): TCrossDependents =>
     },
     {} as TCrossDependents
   )
-
-export default getCrossDependents

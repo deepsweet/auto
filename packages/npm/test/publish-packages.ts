@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { TPackages } from '@auto/deps/src/'
+import { TPackages } from '@auto/workspaces/src/'
 
 test('npm:publish', async (t) => {
   const getPackagesSpy = createSpy((): Promise<TPackages> => Promise.resolve(({

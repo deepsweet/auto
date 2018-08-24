@@ -1,6 +1,6 @@
 import fastGlob from 'fast-glob'
 
-const getPackageDirs = async () => {
+export const getPackageDirs = async () => {
   const { workspaces } = await import(`${process.cwd()}/package.json`)
 
   return fastGlob(workspaces, {
@@ -9,5 +9,3 @@ const getPackageDirs = async () => {
     absolute: true
   }) as Promise<string[]>
 }
-
-export default getPackageDirs

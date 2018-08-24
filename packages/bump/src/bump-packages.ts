@@ -1,4 +1,4 @@
-import { getDependentsOf, TPackages } from '@auto/deps/src/'
+import { getDependentsOf, TPackages } from '@auto/workspaces/src/'
 import { compareReleaseTypes, TBump, TBumpStack, TBumpType } from '@auto/utils/src/'
 import bumpRange from './bump-range'
 import bumpVersion from './bump-version'

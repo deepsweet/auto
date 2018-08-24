@@ -1,10 +1,10 @@
 {
-  "name": "@auto/deps",
+  "name": "@auto/workspaces",
   "version": "0.0.1",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
-  "homepage": "https://github.com/deepsweet/start/tree/master/packages/deps",
+  "homepage": "https://github.com/deepsweet/start/tree/master/packages/workspace",
   "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
   "contributors": [
     "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"

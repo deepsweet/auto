@@ -10,7 +10,7 @@ const vol = Volume.fromJSON({
 })
 const fs = createFsFromVolume(vol)
 
-test('deps:getPackageDirs no cross dependencies', async (t) => {
+test('workspace:getPackageDirs no cross dependencies', async (t) => {
   mock('../src/get-package-dirs', {
     [`${rootDir}/package.json`]: {
       workspaces: ['fakes/*']
@@ -21,7 +21,7 @@ test('deps:getPackageDirs no cross dependencies', async (t) => {
     fs
   })
 
-  const { default: getPackageDirs } = await import('../src/get-package-dirs')
+  const { getPackageDirs } = await import('../src/get-package-dirs')
   t.deepEquals(
     await getPackageDirs(),
     [
