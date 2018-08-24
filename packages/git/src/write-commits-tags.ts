@@ -7,7 +7,7 @@ const removeNamespace = (name: string, namespace: string) => {
 }
 
 export const writeCommitsTags = async (bumps: TBumpStack, gitOptions: TGitOptions) => {
-  for (const [nsName, bump] of Object.entries(bumps)) {
+  for (const [nsName, bump] of Object.entries(bumps).reverse()) {
     const name = removeNamespace(nsName, gitOptions.namespace)
 
     if (bump.type !== null && bump.version !== null) {

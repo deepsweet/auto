@@ -74,10 +74,10 @@ test('git:writeCommitsTags: multiple packages', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy),
     [
-      ['git', ['commit', '-m', '📦 a: v0.1.1', 'fakes/a/package.json']],
-      ['git', ['tag', '-m', 'a@0.1.1', 'a@0.1.1']],
       ['git', ['commit', '-m', '📦 c: v1.2.0', 'fakes/c/package.json']],
-      ['git', ['tag', '-m', 'c@1.2.0', 'c@1.2.0']]
+      ['git', ['tag', '-m', 'c@1.2.0', 'c@1.2.0']],
+      ['git', ['commit', '-m', '📦 a: v0.1.1', 'fakes/a/package.json']],
+      ['git', ['tag', '-m', 'a@0.1.1', 'a@0.1.1']]
     ],
     'multiple packages'
   )
