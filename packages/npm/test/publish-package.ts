@@ -12,7 +12,14 @@ test('npm:publishPackage', async (t) => {
 
   const { publishPackage } = await import('../src/publish-package')
 
-  await publishPackage('/foo/bar/baz')
+  await publishPackage({
+    name: 'baz',
+    dir: '/foo/bar/baz',
+    version: '1.2.3',
+    type: 'minor',
+    deps: null,
+    devDeps: null
+  })
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
@@ -37,7 +44,14 @@ test('npm:publishPackage: throw error', async (t) => {
   const { publishPackage } = await import('../src/publish-package')
 
   try {
-    await publishPackage('/foo/bar/baz')
+    await publishPackage({
+      name: 'baz',
+      dir: '/foo/bar/baz',
+      version: '1.2.3',
+      type: 'minor',
+      deps: null,
+      devDeps: null
+    })
 
     t.fail('should not get here')
   } catch (err) {
