@@ -4005,7 +4005,7 @@ test('getPackageBumps: sort', (t) => {
             name: 'a',
             version: '0.1.0'
           }
-        },
+        }
       },
       [
         { name: 'a', type: 'minor' },
