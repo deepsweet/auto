@@ -118,6 +118,7 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
 
   for (const bump of bumps) {
     const packageItem = packages[bump.name]
+
     if (Reflect.has(bumpStack, bump.name)) {
       const bumpStackItem = bumpStack[bump.name]
 
@@ -146,5 +147,6 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
     bumpDependents(bump.name, packageItem.json.version, bump.type)
   }
 
-  return Object.values(bumpStack).sort((a, b) => getDependentsCount(b) - getDependentsCount(a))
+  return Object.values(bumpStack)
+    .sort((a, b) => getDependentsCount(a) - getDependentsCount(b))
 }
