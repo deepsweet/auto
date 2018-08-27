@@ -27,10 +27,6 @@ export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
       continue
     }
 
-    if (parsed.type === 'dependencies') {
-      continue
-    }
-
     if (parsed.type === 'publish') {
       completedPackages.push(parsed.package)
       continue
