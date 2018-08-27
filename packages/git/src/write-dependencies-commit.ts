@@ -1,4 +1,5 @@
 import execa from 'execa'
+import path from 'path'
 import { TGitOptions } from './types'
 import { TPackageBump } from '@auto/utils/src/'
 
@@ -7,6 +8,8 @@ export const writeDependenciesCommit = async (packageBump: TPackageBump, gitOpti
   const execaOptions = { stderr: process.stderr }
 
   if (packageBump.deps !== null || packageBump.devDeps !== null) {
+    const packageJsonPath = path.join(packageBump.dir, 'package.json')
+
     try {
       await execa(
         'git',
@@ -14,7 +17,7 @@ export const writeDependenciesCommit = async (packageBump: TPackageBump, gitOpti
           'commit',
           '-m',
           `${gitOptions.prefixes['dependencies']} ${name}: upgrade dependencies`,
-          packageBump.path
+          packageJsonPath
         ],
         execaOptions
       )

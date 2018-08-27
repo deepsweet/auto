@@ -4,7 +4,7 @@ import { getCrossDependents } from '../src/get-cross-dependents'
 test('workspace:getCrossDependents no cross dependencies', async (t) => {
   const packages = {
     a: {
-      path: '/fakes/a/package.json',
+      dir: '/fakes/a',
       json: {
         name: 'a',
         version: '0.1.0',
@@ -13,7 +13,7 @@ test('workspace:getCrossDependents no cross dependencies', async (t) => {
       }
     },
     b: {
-      path: '/fakes/b/package.json',
+      dir: '/fakes/b',
       json: {
         name: 'b',
         version: '0.2.0',
@@ -22,7 +22,7 @@ test('workspace:getCrossDependents no cross dependencies', async (t) => {
       }
     },
     c: {
-      path: '/fakes/c/package.json',
+      dir: '/fakes/c',
       json: {
         name: 'c',
         version: '0.3.0',
@@ -42,7 +42,7 @@ test('workspace:getCrossDependents no cross dependencies', async (t) => {
 test('workspace:getCrossDependents one cross dependency', async (t) => {
   const packages = {
     a: {
-      path: '/fakes/a/package.json',
+      dir: '/fakes/a',
       json: {
         name: 'a',
         version: '0.1.0',
@@ -50,7 +50,7 @@ test('workspace:getCrossDependents one cross dependency', async (t) => {
       }
     },
     b: {
-      path: '/fakes/b/package.json',
+      dir: '/fakes/b',
       json: {
         name: 'b',
         version: '0.2.0',
@@ -58,7 +58,7 @@ test('workspace:getCrossDependents one cross dependency', async (t) => {
       }
     },
     c: {
-      path: '/fakes/c/package.json',
+      dir: '/fakes/c',
       json: {
         name: 'c',
         version: '0.3.0',
@@ -80,7 +80,7 @@ test('workspace:getCrossDependents one cross dependency', async (t) => {
 test('workspace:getCrossDependents multiple cross dependencies', async (t) => {
   const packages = {
     a: {
-      path: '/fakes/a/package.json',
+      dir: '/fakes/a',
       json: {
         name: 'a',
         version: '0.1.0',
@@ -89,7 +89,7 @@ test('workspace:getCrossDependents multiple cross dependencies', async (t) => {
       }
     },
     b: {
-      path: '/fakes/b/package.json',
+      dir: '/fakes/b',
       json: {
         name: 'b',
         version: '0.2.0',
@@ -98,7 +98,7 @@ test('workspace:getCrossDependents multiple cross dependencies', async (t) => {
       }
     },
     c: {
-      path: '/fakes/c/package.json',
+      dir: '/fakes/c',
       json: {
         name: 'c',
         version: '0.3.0',
@@ -123,7 +123,7 @@ test('workspace:getCrossDependents multiple cross dependencies', async (t) => {
 test('workspace:getCrossDependents circular dependencies', async (t) => {
   const packages = {
     a: {
-      path: '/fakes/a/package.json',
+      dir: '/fakes/a',
       json: {
         name: 'a',
         version: '0.1.0',
@@ -132,7 +132,7 @@ test('workspace:getCrossDependents circular dependencies', async (t) => {
       }
     },
     b: {
-      path: '/fakes/b/package.json',
+      dir: '/fakes/b',
       json: {
         name: 'b',
         version: '0.2.0',
@@ -141,7 +141,7 @@ test('workspace:getCrossDependents circular dependencies', async (t) => {
       }
     },
     c: {
-      path: '/fakes/c/package.json',
+      dir: '/fakes/c',
       json: {
         name: 'c',
         version: '0.3.0',

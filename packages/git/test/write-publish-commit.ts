@@ -15,7 +15,7 @@ test('git:writePublishCommit: single package', async (t) => {
   await writePublishCommit(
     {
       name: '@ns/a',
-      path: 'fakes/a/package.json',
+      dir: 'fakes/a',
       type: 'patch',
       version: '0.1.1',
       deps: null,
@@ -48,7 +48,7 @@ test('git:writePublishCommit: no packages to publish', async (t) => {
   await writePublishCommit(
     {
       name: '@ns/a',
-      path: 'fakes/a/package.json',
+      dir: 'fakes/a',
       type: null,
       version: null,
       deps: {
@@ -83,7 +83,7 @@ test('git:writePublishCommit: throw error', async (t) => {
     await writePublishCommit(
       {
         name: '@ns/a',
-        path: 'fakes/a/package.json',
+        dir: 'fakes/a',
         type: 'major',
         version: '1.0.0',
         deps: {

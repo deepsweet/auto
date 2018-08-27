@@ -15,7 +15,7 @@ test('git:writeDependenciesCommit: no dependencies', async (t) => {
   await writeDependenciesCommit(
     {
       name: '@ns/a',
-      path: 'fakes/a/package.json',
+      dir: 'fakes/a',
       type: 'patch',
       version: '0.1.1',
       deps: null,
@@ -45,7 +45,7 @@ test('git:writeDependenciesCommit: single dependency', async (t) => {
   await writeDependenciesCommit(
     {
       name: '@ns/a',
-      path: 'fakes/a/package.json',
+      dir: 'fakes/a',
       type: null,
       version: null,
       deps: {
@@ -82,7 +82,7 @@ test('git:writeDependenciesCommit: throw error', async (t) => {
     await writeDependenciesCommit(
       {
         name: '@ns/a',
-        path: 'fakes/a/package.json',
+        dir: 'fakes/a',
         type: 'major',
         version: '1.0.0',
         deps: {

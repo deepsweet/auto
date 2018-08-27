@@ -6,7 +6,7 @@ test('getPackageBumps: single package', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
@@ -20,7 +20,7 @@ test('getPackageBumps: single package', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -34,7 +34,7 @@ test('getPackageBumps: single package', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
@@ -48,7 +48,7 @@ test('getPackageBumps: single package', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -62,7 +62,7 @@ test('getPackageBumps: single package', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.2.1'
@@ -76,7 +76,7 @@ test('getPackageBumps: single package', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -94,21 +94,21 @@ test('getPackageBumps: multiple independent packages', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '0.2.1'
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '1.2.1'
@@ -124,7 +124,7 @@ test('getPackageBumps: multiple independent packages', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
         deps: null,
@@ -132,7 +132,7 @@ test('getPackageBumps: multiple independent packages', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '0.3.0',
         type: 'minor',
         deps: null,
@@ -140,7 +140,7 @@ test('getPackageBumps: multiple independent packages', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -158,7 +158,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
@@ -173,7 +173,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
         deps: null,
@@ -187,7 +187,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
@@ -202,7 +202,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -216,7 +216,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
@@ -231,7 +231,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -245,7 +245,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
@@ -260,7 +260,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -274,7 +274,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
@@ -289,7 +289,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -303,7 +303,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
@@ -318,7 +318,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -332,7 +332,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
@@ -347,7 +347,7 @@ test('getPackageBumps: single package multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -365,14 +365,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -389,7 +389,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -397,7 +397,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -413,14 +413,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -437,7 +437,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.3',
         type: 'patch',
         deps: null,
@@ -445,7 +445,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -461,14 +461,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -485,7 +485,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -493,7 +493,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -509,14 +509,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -533,7 +533,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -541,7 +541,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -557,14 +557,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -581,7 +581,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
         deps: null,
@@ -589,7 +589,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -605,14 +605,14 @@ test('getPackageBumps: b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -629,7 +629,7 @@ test('getPackageBumps: b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -637,7 +637,7 @@ test('getPackageBumps: b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -657,14 +657,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -681,7 +681,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -689,7 +689,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -705,14 +705,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -729,7 +729,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -737,7 +737,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -753,14 +753,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -777,7 +777,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -785,7 +785,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -801,14 +801,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -825,7 +825,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -833,7 +833,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -849,14 +849,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -873,7 +873,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
         deps: null,
@@ -881,7 +881,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -897,14 +897,14 @@ test('getPackageBumps: b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -921,7 +921,7 @@ test('getPackageBumps: b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -929,7 +929,7 @@ test('getPackageBumps: b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -949,14 +949,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -974,7 +974,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -982,7 +982,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -998,14 +998,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1023,7 +1023,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1031,7 +1031,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -1047,14 +1047,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1072,7 +1072,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1080,7 +1080,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -1096,14 +1096,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1121,7 +1121,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1129,7 +1129,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -1145,14 +1145,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1170,7 +1170,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1178,7 +1178,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -1194,14 +1194,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1219,7 +1219,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1227,7 +1227,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -1243,14 +1243,14 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1268,7 +1268,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1276,7 +1276,7 @@ test('getPackageBumps: b -> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -1296,14 +1296,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1321,7 +1321,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -1329,7 +1329,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1345,14 +1345,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1370,7 +1370,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1378,7 +1378,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1394,14 +1394,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1419,7 +1419,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1427,7 +1427,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1443,14 +1443,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1468,7 +1468,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1476,7 +1476,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         devDeps: {
@@ -1492,14 +1492,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1517,7 +1517,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1525,7 +1525,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1541,14 +1541,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1566,7 +1566,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1574,7 +1574,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1590,14 +1590,14 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.2'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1615,7 +1615,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -1623,7 +1623,7 @@ test('getPackageBumps: b |> a multiple bumps', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -1643,14 +1643,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1660,7 +1660,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -1677,7 +1677,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -1685,7 +1685,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -1695,7 +1695,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -1711,14 +1711,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1728,7 +1728,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -1745,7 +1745,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -1753,7 +1753,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -1763,7 +1763,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -1779,14 +1779,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1796,7 +1796,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -1813,7 +1813,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1821,7 +1821,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -1831,7 +1831,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -1847,14 +1847,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -1864,7 +1864,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -1881,7 +1881,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -1889,7 +1889,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -1899,7 +1899,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -1915,14 +1915,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '2.3.4',
@@ -1932,7 +1932,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '3.4.5',
@@ -1949,7 +1949,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.3.0',
         type: 'minor',
         deps: null,
@@ -1957,7 +1957,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -1967,7 +1967,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '3.5.0',
         type: 'minor',
         deps: {
@@ -1983,14 +1983,14 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '2.3.4',
@@ -2000,7 +2000,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '3.4.5',
@@ -2017,7 +2017,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -2025,7 +2025,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '3.0.0',
         type: 'major',
         deps: {
@@ -2035,7 +2035,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '4.0.0',
         type: 'major',
         deps: {
@@ -2055,14 +2055,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2072,7 +2072,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2089,7 +2089,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -2097,7 +2097,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2107,7 +2107,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2123,14 +2123,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2140,7 +2140,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2157,7 +2157,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -2165,7 +2165,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2175,7 +2175,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2191,14 +2191,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2208,7 +2208,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2225,7 +2225,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -2233,7 +2233,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2243,7 +2243,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2259,14 +2259,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2276,7 +2276,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2293,7 +2293,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -2301,7 +2301,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2311,7 +2311,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2327,14 +2327,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '2.3.4',
@@ -2344,7 +2344,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '3.4.5',
@@ -2361,7 +2361,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.3.0',
         type: 'minor',
         deps: null,
@@ -2369,7 +2369,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2379,7 +2379,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2395,14 +2395,14 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.2.3'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '2.3.4',
@@ -2412,7 +2412,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '3.4.5',
@@ -2429,7 +2429,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -2437,7 +2437,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2447,7 +2447,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -2467,14 +2467,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2484,7 +2484,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2501,7 +2501,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -2509,7 +2509,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -2519,7 +2519,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -2535,14 +2535,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2552,7 +2552,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2569,7 +2569,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
         deps: null,
@@ -2577,7 +2577,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -2587,7 +2587,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -2603,14 +2603,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2620,7 +2620,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2637,7 +2637,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -2645,7 +2645,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -2655,7 +2655,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -2671,14 +2671,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2688,7 +2688,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2705,7 +2705,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -2713,7 +2713,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -2723,7 +2723,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -2739,14 +2739,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2756,7 +2756,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2773,7 +2773,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
         deps: null,
@@ -2781,7 +2781,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -2791,7 +2791,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -2807,14 +2807,14 @@ test('getPackageBumps: c -> b -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2824,7 +2824,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2841,7 +2841,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -2849,7 +2849,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -2859,7 +2859,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '3.0.0',
         type: 'major',
         deps: {
@@ -2879,14 +2879,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2896,7 +2896,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2913,7 +2913,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -2921,7 +2921,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2937,14 +2937,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -2954,7 +2954,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -2971,7 +2971,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
         deps: null,
@@ -2979,7 +2979,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -2995,14 +2995,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3012,7 +3012,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3029,7 +3029,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -3037,7 +3037,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -3053,14 +3053,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3070,7 +3070,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3087,7 +3087,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -3095,7 +3095,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -3111,14 +3111,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '1.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3128,7 +3128,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3145,7 +3145,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
         deps: null,
@@ -3153,7 +3153,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -3169,14 +3169,14 @@ test('getPackageBumps: C |> b |> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.1'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3186,7 +3186,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3203,7 +3203,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: null,
@@ -3211,7 +3211,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -3231,7 +3231,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3241,7 +3241,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3251,7 +3251,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3268,7 +3268,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: {
@@ -3278,7 +3278,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: {
@@ -3288,7 +3288,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -3304,7 +3304,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3314,7 +3314,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3324,7 +3324,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3342,7 +3342,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: {
@@ -3352,7 +3352,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -3362,7 +3362,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -3378,7 +3378,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3388,7 +3388,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3398,7 +3398,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3416,7 +3416,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: {
@@ -3426,7 +3426,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: {
@@ -3436,7 +3436,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -3452,7 +3452,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3462,7 +3462,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3472,7 +3472,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3491,7 +3491,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
         deps: {
@@ -3501,7 +3501,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: {
@@ -3511,7 +3511,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '3.0.0',
         type: 'major',
         deps: {
@@ -3531,7 +3531,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3541,7 +3541,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3551,7 +3551,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3568,7 +3568,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -3576,7 +3576,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: null,
         type: null,
         deps: null,
@@ -3592,7 +3592,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3602,7 +3602,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3612,7 +3612,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3630,7 +3630,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -3638,7 +3638,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: null,
@@ -3648,7 +3648,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -3664,7 +3664,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3674,7 +3674,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3684,7 +3684,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3702,7 +3702,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -3710,7 +3710,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
         deps: null,
@@ -3720,7 +3720,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: null,
         type: null,
         deps: null,
@@ -3736,7 +3736,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0',
@@ -3746,7 +3746,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3',
@@ -3756,7 +3756,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3775,7 +3775,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -3785,7 +3785,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -3795,7 +3795,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: null,
@@ -3815,21 +3815,21 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3'
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3850,7 +3850,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
         deps: null,
@@ -3858,7 +3858,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
         deps: null,
@@ -3866,7 +3866,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
         deps: {
@@ -3884,21 +3884,21 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
     getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3'
           }
         },
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3919,7 +3919,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -3927,7 +3927,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -3935,7 +3935,7 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {
@@ -3957,7 +3957,7 @@ test('getPackageBumps: throw', (t) => {
     () => getPackagesBumps(
       {
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
@@ -3980,7 +3980,7 @@ test('getPackageBumps: sort', (t) => {
     getPackagesBumps(
       {
         c: {
-          path: '/fakes/c/package.json',
+          dir: '/fakes/c',
           json: {
             name: 'c',
             version: '2.3.4',
@@ -3993,14 +3993,14 @@ test('getPackageBumps: sort', (t) => {
           }
         },
         b: {
-          path: '/fakes/b/package.json',
+          dir: '/fakes/b',
           json: {
             name: 'b',
             version: '1.2.3'
           }
         },
         a: {
-          path: '/fakes/a/package.json',
+          dir: '/fakes/a',
           json: {
             name: 'a',
             version: '0.1.0'
@@ -4015,7 +4015,7 @@ test('getPackageBumps: sort', (t) => {
     [
       {
         name: 'a',
-        path: '/fakes/a/package.json',
+        dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
         deps: null,
@@ -4023,7 +4023,7 @@ test('getPackageBumps: sort', (t) => {
       },
       {
         name: 'b',
-        path: '/fakes/b/package.json',
+        dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
         deps: null,
@@ -4031,7 +4031,7 @@ test('getPackageBumps: sort', (t) => {
       },
       {
         name: 'c',
-        path: '/fakes/c/package.json',
+        dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
         deps: {

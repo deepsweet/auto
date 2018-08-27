@@ -2,7 +2,7 @@ import { TPackageJson } from '@auto/utils/src/'
 
 export type TPackages = {
   [name: string]: {
-    path: string,
+    dir: string,
     json: TPackageJson
   }
 }

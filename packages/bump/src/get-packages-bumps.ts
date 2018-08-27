@@ -83,7 +83,7 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
       } else {
         bumpStack[dependent.name] = {
           name: dependent.name,
-          path: dependentPackage.path,
+          dir: dependentPackage.dir,
           version: null,
           type: null,
           deps: null,
@@ -136,7 +136,7 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
     } else {
       bumpStack[bump.name] = {
         name: bump.name,
-        path: packageItem.path,
+        dir: packageItem.dir,
         version: bumpVersion(packageItem.json.version, bump.type),
         type: bump.type,
         deps: null,

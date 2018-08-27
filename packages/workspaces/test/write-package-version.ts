@@ -24,7 +24,7 @@ test('writePackageVersion: single version bump', async (t) => {
 
   await writePackageVersion({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
@@ -70,7 +70,7 @@ test('writePackageVersion: ignore dependencies', async (t) => {
 
   await writePackageVersion({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: {
@@ -123,7 +123,7 @@ test('writePackageVersion: ignore devDependencies', async (t) => {
 
   await writePackageVersion({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
@@ -175,7 +175,7 @@ test('writePackageVersion: no version bump', async (t) => {
 
   await writePackageVersion({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: null,
     type: null,
     deps: null,

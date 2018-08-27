@@ -35,21 +35,21 @@ test('workspace:getPackages no cross dependencies', async (t) => {
     await getPackages(),
     {
       '@ns/a': {
-        path: `${rootDir}/fakes/a/package.json`,
+        dir: `${rootDir}/fakes/a`,
         json: {
           name: '@ns/a',
           version: '1.0.0'
         }
       },
       '@ns/b': {
-        path: `${rootDir}/fakes/b/package.json`,
+        dir: `${rootDir}/fakes/b`,
         json: {
           name: '@ns/b',
           version: '2.0.0'
         }
       },
       '@ns/c': {
-        path: `${rootDir}/fakes/c/package.json`,
+        dir: `${rootDir}/fakes/c`,
         json: {
           name: '@ns/c',
           version: '3.0.0'

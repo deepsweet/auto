@@ -20,7 +20,7 @@ export type TGitBump = {
 
 export type TPackageBump = {
   name: string,
-  path: string,
+  dir: string,
   version: string | null,
   type: TBumpType | null,
   deps: {

@@ -5,7 +5,7 @@ test('getDependentsCount', (t) => {
   t.equals(
     getDependentsCount({
       name: 'a',
-      path: 'fakes/a',
+      dir: 'fakes/a',
       version: null,
       type: null,
       deps: {
@@ -20,7 +20,7 @@ test('getDependentsCount', (t) => {
   t.equals(
     getDependentsCount({
       name: 'a',
-      path: 'fakes/a',
+      dir: 'fakes/a',
       version: null,
       type: null,
       deps: null,
@@ -35,7 +35,7 @@ test('getDependentsCount', (t) => {
   t.equals(
     getDependentsCount({
       name: 'a',
-      path: 'fakes/a',
+      dir: 'fakes/a',
       version: null,
       type: null,
       deps: {

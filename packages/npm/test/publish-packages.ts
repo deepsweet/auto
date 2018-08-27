@@ -6,14 +6,14 @@ import { TPackages } from '@auto/workspaces/src/'
 test('npm:publish', async (t) => {
   const getPackagesSpy = createSpy((): Promise<TPackages> => Promise.resolve(({
     a: {
-      path: '/fakes/a/package.json',
+      dir: '/fakes/a',
       json: {
         name: '@ns/a',
         version: '0.1.2'
       }
     },
     b: {
-      path: '/fakes/b/package.json',
+      dir: '/fakes/b',
       json: {
         name: '@ns/b',
         version: '1.2.3'

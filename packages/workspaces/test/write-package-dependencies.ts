@@ -27,7 +27,7 @@ test('writePackageDependencies: ignore version bump', async (t) => {
 
   await writePackageDependencies({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
@@ -73,7 +73,7 @@ test('writePackageDependencies: multiple dependencies bump', async (t) => {
 
   await writePackageDependencies({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: {
@@ -126,7 +126,7 @@ test('writePackageDependencies: multiple dev dependencies bump', async (t) => {
 
   await writePackageDependencies({
     name: '@ns/a',
-    path: `${rootDir}/fakes/a/package.json`,
+    dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
