@@ -3,16 +3,16 @@ import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { gitOptions } from './git-options'
 
-test('git:writePublishCommit: single package', async (t) => {
+test('git:writePublishTag: single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
-  mock('../src/write-publish-commit', {
+  mock('../src/write-publish-tag', {
     execa: { default: execaSpy }
   })
 
-  const { writePublishCommit } = await import('../src/write-publish-commit')
+  const { writePublishTag } = await import('../src/write-publish-tag')
 
-  await writePublishCommit(
+  await writePublishTag(
     {
       name: '@ns/a',
       dir: 'fakes/a',
@@ -27,24 +27,24 @@ test('git:writePublishCommit: single package', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['commit', '-m', '📦 a: v0.1.1', 'fakes/a/package.json']],
+      ['git', ['tag', '-m', 'a@0.1.1', 'a@0.1.1']]
     ],
     'single package'
   )
 
-  unmock('../src/write-publish-commit')
+  unmock('../src/write-publish-tag')
 })
 
-test('git:writePublishCommit: no packages to publish', async (t) => {
+test('git:writePublishTag: no packages to publish', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
-  mock('../src/write-publish-commit', {
+  mock('../src/write-publish-tag', {
     execa: { default: execaSpy }
   })
 
-  const { writePublishCommit } = await import('../src/write-publish-commit')
+  const { writePublishTag } = await import('../src/write-publish-tag')
 
-  await writePublishCommit(
+  await writePublishTag(
     {
       name: '@ns/a',
       dir: 'fakes/a',
@@ -64,22 +64,22 @@ test('git:writePublishCommit: no packages to publish', async (t) => {
     'no packages to publish'
   )
 
-  unmock('../src/write-publish-commit')
+  unmock('../src/write-publish-tag')
 })
 
-test('git:writePublishCommit: throw error', async (t) => {
+test('git:writePublishTag: throw error', async (t) => {
   const execaSpy = createSpy(() => {
     throw new Error('error')
   })
 
-  mock('../src/write-publish-commit', {
+  mock('../src/write-publish-tag', {
     execa: { default: execaSpy }
   })
 
-  const { writePublishCommit } = await import('../src/write-publish-commit')
+  const { writePublishTag } = await import('../src/write-publish-tag')
 
   try {
-    await writePublishCommit(
+    await writePublishTag(
       {
         name: '@ns/a',
         dir: 'fakes/a',
@@ -98,5 +98,5 @@ test('git:writePublishCommit: throw error', async (t) => {
     t.equal(err, null, 'error should be null')
   }
 
-  unmock('../src/write-publish-commit')
+  unmock('../src/write-publish-tag')
 })

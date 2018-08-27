@@ -1,23 +1,20 @@
-import path from 'path'
 import execa from 'execa'
 import { TGitOptions } from './types'
 import { TPackageBump } from '@auto/utils/src/'
 
-export const writePublishCommit = async (packageBump: TPackageBump, gitOptions: TGitOptions) => {
+export const writePublishTag = async (packageBump: TPackageBump, gitOptions: TGitOptions) => {
   const name = packageBump.name.replace(`@${gitOptions.namespace}/`, '')
   const execaOptions = { stderr: process.stderr }
 
   if (packageBump.type !== null && packageBump.version !== null) {
-    const packageJsonPath = path.join(packageBump.dir, 'package.json')
-
     try {
       await execa(
         'git',
         [
-          'commit',
+          'tag',
           '-m',
-          `${gitOptions.prefixes['publish']} ${name}: v${packageBump.version}`,
-          packageJsonPath
+          `${name}@${packageBump.version}`,
+          `${name}@${packageBump.version}`
         ],
         execaOptions
       )
