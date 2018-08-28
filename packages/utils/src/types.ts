@@ -24,6 +24,7 @@ export type TPackageBump = {
   dir: string,
   version: string | null,
   type: TBumpType | null,
+  messages: string[] | null,
   deps: {
     [name: string]: string
   } | null,
