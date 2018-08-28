@@ -15,7 +15,8 @@ export type TBumpType = 'major' | 'minor' | 'patch'
 
 export type TGitBump = {
   name: string,
-  type: TBumpType
+  type: TBumpType,
+  messages: string[]
 }
 
 export type TPackageBump = {

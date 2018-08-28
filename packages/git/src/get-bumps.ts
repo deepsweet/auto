@@ -4,7 +4,7 @@ import { parseCommitMessage } from './parse-commit-message'
 import { TGitOptions } from './types'
 
 type TGitBumps = {
-  [key: string]: TBumpType
+  [key: string]: TGitBump
 }
 
 export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
@@ -32,19 +32,23 @@ export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
       continue
     }
 
+    const prefixedMessage = `${parsed.prefix} ${parsed.message}`
+
     if (Reflect.has(bumps, parsed.package)) {
-      if (compareReleaseTypes(parsed.type, bumps[parsed.package]) > 0) {
-        bumps[parsed.package] = parsed.type
+      const bump = bumps[parsed.package]
+
+      if (compareReleaseTypes(parsed.type, bump.type) > 0) {
+        bump.type = parsed.type
+        bump.messages.push(prefixedMessage)
       }
     } else {
-      bumps[parsed.package] = parsed.type
+      bumps[parsed.package] = {
+        name: parsed.package,
+        type: parsed.type,
+        messages: [prefixedMessage]
+      }
     }
   }
 
-  return Object.entries(bumps).reduce((res, [name, type]) => {
-    return res.concat({
-      name,
-      type
-    })
-  }, [] as TGitBump[])
+  return Object.values(bumps)
 }

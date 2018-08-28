@@ -19,7 +19,11 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'patch'
+      type: 'patch',
+      messages: [
+        '✔️ patch 2',
+        '✔️ patch 1'
+      ]
     }],
     'bump as patch + patch'
   )
@@ -44,7 +48,11 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'minor'
+      type: 'minor',
+      messages: [
+        '➕ minor',
+        '✔️ patch'
+      ]
     }],
     'bump as patch + minor'
   )
@@ -69,7 +77,11 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'minor'
+      type: 'minor',
+      messages: [
+        '✔️ patch',
+        '➕ minor'
+      ]
     }],
     'bump as minor + patch'
   )
@@ -95,7 +107,12 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'major'
+      type: 'major',
+      messages: [
+        '💥 major',
+        '➕ minor',
+        '✔️ patch'
+      ]
     }],
     'bump as patch + minor + major'
   )
@@ -121,7 +138,12 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'major'
+      type: 'major',
+      messages: [
+        '➕ minor',
+        '💥 major',
+        '✔️ patch'
+      ]
     }],
     'bump as patch + major + minor'
   )
@@ -147,7 +169,12 @@ test('git:getBumps single package', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'major'
+      type: 'major',
+      messages: [
+        '➕ minor',
+        '✔️ patch',
+        '💥 major'
+      ]
     }],
     'bump as major + patch + minor'
   )
@@ -175,10 +202,12 @@ test('git:getBumps multiple packages', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'patch'
+      type: 'patch',
+      messages: ['✔️ patch']
     }, {
       name: '@ns/bar',
-      type: 'patch'
+      type: 'patch',
+      messages: ['✔️ patch']
     }],
     'bump as patch && patch'
   )
@@ -207,7 +236,11 @@ test('git:getBumps skipped commits', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'patch'
+      type: 'patch',
+      messages: [
+        '✔️ minor',
+        '✔️ patch'
+      ]
     }],
     'skip invalid commit messages'
   )
