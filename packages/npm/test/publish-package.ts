@@ -17,6 +17,7 @@ test('npm:publishPackage', async (t) => {
     dir: '/foo/bar/baz',
     version: '1.2.3',
     type: 'minor',
+    messages: null,
     deps: null,
     devDeps: null
   })
@@ -49,6 +50,7 @@ test('npm:publishPackage: throw error', async (t) => {
       dir: '/foo/bar/baz',
       version: '1.2.3',
       type: 'minor',
+      messages: null,
       deps: null,
       devDeps: null
     })

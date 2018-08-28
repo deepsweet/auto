@@ -27,6 +27,7 @@ test('writePackageVersion: single version bump', async (t) => {
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
+    messages: null,
     deps: null,
     devDeps: null
   })
@@ -73,6 +74,7 @@ test('writePackageVersion: ignore dependencies', async (t) => {
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
+    messages: null,
     deps: {
       '@ns/b': '0.0.2',
       '@ns/c': '0.0.3'
@@ -126,6 +128,7 @@ test('writePackageVersion: ignore devDependencies', async (t) => {
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
+    messages: null,
     deps: null,
     devDeps: {
       '@ns/b': '0.0.2',
@@ -178,6 +181,7 @@ test('writePackageVersion: no version bump', async (t) => {
     dir: `${rootDir}/fakes/a`,
     version: null,
     type: null,
+    messages: null,
     deps: null,
     devDeps: null
   })

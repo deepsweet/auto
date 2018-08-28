@@ -37,9 +37,10 @@ export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
     if (Reflect.has(bumps, parsed.package)) {
       const bump = bumps[parsed.package]
 
+      bump.messages.push(prefixedMessage)
+
       if (compareReleaseTypes(parsed.type, bump.type) > 0) {
         bump.type = parsed.type
-        bump.messages.push(prefixedMessage)
       }
     } else {
       bumps[parsed.package] = {

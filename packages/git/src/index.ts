@@ -1,6 +1,5 @@
 export { getBumps } from './get-bumps'
 export { getCommitMessages } from './get-commit-messages'
-export { getLog } from './get-log'
 export { parseCommitMessage } from './parse-commit-message'
 export { writePublishCommit } from './write-publish-commit'
 export { writePublishTag } from './write-publish-tag'

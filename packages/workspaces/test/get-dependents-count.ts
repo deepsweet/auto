@@ -8,6 +8,7 @@ test('getDependentsCount', (t) => {
       dir: 'fakes/a',
       version: null,
       type: null,
+      messages: null,
       deps: {
         'a': '1.1.1'
       },
@@ -23,6 +24,7 @@ test('getDependentsCount', (t) => {
       dir: 'fakes/a',
       version: null,
       type: null,
+      messages: null,
       deps: null,
       devDeps: {
         'a': '1.1.1'
@@ -38,6 +40,7 @@ test('getDependentsCount', (t) => {
       dir: 'fakes/a',
       version: null,
       type: null,
+      messages: null,
       deps: {
         'a': '1.1.1'
       },
