@@ -30,8 +30,3 @@ export type TPackageBump = {
     [name: string]: string
   } | null
 }
-
-export type TChangelog = {
-  name: string,
-  messages: string[]
-}
