@@ -1,4 +1,4 @@
-import { compareReleaseTypes, TGitBump, TBumpType } from '@auto/utils/src/'
+import { compareReleaseTypes, TGitBump } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
 import { parseCommitMessage } from './parse-commit-message'
 import { TGitOptions } from './types'
@@ -32,12 +32,14 @@ export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
       continue
     }
 
-    const prefixedMessage = `${parsed.prefix} ${parsed.message}`
-
     if (Reflect.has(bumps, parsed.package)) {
       const bump = bumps[parsed.package]
 
-      bump.messages.push(prefixedMessage)
+      bump.messages.push({
+        type: parsed.type,
+        prefix: parsed.prefix,
+        value: parsed.message
+      })
 
       if (compareReleaseTypes(parsed.type, bump.type) > 0) {
         bump.type = parsed.type
@@ -46,7 +48,11 @@ export const getBumps = async (options: TGitOptions): Promise<TGitBump[]> => {
       bumps[parsed.package] = {
         name: parsed.package,
         type: parsed.type,
-        messages: [prefixedMessage]
+        messages: [{
+          type: parsed.type,
+          prefix: parsed.prefix,
+          value: parsed.message
+        }]
       }
     }
   }

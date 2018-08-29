@@ -17,7 +17,6 @@ test('npm:publishPackage', async (t) => {
     dir: '/foo/bar/baz',
     version: '1.2.3',
     type: 'minor',
-    messages: null,
     deps: null,
     devDeps: null
   })
@@ -50,14 +49,13 @@ test('npm:publishPackage: throw error', async (t) => {
       dir: '/foo/bar/baz',
       version: '1.2.3',
       type: 'minor',
-      messages: null,
       deps: null,
       devDeps: null
     })
 
     t.fail('should not get here')
   } catch (err) {
-    t.equal(err, null, 'error should be null')
+    t.equals(err, null, 'error should be null')
   }
 
   unmock('../src/publish-package')

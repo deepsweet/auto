@@ -46,7 +46,7 @@ test('git:getCommitMessages: throw error', async (t) => {
 
     t.fail('should not get here')
   } catch (err) {
-    t.equal(err, null, 'error should be null')
+    t.equals(err, null, 'error should be null')
   }
 
   unmock('../src/get-commit-messages')

@@ -18,7 +18,6 @@ test('git:writePublishCommit: single package', async (t) => {
       dir: 'fakes/a',
       type: 'patch',
       version: '0.1.1',
-      messages: null,
       deps: null,
       devDeps: null
     },
@@ -51,7 +50,6 @@ test('git:writePublishCommit: no packages to publish', async (t) => {
       dir: 'fakes/a',
       type: null,
       version: null,
-      messages: null,
       deps: {
         '@ns/b': '~0.2.0'
       },
@@ -87,7 +85,6 @@ test('git:writePublishCommit: throw error', async (t) => {
         dir: 'fakes/a',
         type: 'major',
         version: '1.0.0',
-        messages: null,
         deps: {
           '@ns/b': '~0.2.0'
         },
@@ -98,7 +95,7 @@ test('git:writePublishCommit: throw error', async (t) => {
 
     t.fail('should not get here')
   } catch (err) {
-    t.equal(err, null, 'error should be null')
+    t.equals(err, null, 'error should be null')
   }
 
   unmock('../src/write-publish-commit')

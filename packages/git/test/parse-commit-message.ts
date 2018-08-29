@@ -3,7 +3,7 @@ import { gitOptions } from './git-options'
 import { parseCommitMessage } from '../src/parse-commit-message'
 
 test('git:parseCommitMessage', async (t) => {
-  t.equal(
+  t.equals(
     parseCommitMessage(
       '💩 foo: breaking change',
       gitOptions

@@ -14,7 +14,7 @@ test('getPackageBumps: single package', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -23,7 +23,6 @@ test('getPackageBumps: single package', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       }
@@ -43,7 +42,7 @@ test('getPackageBumps: single package', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -52,7 +51,6 @@ test('getPackageBumps: single package', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       }
@@ -72,7 +70,7 @@ test('getPackageBumps: single package', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -81,7 +79,6 @@ test('getPackageBumps: single package', (t) => {
         dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       }
@@ -119,9 +116,9 @@ test('getPackageBumps: multiple independent packages', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'minor', messages: ['minor'] },
-        { name: 'c', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'minor', messages: [] },
+        { name: 'c', type: 'major', messages: [] }
       ]
     ),
     [
@@ -130,7 +127,6 @@ test('getPackageBumps: multiple independent packages', (t) => {
         dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -139,7 +135,6 @@ test('getPackageBumps: multiple independent packages', (t) => {
         dir: '/fakes/b',
         version: '0.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -148,7 +143,6 @@ test('getPackageBumps: multiple independent packages', (t) => {
         dir: '/fakes/c',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       }
@@ -182,7 +176,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -191,7 +185,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -200,7 +193,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -232,7 +224,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -241,7 +233,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.3',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -250,7 +241,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '~0.1.3'
         },
@@ -282,7 +272,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -291,7 +281,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -300,7 +289,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -332,7 +320,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -341,7 +329,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -350,7 +337,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -382,7 +368,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -391,7 +377,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -400,7 +385,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^1.2.0'
         },
@@ -432,7 +416,7 @@ test('getPackageBumps: b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -441,7 +425,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -450,7 +433,6 @@ test('getPackageBumps: b -> a', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: null,
         deps: {
           a: '^2.0.0'
         },
@@ -486,7 +468,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -495,7 +477,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -504,7 +485,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -536,7 +516,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -545,7 +525,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -554,7 +533,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '~0.1.1'
@@ -586,7 +564,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -595,7 +573,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -604,7 +581,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -636,7 +612,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -645,7 +621,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -654,7 +629,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -686,7 +660,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -695,7 +669,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -704,7 +677,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^1.2.0'
@@ -736,7 +708,7 @@ test('getPackageBumps: b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -745,7 +717,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -754,7 +725,6 @@ test('getPackageBumps: b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^2.0.0'
@@ -800,7 +770,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -809,7 +779,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -818,7 +787,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -829,7 +797,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -871,7 +838,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -880,7 +847,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -889,7 +855,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -900,7 +865,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           a: '~0.1.1'
         },
@@ -942,7 +906,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -951,7 +915,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -960,7 +923,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '0.2.0'
         },
@@ -971,7 +933,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -1013,7 +974,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1022,7 +983,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1031,7 +991,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '0.2.0'
         },
@@ -1042,7 +1001,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -1084,7 +1042,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1093,7 +1051,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '1.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1102,7 +1059,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '1.3.0'
         },
@@ -1113,7 +1069,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '3.5.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^1.3.0'
         },
@@ -1155,7 +1110,7 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -1164,7 +1119,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -1173,7 +1127,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/b',
         version: '3.0.0',
         type: 'major',
-        messages: null,
         deps: {
           a: '2.0.0'
         },
@@ -1184,7 +1137,6 @@ test('getPackageBumps: b -> a, c -> a', (t) => {
         dir: '/fakes/c',
         version: '4.0.0',
         type: 'major',
-        messages: null,
         deps: {
           a: '^2.0.0'
         },
@@ -1230,7 +1182,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -1239,7 +1191,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -1248,7 +1199,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -1259,7 +1209,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -1301,7 +1250,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -1310,7 +1259,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -1319,7 +1267,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -1330,7 +1277,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '~0.1.1'
@@ -1372,7 +1318,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1381,7 +1327,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1390,7 +1335,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.2.0'
@@ -1401,7 +1345,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -1443,7 +1386,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1452,7 +1395,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1461,7 +1403,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.2.0'
@@ -1472,7 +1413,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -1514,7 +1454,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1523,7 +1463,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '1.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1532,7 +1471,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '1.3.0'
@@ -1543,7 +1481,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^1.3.0'
@@ -1585,7 +1522,7 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -1594,7 +1531,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/a',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -1603,7 +1539,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '2.0.0'
@@ -1614,7 +1549,6 @@ test('getPackageBumps: b |> a, c |> a', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^2.0.0'
@@ -1660,7 +1594,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -1669,7 +1603,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -1678,7 +1611,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -1689,7 +1621,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           b: '1.2.4'
         },
@@ -1731,7 +1662,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -1740,7 +1671,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -1749,7 +1679,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '~0.1.2'
         },
@@ -1760,7 +1689,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           b: '1.2.4'
         },
@@ -1802,7 +1730,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1811,7 +1739,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1820,7 +1747,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -1831,7 +1757,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           b: '1.3.0'
         },
@@ -1873,7 +1798,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1882,7 +1807,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1891,7 +1815,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^0.2.0'
         },
@@ -1902,7 +1825,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           b: '1.3.0'
         },
@@ -1944,7 +1866,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -1953,7 +1875,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -1962,7 +1883,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '^1.2.0'
         },
@@ -1973,7 +1893,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           b: '1.3.0'
         },
@@ -2015,7 +1934,7 @@ test('getPackageBumps: c -> b -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -2024,7 +1943,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -2033,7 +1951,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: null,
         deps: {
           a: '^1.0.0'
         },
@@ -2044,7 +1961,6 @@ test('getPackageBumps: c -> b -> a', (t) => {
         dir: '/fakes/c',
         version: '3.0.0',
         type: 'major',
-        messages: null,
         deps: {
           b: '2.0.0'
         },
@@ -2090,7 +2006,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2099,7 +2015,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -2108,7 +2023,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -2150,7 +2064,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2159,7 +2073,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.2',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -2168,7 +2081,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '~0.1.2'
@@ -2210,7 +2122,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2219,7 +2131,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -2228,7 +2139,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -2270,7 +2180,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2279,7 +2189,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -2288,7 +2197,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^0.2.0'
@@ -2330,7 +2238,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2339,7 +2247,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '1.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -2348,7 +2255,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^1.2.0'
@@ -2390,7 +2296,7 @@ test('getPackageBumps: C |> b |> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'major', messages: [] }
       ]
     ),
     [
@@ -2399,7 +2305,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -2408,7 +2313,6 @@ test('getPackageBumps: C |> b |> a', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '^1.0.0'
@@ -2457,7 +2361,7 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2466,7 +2370,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: {
           c: '2.3.5'
         },
@@ -2477,7 +2380,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -2488,7 +2390,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           b: '1.2.4'
         },
@@ -2533,8 +2434,8 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2543,7 +2444,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['patch'],
         deps: {
           c: '2.4.0'
         },
@@ -2554,7 +2454,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: {
           a: '0.2.0'
         },
@@ -2565,7 +2464,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           b: '1.3.0'
         },
@@ -2610,8 +2508,8 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] },
-        { name: 'b', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'minor', messages: [] },
+        { name: 'b', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2620,7 +2518,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: {
           c: '2.4.0'
         },
@@ -2631,7 +2528,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: ['patch'],
         deps: {
           a: '0.2.0'
         },
@@ -2642,7 +2538,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           b: '1.3.0'
         },
@@ -2687,9 +2582,9 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'major', messages: ['major'] },
-        { name: 'c', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'major', messages: [] },
+        { name: 'c', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2698,7 +2593,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/a',
         version: '1.0.0',
         type: 'major',
-        messages: ['patch'],
         deps: {
           c: '3.0.0'
         },
@@ -2709,7 +2603,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: {
           a: '1.0.0'
         },
@@ -2720,7 +2613,6 @@ test('getPackageBumps: c -> b -> a -> c', (t) => {
         dir: '/fakes/c',
         version: '3.0.0',
         type: 'major',
-        messages: ['minor'],
         deps: {
           b: '2.0.0'
         },
@@ -2769,7 +2661,7 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2778,7 +2670,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -2787,7 +2678,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/b',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -2832,8 +2722,8 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2842,7 +2732,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -2851,7 +2740,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -2862,7 +2750,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           b: '1.3.0'
@@ -2907,8 +2794,8 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] },
-        { name: 'b', type: 'patch', messages: ['patch'] }
+        { name: 'a', type: 'minor', messages: [] },
+        { name: 'b', type: 'patch', messages: [] }
       ]
     ),
     [
@@ -2917,7 +2804,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -2926,7 +2812,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/b',
         version: '1.2.4',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: {
           a: '0.2.0'
@@ -2937,7 +2822,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/c',
         version: null,
         type: null,
-        messages: null,
         deps: null,
         devDeps: {
           b: '1.2.4'
@@ -2982,9 +2866,9 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'major', messages: ['major'] },
-        { name: 'c', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'major', messages: [] },
+        { name: 'c', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -2993,7 +2877,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: {
           c: '2.4.0'
@@ -3004,7 +2887,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: {
           a: '0.1.1'
@@ -3015,7 +2897,6 @@ test('getPackageBumps: c |> b |> a |> c', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: {
           b: '2.0.0'
@@ -3061,8 +2942,8 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'patch', messages: ['patch'] },
-        { name: 'b', type: 'minor', messages: ['minor'] }
+        { name: 'a', type: 'patch', messages: [] },
+        { name: 'b', type: 'minor', messages: [] }
       ]
     ),
     [
@@ -3071,7 +2952,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.1.1',
         type: 'patch',
-        messages: ['patch'],
         deps: null,
         devDeps: null
       },
@@ -3080,7 +2960,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/b',
         version: '1.3.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -3089,7 +2968,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.3.5',
         type: 'patch',
-        messages: null,
         deps: {
           a: '0.1.1'
         },
@@ -3133,8 +3011,8 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] },
-        { name: 'b', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'minor', messages: [] },
+        { name: 'b', type: 'major', messages: [] }
       ]
     ),
     [
@@ -3143,7 +3021,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -3152,7 +3029,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -3161,7 +3037,6 @@ test('getPackageBumps: c |> b, c -> a', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '0.2.0'
         },
@@ -3189,7 +3064,7 @@ test('getPackageBumps: throw', (t) => {
         }
       },
       [
-        { name: 'b', type: 'minor', messages: ['minor'] }
+        { name: 'b', type: 'minor', messages: [] }
       ]
     ),
     /Unable to find package/,
@@ -3232,8 +3107,8 @@ test('getPackageBumps: sort', (t) => {
         }
       },
       [
-        { name: 'a', type: 'minor', messages: ['minor'] },
-        { name: 'b', type: 'major', messages: ['major'] }
+        { name: 'a', type: 'minor', messages: [] },
+        { name: 'b', type: 'major', messages: [] }
       ]
     ),
     [
@@ -3242,7 +3117,6 @@ test('getPackageBumps: sort', (t) => {
         dir: '/fakes/a',
         version: '0.2.0',
         type: 'minor',
-        messages: ['minor'],
         deps: null,
         devDeps: null
       },
@@ -3251,7 +3125,6 @@ test('getPackageBumps: sort', (t) => {
         dir: '/fakes/b',
         version: '2.0.0',
         type: 'major',
-        messages: ['major'],
         deps: null,
         devDeps: null
       },
@@ -3260,7 +3133,6 @@ test('getPackageBumps: sort', (t) => {
         dir: '/fakes/c',
         version: '2.4.0',
         type: 'minor',
-        messages: null,
         deps: {
           a: '0.2.0'
         },

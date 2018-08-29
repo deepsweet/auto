@@ -86,7 +86,6 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
           dir: dependentPackage.dir,
           version: null,
           type: null,
-          messages: null,
           deps: null,
           devDeps: null
         }
@@ -123,8 +122,6 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
     if (Reflect.has(bumpStack, bump.name)) {
       const bumpStackItem = bumpStack[bump.name]
 
-      bumpStack[bump.name].messages = bump.messages
-
       // if there was already a bump greater or equal than the current
       // then do nothing
       if (compareReleaseTypes(bumpStackItem.type, bump.type) >= 0) {
@@ -142,7 +139,6 @@ export const getPackagesBumps = (packages: TPackages, bumps: TGitBump[]): TPacka
         dir: packageItem.dir,
         version: bumpVersion(packageItem.json.version, bump.type),
         type: bump.type,
-        messages: bump.messages,
         deps: null,
         devDeps: null
       }

@@ -20,11 +20,17 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'patch',
-      messages: [
-        '✔️ patch 2',
-        '✔️ patch 1'
-      ]
-    }],
+      messages: [{
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch 2'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch 1'
+      }]
+    }]
+    ,
     'bump as patch + patch'
   )
 
@@ -49,10 +55,15 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'minor',
-      messages: [
-        '➕ minor',
-        '✔️ patch'
-      ]
+      messages: [{
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }],
     'bump as patch + minor'
   )
@@ -78,10 +89,16 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'minor',
-      messages: [
-        '✔️ patch',
-        '➕ minor'
-      ]
+      messages: [{
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }, {
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+
+      }]
     }],
     'bump as minor + patch'
   )
@@ -108,11 +125,19 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'major',
-      messages: [
-        '💥 major',
-        '➕ minor',
-        '✔️ patch'
-      ]
+      messages: [{
+        type: 'major',
+        prefix: '💥',
+        value: 'major'
+      }, {
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }],
     'bump as patch + minor + major'
   )
@@ -139,11 +164,20 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'major',
-      messages: [
-        '➕ minor',
-        '💥 major',
-        '✔️ patch'
-      ]
+      messages: [{
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+
+      }, {
+        type: 'major',
+        prefix: '💥',
+        value: 'major'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }],
     'bump as patch + major + minor'
   )
@@ -170,11 +204,19 @@ test('git:getBumps single package', async (t) => {
     [{
       name: '@ns/foo',
       type: 'major',
-      messages: [
-        '➕ minor',
-        '✔️ patch',
-        '💥 major'
-      ]
+      messages: [{
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }, {
+        type: 'major',
+        prefix: '💥',
+        value: 'major'
+      }]
     }],
     'bump as major + patch + minor'
   )
@@ -203,11 +245,19 @@ test('git:getBumps multiple packages', async (t) => {
     [{
       name: '@ns/foo',
       type: 'patch',
-      messages: ['✔️ patch']
+      messages: [{
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }, {
       name: '@ns/bar',
       type: 'patch',
-      messages: ['✔️ patch']
+      messages: [{
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }],
     'bump as patch && patch'
   )
@@ -219,7 +269,7 @@ test('git:getBumps skipped commits', async (t) => {
   mock('../src/get-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ foo: minor',
+        '➕ foo: minor',
         '➕ foo',
         '💥',
         'beep',
@@ -236,11 +286,16 @@ test('git:getBumps skipped commits', async (t) => {
     await getBumps(gitOptions),
     [{
       name: '@ns/foo',
-      type: 'patch',
-      messages: [
-        '✔️ minor',
-        '✔️ patch'
-      ]
+      type: 'minor',
+      messages: [{
+        type: 'minor',
+        prefix: '➕',
+        value: 'minor'
+      }, {
+        type: 'patch',
+        prefix: '✔️',
+        value: 'patch'
+      }]
     }],
     'skip invalid commit messages'
   )
