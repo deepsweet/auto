@@ -9,6 +9,7 @@ export const writeDependenciesCommit = async (packageBump: TPackageBump, gitOpti
 
   if (packageBump.deps !== null || packageBump.devDeps !== null) {
     const packageJsonPath = path.join(packageBump.dir, 'package.json')
+    const prefix = packageBump.type !== null ? packageBump.type : 'dependencies'
 
     try {
       await execa(
@@ -16,7 +17,7 @@ export const writeDependenciesCommit = async (packageBump: TPackageBump, gitOpti
         [
           'commit',
           '-m',
-          `${gitOptions.prefixes['dependencies']} ${name}: upgrade dependencies`,
+          `${gitOptions.prefixes[prefix]} ${name}: upgrade dependencies`,
           packageJsonPath
         ],
         execaOptions

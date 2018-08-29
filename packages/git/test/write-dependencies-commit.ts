@@ -47,13 +47,48 @@ test('git:writeDependenciesCommit: single dependency', async (t) => {
     {
       name: '@ns/a',
       dir: 'fakes/a',
-      type: null,
+      type: 'patch',
       version: null,
       messages: null,
       deps: {
         '@ns/b': '~0.2.0'
       },
       devDeps: null
+    },
+    gitOptions
+  )
+
+  t.deepEquals(
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
+    [
+      ['git', ['commit', '-m', '✔️ a: upgrade dependencies', 'fakes/a/package.json']]
+    ],
+    'single commit'
+  )
+
+  unmock('../src/write-dependencies-commit')
+})
+
+test('git:writeDependenciesCommit: single dependency', async (t) => {
+  const execaSpy = createSpy(() => Promise.resolve())
+
+  mock('../src/write-dependencies-commit', {
+    execa: { default: execaSpy }
+  })
+
+  const { writeDependenciesCommit } = await import('../src/write-dependencies-commit')
+
+  await writeDependenciesCommit(
+    {
+      name: '@ns/a',
+      dir: 'fakes/a',
+      type: null,
+      version: null,
+      messages: null,
+      deps: null,
+      devDeps: {
+        '@ns/b': '~0.2.0'
+      },
     },
     gitOptions
   )
@@ -98,7 +133,7 @@ test('git:writeDependenciesCommit: throw error', async (t) => {
 
     t.fail('should not get here')
   } catch (err) {
-    t.equal(err, null, 'error should be null')
+    t.equals(err, null, 'error should be null')
   }
 
   unmock('../src/write-dependencies-commit')
