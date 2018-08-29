@@ -1,5 +1,5 @@
-import { compareReleaseTypes, TGitBump, TLog, TPackageBump } from '@auto/utils/src'
-import { TGitOptions } from '@auto/git/src'
+import { compareReleaseTypes, TGitBump, TLog, TPackageBump } from '@auto/utils/src/'
+import { TGitOptions } from '@auto/git/src/'
 
 const getMessages = (gitBumps: TGitBump[], name: string) => {
   for (const bump of gitBumps) {
