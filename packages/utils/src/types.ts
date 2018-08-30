@@ -1,5 +1,14 @@
 import { TJsonMap } from 'typeon'
 
+export type TCommitPrefixType = 'major' | 'minor' | 'patch' | 'publish' | 'dependencies'
+
+export type TOptions = {
+  prefixes: {
+    [key in TCommitPrefixType]: string[]
+  },
+  namespace: string
+}
+
 export type TPackageJson = {
   name: string,
   version: string,
@@ -19,17 +28,25 @@ export type TMessage = {
   value: string
 }
 
-export type TGitBump = {
-  name: string,
+export type TGitRepoBump = {
   type: TBumpType,
   messages: TMessage[]
 }
 
-export type TPackageBump = {
+export type TGitWorkspacesBump = {
   name: string,
-  dir: string,
-  version: string | null,
+} & TGitRepoBump
+
+export type TRepoPackageBump = {
+  type: TBumpType,
+  version: string,
+}
+
+export type TWorkspacesPackageBump = {
+  name: string,
   type: TBumpType | null,
+  version: string | null,
+  dir: string,
   deps: {
     [name: string]: string
   } | null,
@@ -38,9 +55,6 @@ export type TPackageBump = {
   } | null
 }
 
-export type TLog = {
-  name: string,
-  version: string,
-  type: TBumpType,
-  messages: TMessage[]
-}
+export type TWorkspacesLog = {
+  version: string
+} & TGitWorkspacesBump

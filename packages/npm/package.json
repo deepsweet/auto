@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/workspaces": "^0.0.7",
+    "@auto/fs": "^0.0.1",
     "esm": "^3.0.81",
     "execa": "^0.11.0"
   },

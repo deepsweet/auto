@@ -1,10 +1,10 @@
 {
-  "name": "@auto/bump",
-  "version": "0.0.8",
+  "name": "@auto/fs",
+  "version": "0.0.1",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
-  "homepage": "https://github.com/deepsweet/start/tree/master/packages/bump",
+  "homepage": "https://github.com/deepsweet/start/tree/master/packages/fs",
   "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
   "contributors": [
     "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"
@@ -24,11 +24,7 @@
   },
   "dependencies": {
     "@auto/utils": "^0.0.4",
-    "@auto/fs": "^0.0.1",
     "esm": "^3.0.81",
-    "semver": "^5.5.1"
-  },
-  "devDependencies": {
-    "@types/semver": "^5.5.0"
+    "fast-glob": "^2.2.2"
   }
 }
