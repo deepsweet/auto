@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { getCrossDependents } from '../src/get-cross-dependents'
 
-test('fs:getCrossDependents no cross dependencies', async (t) => {
+test('workspaces:getCrossDependents no cross dependencies', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',
@@ -39,7 +39,7 @@ test('fs:getCrossDependents no cross dependencies', async (t) => {
   )
 })
 
-test('fs:getCrossDependents one cross dependency', async (t) => {
+test('workspaces:getCrossDependents one cross dependency', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',
@@ -77,7 +77,7 @@ test('fs:getCrossDependents one cross dependency', async (t) => {
   )
 })
 
-test('fs:getCrossDependents multiple cross dependencies', async (t) => {
+test('workspaces:getCrossDependents multiple cross dependencies', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',
@@ -120,7 +120,7 @@ test('fs:getCrossDependents multiple cross dependencies', async (t) => {
   )
 })
 
-test('fs:getCrossDependents circular dependencies', async (t) => {
+test('workspaces:getCrossDependents circular dependencies', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',

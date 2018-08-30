@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { getDependentsCount } from '../src'
 
-test('fs:getDependentsCount', (t) => {
+test('workspaces:getDependentsCount', (t) => {
   t.equals(
     getDependentsCount({
       name: 'a',

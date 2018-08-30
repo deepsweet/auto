@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { getDependentsOf } from '../src/get-dependents-of'
 
-test('fs:getDependentsOf circular cross dependencies', async (t) => {
+test('workspaces:getDependentsOf circular cross dependencies', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',
@@ -39,7 +39,7 @@ test('fs:getDependentsOf circular cross dependencies', async (t) => {
   )
 })
 
-test('fs:getDependentsOf no dependents', async (t) => {
+test('workspaces:getDependentsOf no dependents', async (t) => {
   const packages = {
     a: {
       dir: '/fakes/a',
