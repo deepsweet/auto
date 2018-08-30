@@ -1,7 +1,6 @@
 import path from 'path'
+import { TPackageJson, TPackages } from '@auto/utils/src/'
 import { getWorkspacesPackageDirs } from './get-workspaces-package-dirs'
-import { TPackages } from './types'
-import { TPackageJson } from '@auto/utils/src/'
 
 export const getWorkspacesPackages = async () => {
   const dirs = await getWorkspacesPackageDirs()

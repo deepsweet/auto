@@ -20,6 +20,13 @@ export type TPackageJson = {
   }
 } & TJsonMap
 
+export type TPackages = {
+  [name: string]: {
+    dir: string,
+    json: TPackageJson
+  }
+}
+
 export type TBumpType = 'major' | 'minor' | 'patch'
 
 export type TMessage = {

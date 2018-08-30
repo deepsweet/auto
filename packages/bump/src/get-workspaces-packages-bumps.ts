@@ -1,5 +1,11 @@
-import { getDependentsCount, getDependentsOf, TPackages } from '@auto/fs/src/'
-import { compareReleaseTypes, TGitWorkspacesBump, TWorkspacesPackageBump, TBumpType } from '@auto/utils/src/'
+import { getDependentsCount, getDependentsOf } from '@auto/workspaces/src'
+import {
+  compareReleaseTypes,
+  TGitWorkspacesBump,
+  TWorkspacesPackageBump,
+  TBumpType,
+  TPackages
+} from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
 

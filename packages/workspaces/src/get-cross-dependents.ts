@@ -1,5 +1,5 @@
-import { isDependencyObject, TPackageJson } from '@auto/utils/src/'
-import { TCrossDependents, TPackages } from './types'
+import { isDependencyObject, TPackageJson, TPackages } from '@auto/utils/src/'
+import { TCrossDependents } from './types'
 
 const isDependent = (pkg: TPackageJson, dependsOnName: string): boolean => {
   let isDep = false
