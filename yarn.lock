@@ -759,9 +759,9 @@
     eslint-plugin-standard "^3.0.1"
     typescript-eslint-parser "^18.0.0"
 
-"@deepsweet/start-preset-node-ts-monorepo@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@deepsweet/start-preset-node-ts-monorepo/-/start-preset-node-ts-monorepo-0.3.2.tgz#1cda7e6e625d45287cad2bbc9f40bb5d8bb00495"
+"@deepsweet/start-preset-node-ts-monorepo@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@deepsweet/start-preset-node-ts-monorepo/-/start-preset-node-ts-monorepo-0.3.3.tgz#95b380665412a404a20bab5117467b166ba3c5bb"
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
@@ -1032,9 +1032,9 @@
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
-"@types/node@^10.9.3":
-  version "10.9.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.3.tgz#85f288502503ade0b3bfc049fe1777b05d0327d5"
+"@types/node@^10.9.4":
+  version "10.9.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
 
 "@types/semver@^5.5.0":
   version "5.5.0"

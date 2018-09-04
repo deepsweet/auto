@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.4",
+    "@auto/utils": "^0.0.5",
     "esm": "^3.0.81"
   },
   "devDependencies": {
