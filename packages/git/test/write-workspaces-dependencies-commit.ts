@@ -59,7 +59,15 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['commit', '-m', '✔️ a: upgrade dependencies', 'fakes/a/package.json']]
+      [
+        'git',
+        [
+          'commit',
+          '-m',
+          `${options.semverPrefixes.patch.value} a: upgrade dependencies`,
+          'fakes/a/package.json'
+        ]
+      ]
     ],
     'single commit'
   )
@@ -93,7 +101,15 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['commit', '-m', '♻️ a: upgrade dependencies', 'fakes/a/package.json']]
+      [
+        'git',
+        [
+          'commit',
+          '-m',
+          `${options.autoPrefixes.dependencies.value} a: upgrade dependencies`,
+          'fakes/a/package.json'
+        ]
+      ]
     ],
     'single commit'
   )

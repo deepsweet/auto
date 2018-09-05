@@ -32,7 +32,6 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
           type: bump.type,
           messages: [{
             type: bump.type,
-            prefix: options.prefixes[bump.type][0],
             value: `upgrade dependencies: ${Object.keys(bump.deps).join(', ')}`
           }]
         })
@@ -49,7 +48,6 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
         messages: messages
           .concat({
             type: bump.type,
-            prefix: options.prefixes[bump.type][0],
             value: `upgrade dependencies: ${Object.keys(bump.deps).join(', ')}`
           })
           .sort((a, b) => compareReleaseTypes(b.type, a.type))

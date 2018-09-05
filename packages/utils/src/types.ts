@@ -1,12 +1,22 @@
 import { TJsonMap } from 'typeon'
 
-export type TCommitPrefixType = 'major' | 'minor' | 'patch' | 'publish' | 'dependencies'
+export type TBumpType = 'major' | 'minor' | 'patch'
+
+export type TOptionsPrefix = {
+  title: string,
+  value: string
+}
 
 export type TOptions = {
-  prefixes: {
-    [key in TCommitPrefixType]: string[]
+  semverPrefixes: {
+    [key in TBumpType]: TOptionsPrefix
   },
-  namespace: string
+  autoPrefixes: {
+    publish: TOptionsPrefix,
+    dependencies: TOptionsPrefix,
+  }
+  customPrefixes: TOptionsPrefix[],
+  namespace?: string
 }
 
 export type TPackageJson = {
@@ -27,11 +37,19 @@ export type TPackages = {
   }
 }
 
-export type TBumpType = 'major' | 'minor' | 'patch'
+export type TParsedMessageType = TBumpType | 'publish'
+
+export type TParsedRepoMessage = {
+  type: TParsedMessageType,
+  message: string
+}
+
+export type TParsedWorkspacesMessage = {
+  name: string
+} & TParsedRepoMessage
 
 export type TMessage = {
   type: TBumpType,
-  prefix: string,
   value: string
 }
 

@@ -5,7 +5,7 @@ import { parseWorkspacesCommitMessage } from '../src/parse-workspaces-commit-mes
 test('git:parseWorkspacesCommitMessage', async (t) => {
   t.equals(
     parseWorkspacesCommitMessage(
-      '💩 foo: breaking change',
+      '🚨 foo: breaking change',
       options
     ),
     null,
@@ -14,13 +14,12 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      '🚨 foo: breaking change\nnew line',
+      `${options.semverPrefixes.major.value} foo: breaking change\nnew line`,
       options
     ),
     {
       type: 'major',
-      prefix: '🚨',
-      package: '@ns/foo',
+      name: '@ns/foo',
       message: 'breaking change\nnew line'
     },
     'return bump object'

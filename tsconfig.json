@@ -11,7 +11,11 @@
       "memfs": [
         "types/memfs"
       ]
-    }
+    },
+    "typeRoots": [
+      "types/prompts",
+      "node_modules/@types"
+    ]
   },
-  "exclude": ["node_modules/", "coverage/", "packages/*/build/", "tmp/", "types/"]
+  "exclude": ["node_modules/", "coverage/", "packages/*/build/", "tmp/", "types/memfs"]
 }

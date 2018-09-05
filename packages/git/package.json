@@ -25,7 +25,8 @@
   "dependencies": {
     "@auto/utils": "^0.0.5",
     "esm": "^3.0.81",
-    "execa": "^0.11.0"
+    "execa": "^0.11.0",
+    "prompts": "^1.0.0"
   },
   "devDependencies": {
     "@types/execa": "^0.9.0"

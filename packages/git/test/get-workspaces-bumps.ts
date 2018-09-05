@@ -1,14 +1,15 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/git-options'
 import { mock, unmock } from 'mocku'
+import { TGitRepoBump, TGitWorkspacesBump } from '@auto/utils/src/'
+import { options } from '../../utils/test/git-options'
 
 test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ foo: patch 2',
-        '✔️ foo: patch 1',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.patch.value} foo: patch 2`,
+        `${options.semverPrefixes.patch.value} foo: patch 1`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -22,14 +23,12 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'patch',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch 2'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch 1'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as patch + patch'
   )
 
@@ -40,9 +39,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ foo: minor',
-        '✔️ foo: patch',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -56,14 +55,12 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'minor',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as patch + minor'
   )
 
@@ -74,9 +71,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ foo: patch',
-        '➕ foo: minor',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -90,15 +87,12 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'minor',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }, {
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
-
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as minor + patch'
   )
 
@@ -109,10 +103,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '💥 foo: major',
-        '➕ foo: minor',
-        '✔️ foo: patch',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.major.value} foo: major`,
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -126,18 +120,15 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }, {
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as patch + minor + major'
   )
 
@@ -148,10 +139,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ foo: minor',
-        '💥 foo: major',
-        '✔️ foo: patch',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.semverPrefixes.major.value} foo: major`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -165,19 +156,16 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
 
       }, {
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as patch + major + minor'
   )
 
@@ -188,10 +176,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ foo: minor',
-        '✔️ foo: patch',
-        '💥 foo: major',
-        '📦 foo: v1.2.3'
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.semverPrefixes.major.value} foo: major`,
+        `${options.autoPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -205,18 +193,15 @@ test('git:getWorkspacesBumps single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }, {
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as major + patch + minor'
   )
 
@@ -227,12 +212,12 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ foo: patch',
-        '📦 foo: v1.0.1',
-        '✔️ bar: patch',
-        '📦 bar: v2.0.1',
-        '💥 foo: breaking',
-        '💥 bar: breaking'
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.autoPrefixes.publish.value} foo: v1.0.1`,
+        `${options.semverPrefixes.patch.value} bar: patch`,
+        `${options.autoPrefixes.publish.value} bar: v2.0.1`,
+        `${options.semverPrefixes.major.value} foo: breaking`,
+        `${options.semverPrefixes.major.value} bar: breaking`
       ])
     }
   })
@@ -246,7 +231,6 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
       type: 'patch',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
     }, {
@@ -254,10 +238,9 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
       type: 'patch',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'bump as patch && patch'
   )
 
@@ -268,13 +251,13 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ foo: minor',
-        '➕ foo',
-        '💥',
+        `${options.semverPrefixes.minor.value} foo: minor`,
+        `${options.semverPrefixes.minor.value} foo`,
+        `${options.semverPrefixes.major.value}`,
         'beep',
-        '♻️ foo: upgrade dependencies',
-        '✔️ foo: patch',
-        '📦 foo: v1.0.1'
+        `${options.autoPrefixes.dependencies.value} foo: upgrade dependencies`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.autoPrefixes.publish.value} foo: v1.0.1`
       ])
     }
   })
@@ -288,14 +271,12 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
       type: 'minor',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    }],
+    }] as TGitWorkspacesBump[],
     'skip invalid commit messages'
   )
 

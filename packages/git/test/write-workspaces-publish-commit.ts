@@ -27,7 +27,15 @@ test('git:writeWorkspacesPublishCommit: single package', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['commit', '-m', '📦 a: v0.1.1', 'fakes/a/package.json']]
+      [
+        'git',
+        [
+          'commit',
+          '-m',
+          `${options.autoPrefixes.publish.value} a: v0.1.1`,
+          'fakes/a/package.json'
+        ]
+      ]
     ],
     'single package'
   )

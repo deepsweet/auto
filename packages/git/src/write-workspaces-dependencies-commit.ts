@@ -8,7 +8,9 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
 
   if (packageBump.deps !== null || packageBump.devDeps !== null) {
     const packageJsonPath = path.join(packageBump.dir, 'package.json')
-    const prefix = packageBump.type !== null ? packageBump.type : 'dependencies'
+    const prefix = packageBump.type !== null
+      ? options.semverPrefixes[packageBump.type].value
+      : options.autoPrefixes.dependencies.value
 
     try {
       await execa(
@@ -16,7 +18,7 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
         [
           'commit',
           '-m',
-          `${options.prefixes[prefix]} ${name}: upgrade dependencies`,
+          `${prefix} ${name}: upgrade dependencies`,
           packageJsonPath
         ],
         execaOptions

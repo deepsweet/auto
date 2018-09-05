@@ -1,5 +1,5 @@
 import execa from 'execa'
-import { TWorkspacesPackageBump } from '@auto/utils/src'
+import { TWorkspacesPackageBump } from '@auto/utils/src/'
 
 export const publishWorkspacesPackage = async (bumpPackage: TWorkspacesPackageBump) => {
   try {

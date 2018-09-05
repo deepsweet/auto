@@ -1,4 +1,4 @@
-import { TWorkspacesPackageBump } from '@auto/utils/src'
+import { TWorkspacesPackageBump } from '@auto/utils/src/'
 
 export const getDependentsCount = (packageBump: TWorkspacesPackageBump) => {
   let depsCount = 0

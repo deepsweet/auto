@@ -18,25 +18,20 @@ export const getWorkspacesBumps = async (options: TOptions): Promise<TGitWorkspa
       continue
     }
 
-    if (completedPackages.includes(parsed.package)) {
-      continue
-    }
-
-    if (parsed.type === 'dependencies') {
+    if (completedPackages.includes(parsed.name)) {
       continue
     }
 
     if (parsed.type === 'publish') {
-      completedPackages.push(parsed.package)
+      completedPackages.push(parsed.name)
       continue
     }
 
-    if (Reflect.has(bumps, parsed.package)) {
-      const bump = bumps[parsed.package]
+    if (Reflect.has(bumps, parsed.name)) {
+      const bump = bumps[parsed.name]
 
       bump.messages.push({
         type: parsed.type,
-        prefix: parsed.prefix,
         value: parsed.message
       })
 
@@ -44,12 +39,11 @@ export const getWorkspacesBumps = async (options: TOptions): Promise<TGitWorkspa
         bump.type = parsed.type
       }
     } else {
-      bumps[parsed.package] = {
-        name: parsed.package,
+      bumps[parsed.name] = {
+        name: parsed.name,
         type: parsed.type,
         messages: [{
           type: parsed.type,
-          prefix: parsed.prefix,
           value: parsed.message
         }]
       }

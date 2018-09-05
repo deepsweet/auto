@@ -1,4 +1,4 @@
-import { TPackages } from '@auto/utils/src'
+import { TPackages } from '@auto/utils/src/'
 import { getCrossDependents } from './get-cross-dependents'
 import { TDependent } from './types'
 

@@ -15,7 +15,7 @@ export const writeWorkspacesPublishCommit = async (packageBump: TWorkspacesPacka
         [
           'commit',
           '-m',
-          `${options.prefixes['publish']} ${name}: v${packageBump.version}`,
+          `${options.autoPrefixes.publish.value} ${name}: v${packageBump.version}`,
           packageJsonPath
         ],
         execaOptions

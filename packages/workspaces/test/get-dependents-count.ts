@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { getDependentsCount } from '../src'
+import { getDependentsCount } from '../src/get-dependents-count'
 
 test('workspaces:getDependentsCount', (t) => {
   t.equals(

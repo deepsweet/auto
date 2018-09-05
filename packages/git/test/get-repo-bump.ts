@@ -1,14 +1,15 @@
 import test from 'blue-tape'
 import { options } from '../../utils/test/git-options'
 import { mock, unmock } from 'mocku'
+import { TGitRepoBump } from '@auto/utils/src/'
 
 test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ patch 2',
-        '✔️ patch 1',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.patch.value} patch 2`,
+        `${options.semverPrefixes.patch.value} patch 1`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -21,14 +22,12 @@ test('git:getRepoBump single package', async (t) => {
       type: 'patch',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch 2'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch 1'
       }]
-    },
+    } as TGitRepoBump,
     'bump as patch + patch'
   )
 
@@ -39,9 +38,9 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ minor',
-        '✔️ patch',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.minor.value} minor`,
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -54,14 +53,12 @@ test('git:getRepoBump single package', async (t) => {
       type: 'minor',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    },
+    } as TGitRepoBump,
     'bump as patch + minor'
   )
 
@@ -72,9 +69,9 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '✔️ patch',
-        '➕ minor',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.semverPrefixes.minor.value} minor`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -87,15 +84,13 @@ test('git:getRepoBump single package', async (t) => {
       type: 'minor',
       messages: [{
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }, {
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
 
       }]
-    },
+    } as TGitRepoBump,
     'bump as minor + patch'
   )
 
@@ -106,10 +101,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '💥 major',
-        '➕ minor',
-        '✔️ patch',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.major.value} major`,
+        `${options.semverPrefixes.minor.value} minor`,
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -122,18 +117,15 @@ test('git:getRepoBump single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }, {
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    },
+    } as TGitRepoBump,
     'bump as patch + minor + major'
   )
 
@@ -144,10 +136,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ minor',
-        '💥 major',
-        '✔️ patch',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.minor.value} minor`,
+        `${options.semverPrefixes.major.value} major`,
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -160,19 +152,16 @@ test('git:getRepoBump single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
 
       }, {
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    },
+    } as TGitRepoBump,
     'bump as patch + major + minor'
   )
 
@@ -183,10 +172,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ minor',
-        '✔️ patch',
-        '💥 major',
-        '📦 v1.2.3'
+        `${options.semverPrefixes.minor.value} minor`,
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.semverPrefixes.major.value} major`,
+        `${options.autoPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -199,18 +188,15 @@ test('git:getRepoBump single package', async (t) => {
       type: 'major',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }, {
         type: 'major',
-        prefix: '💥',
         value: 'major'
       }]
-    },
+    } as TGitRepoBump,
     'bump as major + patch + minor'
   )
 
@@ -221,12 +207,12 @@ test('git:getRepoBump skipped commits', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        '➕ minor',
+        `${options.semverPrefixes.minor.value} minor`,
         '💥',
         'beep',
-        '♻️ upgrade dependencies',
-        '✔️ patch',
-        '📦 v1.0.1'
+        `${options.autoPrefixes.dependencies.value} upgrade dependencies`,
+        `${options.semverPrefixes.patch.value} patch`,
+        `${options.autoPrefixes.publish.value} v1.0.1`
       ])
     }
   })
@@ -239,14 +225,12 @@ test('git:getRepoBump skipped commits', async (t) => {
       type: 'minor',
       messages: [{
         type: 'minor',
-        prefix: '➕',
         value: 'minor'
       }, {
         type: 'patch',
-        prefix: '✔️',
         value: 'patch'
       }]
-    },
+    } as TGitRepoBump,
     'skip invalid commit messages'
   )
 

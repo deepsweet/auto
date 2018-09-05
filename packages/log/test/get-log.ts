@@ -1,6 +1,7 @@
 import test from 'blue-tape'
 import { getLog } from '../src/get-log'
 import { options } from '../../utils/test/git-options'
+import { TWorkspacesLog } from '@auto/utils/src/'
 
 test('getLog', (t) => {
   t.deepEquals(
@@ -62,12 +63,11 @@ test('getLog', (t) => {
         messages: [
           {
             type: 'patch',
-            prefix: options.prefixes.patch[0],
             value: 'upgrade dependencies: @ns/b, @ns/c'
           }
         ]
       }
-    ],
+    ] as TWorkspacesLog[],
     'deps only: should return dependency upgrade message'
   )
 
@@ -83,7 +83,7 @@ test('getLog', (t) => {
           devDeps: null
         }
       ],
-      [],
+      [] as TWorkspacesLog[],
       options
     ),
     [],
@@ -112,17 +112,14 @@ test('getLog', (t) => {
           messages: [
             {
               type: 'minor',
-              prefix: options.prefixes.minor[0],
               value: 'minor'
             },
             {
               type: 'patch',
-              prefix: options.prefixes.patch[0],
               value: 'patch'
             },
             {
               type: 'major',
-              prefix: options.prefixes.major[0],
               value: 'major'
             }
           ]
@@ -138,27 +135,23 @@ test('getLog', (t) => {
         messages: [
           {
             type: 'major',
-            prefix: options.prefixes.major[0],
             value: 'major'
           },
           {
             type: 'minor',
-            prefix: options.prefixes.minor[0],
             value: 'minor'
           },
           {
             type: 'patch',
-            prefix: options.prefixes.patch[0],
             value: 'patch'
           },
           {
             type: 'patch',
-            prefix: options.prefixes.patch[0],
             value: 'upgrade dependencies: @ns/b, @ns/c'
           }
         ]
       }
-    ],
+    ] as TWorkspacesLog[],
     'deps with messages: should return sorted messages with dependency upgrade message'
   )
 
@@ -181,17 +174,14 @@ test('getLog', (t) => {
           messages: [
             {
               type: 'minor',
-              prefix: options.prefixes.minor[0],
               value: 'minor'
             },
             {
               type: 'patch',
-              prefix: options.prefixes.patch[0],
               value: 'patch'
             },
             {
               type: 'major',
-              prefix: options.prefixes.major[0],
               value: 'major'
             }
           ]
@@ -207,22 +197,19 @@ test('getLog', (t) => {
         messages: [
           {
             type: 'major',
-            prefix: options.prefixes.major[0],
             value: 'major'
           },
           {
             type: 'minor',
-            prefix: options.prefixes.minor[0],
             value: 'minor'
           },
           {
             type: 'patch',
-            prefix: options.prefixes.patch[0],
             value: 'patch'
           }
         ]
       }
-    ],
+    ] as TWorkspacesLog[],
     'messages only: should return sorted messages'
   )
 

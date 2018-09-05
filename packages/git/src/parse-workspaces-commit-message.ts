@@ -1,9 +1,15 @@
-import { TCommitPrefixType, TOptions } from '@auto/utils/src'
+import { TOptions, TParsedMessageType, TParsedWorkspacesMessage } from '@auto/utils/src/'
 
-export const parseWorkspacesCommitMessage = (message: string, options: TOptions) => {
-  for (const entry of Object.entries(options.prefixes)) {
-    const [type, values] = entry as [TCommitPrefixType, string[]]
-    const regexp = new RegExp(`^(${values.join('|')})\\s(.+?):\\s((?:[\r\n]|.)+)$`, 'm')
+export const parseWorkspacesCommitMessage = (message: string, options: TOptions): TParsedWorkspacesMessage | null => {
+  const prefixes: [TParsedMessageType, string][] = [
+    ['major', options.semverPrefixes.major.value],
+    ['minor', options.semverPrefixes.minor.value],
+    ['patch', options.semverPrefixes.patch.value],
+    ['publish', options.autoPrefixes.publish.value]
+  ]
+
+  for (const [type, value] of prefixes) {
+    const regexp = new RegExp(`^${value}\\s(.+?):\\s((?:[\r\n]|.)+)$`, 'm')
     const result = message.match(regexp)
 
     if (result === null) {
@@ -12,9 +18,8 @@ export const parseWorkspacesCommitMessage = (message: string, options: TOptions)
 
     return {
       type,
-      prefix: result[1],
-      package: `@${options.namespace}/${result[2]}`,
-      message: result[3].trim()
+      name: `@${options.namespace}/${result[1]}`,
+      message: result[2].trim()
     }
   }
 

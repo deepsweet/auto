@@ -1,4 +1,4 @@
-import { compareReleaseTypes, TGitRepoBump, TOptions } from '@auto/utils/src/'
+import { compareReleaseTypes, TGitRepoBump, TOptions, TBumpType } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
 import { parseRepoCommitMessage } from './parse-repo-commit-message'
 
@@ -13,10 +13,6 @@ export const getRepoBump = async (options: TOptions): Promise<TGitRepoBump | nul
       continue
     }
 
-    if (parsed.type === 'dependencies') {
-      continue
-    }
-
     if (parsed.type === 'publish') {
       break
     }
@@ -24,7 +20,6 @@ export const getRepoBump = async (options: TOptions): Promise<TGitRepoBump | nul
     if (bump !== null) {
       bump.messages.push({
         type: parsed.type,
-        prefix: parsed.prefix,
         value: parsed.message
       })
 
@@ -36,7 +31,6 @@ export const getRepoBump = async (options: TOptions): Promise<TGitRepoBump | nul
         type: parsed.type,
         messages: [{
           type: parsed.type,
-          prefix: parsed.prefix,
           value: parsed.message
         }]
       }

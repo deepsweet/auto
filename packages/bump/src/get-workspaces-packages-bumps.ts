@@ -1,4 +1,4 @@
-import { getDependentsCount, getDependentsOf } from '@auto/workspaces/src'
+import { getDependentsCount, getDependentsOf } from '@auto/workspaces/src/'
 import {
   compareReleaseTypes,
   TGitWorkspacesBump,
