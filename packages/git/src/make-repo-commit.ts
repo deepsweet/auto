@@ -23,19 +23,16 @@ export const makeRepoCommit = async (options: TOptions) => {
     message: 'Type commit message'
   }) as { message: string }
 
-  const execaOptions = { stderr: process.stderr }
-
-  try {
-    await execa(
-      'git',
-      [
-        'commit',
-        '-m',
-        `${prefix} ${message}`
-      ],
-      execaOptions
-    )
-  } catch (err) {
-    throw null // eslint-disable-line no-throw-literal
-  }
+  await execa(
+    'git',
+    [
+      'commit',
+      '-m',
+      `${prefix} ${message}`
+    ],
+    {
+      stdout: process.stdout,
+      stderr: null
+    }
+  )
 }

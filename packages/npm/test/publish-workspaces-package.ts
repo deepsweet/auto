@@ -31,32 +31,3 @@ test('npm:publishWorkspacesPackage', async (t) => {
 
   unmock('../src/publish-workspaces-package')
 })
-
-test('npm:publishWorkspacesPackage: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/publish-workspaces-package', {
-    execa: { default: execaSpy }
-  })
-
-  const { publishWorkspacesPackage } = await import('../src/publish-workspaces-package')
-
-  try {
-    await publishWorkspacesPackage({
-      name: 'baz',
-      dir: '/foo/bar/baz',
-      version: '1.2.3',
-      type: 'minor',
-      deps: null,
-      devDeps: null
-    })
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/publish-workspaces-package')
-})

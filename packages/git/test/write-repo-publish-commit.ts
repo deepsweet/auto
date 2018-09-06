@@ -32,31 +32,3 @@ test('git:writeRepoPublishCommit: single package', async (t) => {
 
   unmock('../src/write-repo-publish-commit')
 })
-
-test('git:writeRepoPublishCommit: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/write-repo-publish-commit', {
-    execa: { default: execaSpy }
-  })
-
-  const { writeRepoPublishCommit } = await import('../src/write-repo-publish-commit')
-
-  try {
-    await writeRepoPublishCommit(
-      {
-        type: 'major',
-        version: '1.0.0'
-      },
-      options
-    )
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/write-repo-publish-commit')
-})

@@ -43,19 +43,16 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     name += ': '
   }
 
-  const execaOptions = { stderr: process.stderr }
-
-  try {
-    await execa(
-      'git',
-      [
-        'commit',
-        '-m',
-        `${prefix} ${name}${message}`
-      ],
-      execaOptions
-    )
-  } catch (err) {
-    throw null // eslint-disable-line no-throw-literal
-  }
+  await execa(
+    'git',
+    [
+      'commit',
+      '-m',
+      `${prefix} ${name}${message}`
+    ],
+    {
+      stdout: process.stdout,
+      stderr: null
+    }
+  )
 }

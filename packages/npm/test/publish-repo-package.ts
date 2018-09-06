@@ -24,25 +24,3 @@ test('npm:publishRepoPackage', async (t) => {
 
   unmock('../src/publish-repo-package')
 })
-
-test('npm:publishRepoPackage: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/publish-repo-package', {
-    execa: { default: execaSpy }
-  })
-
-  const { publishRepoPackage } = await import('../src/publish-repo-package')
-
-  try {
-    await publishRepoPackage()
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/publish-repo-package')
-})

@@ -66,37 +66,3 @@ test('git:writeWorkspacesPublishTag: no packages to publish', async (t) => {
 
   unmock('../src/write-workspaces-publish-tag')
 })
-
-test('git:writeWorkspacesPublishTag: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/write-workspaces-publish-tag', {
-    execa: { default: execaSpy }
-  })
-
-  const { writeWorkspacesPublishTag } = await import('../src/write-workspaces-publish-tag')
-
-  try {
-    await writeWorkspacesPublishTag(
-      {
-        name: '@ns/a',
-        dir: 'fakes/a',
-        type: 'major',
-        version: '1.0.0',
-        deps: {
-          '@ns/b': '~0.2.0'
-        },
-        devDeps: null
-      },
-      options
-    )
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/write-workspaces-publish-tag')
-})

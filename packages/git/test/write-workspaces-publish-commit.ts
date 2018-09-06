@@ -74,37 +74,3 @@ test('git:writeWorkspacesPublishCommit: no packages to publish', async (t) => {
 
   unmock('../src/write-workspaces-publish-commit')
 })
-
-test('git:writeWorkspacesPublishCommit: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/write-workspaces-publish-commit', {
-    execa: { default: execaSpy }
-  })
-
-  const { writeWorkspacesPublishCommit } = await import('../src/write-workspaces-publish-commit')
-
-  try {
-    await writeWorkspacesPublishCommit(
-      {
-        name: '@ns/a',
-        dir: 'fakes/a',
-        type: 'major',
-        version: '1.0.0',
-        deps: {
-          '@ns/b': '~0.2.0'
-        },
-        devDeps: null
-      },
-      options
-    )
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/write-workspaces-publish-commit')
-})

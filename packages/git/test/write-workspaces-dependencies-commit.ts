@@ -116,37 +116,3 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
 
   unmock('../src/write-workspaces-dependencies-commit')
 })
-
-test('git:writeWorkspacesDependenciesCommit: throw error', async (t) => {
-  const execaSpy = createSpy(() => {
-    throw new Error('error')
-  })
-
-  mock('../src/write-workspaces-dependencies-commit', {
-    execa: { default: execaSpy }
-  })
-
-  const { writeWorkspacesDependenciesCommit } = await import('../src/write-workspaces-dependencies-commit')
-
-  try {
-    await writeWorkspacesDependenciesCommit(
-      {
-        name: '@ns/a',
-        dir: 'fakes/a',
-        type: 'major',
-        version: '1.0.0',
-        deps: {
-          '@ns/b': '~0.2.0'
-        },
-        devDeps: null
-      },
-      options
-    )
-
-    t.fail('should not get here')
-  } catch (err) {
-    t.equals(err, null, 'error should be null')
-  }
-
-  unmock('../src/write-workspaces-dependencies-commit')
-})
