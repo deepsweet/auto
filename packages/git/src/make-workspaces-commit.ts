@@ -13,9 +13,12 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       options.semverPrefixes.minor,
       options.semverPrefixes.patch,
       ...options.customPrefixes
-    ],
-    initial: 1
-  }) as { prefix: string }
+    ]
+  }) as { prefix?: string }
+
+  if (typeof prefix === 'undefined') {
+    throw new Error('Change type is required')
+  }
 
   const { packageName } = await prompts({
     type: 'autocomplete',
@@ -25,17 +28,25 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       { title: '- (no package)', value: '-' },
       { title: '* (all packages)', value: '*' },
       ...Object.keys(packages).map((name) => ({ title: name, value: name }))
-    ]
-  }) as { packageName: string }
+    ],
     suggest: (input, choices) => Promise.resolve(
       choices.filter((choice) => choice.value.includes(input))
     )
+  }) as { packageName?: string }
+
+  if (typeof packageName === 'undefined') {
+    throw new Error('Package name is required')
+  }
 
   const { message } = await prompts({
     type: 'text',
     name: 'message',
     message: 'Type commit message'
-  }) as { message: string }
+  }) as { message?: string }
+
+  if (typeof message === 'undefined') {
+    throw new Error('Commit message is required')
+  }
 
   let name = ''
 
