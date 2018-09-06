@@ -1,4 +1,4 @@
-declare module "prompts" {
+declare module 'prompts' {
   export = PromptFn;
 }
 
@@ -22,7 +22,7 @@ declare namespace Prompt {
       ToggleQuestion |
       SelectQuestion |
       MultiSelectQuestion |
-      AutoCompleteQuestion;
+      AutoCompleteQuestion
 
   interface Choice {
       title: string;
@@ -69,7 +69,7 @@ declare namespace Prompt {
   }
 
   interface HasSuggestions {
-      suggest: Function;
+      suggest: (input: string, choices: Array<Choice>) => Promise<Array<Choice>>
   }
 
   interface HasLimit {
@@ -84,5 +84,5 @@ declare namespace Prompt {
   interface ToggleQuestion extends Question, HasToggleControl {}
   interface SelectQuestion extends Question, HasChoices {}
   interface MultiSelectQuestion extends Question, HasChoices, HasMaxControl, HasHint {}
-  interface AutoCompleteQuestion extends Question, HasChoices, HasStyle, HasLimit {}
+  interface AutoCompleteQuestion extends Question, HasChoices, HasSuggestions, HasStyle, HasLimit {}
 }

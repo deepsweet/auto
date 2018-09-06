@@ -27,6 +27,9 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       ...Object.keys(packages).map((name) => ({ title: name, value: name }))
     ]
   }) as { packageName: string }
+    suggest: (input, choices) => Promise.resolve(
+      choices.filter((choice) => choice.value.includes(input))
+    )
 
   const { message } = await prompts({
     type: 'text',
