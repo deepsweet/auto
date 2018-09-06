@@ -16,9 +16,11 @@ export const parseWorkspacesCommitMessage = (message: string, options: TOptions)
       continue
     }
 
+    const name = result[1]
+
     return {
       type,
-      name: `${options.autoNamePrefix}${result[1]}`,
+      name: name === '*' ? name : `${options.autoNamePrefix}${name}`,
       message: result[2].trim()
     }
   }

@@ -22,7 +22,8 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     name: 'packageName',
     message: 'Type package name',
     choices: [
-      { title: '-', value: '-' },
+      { title: '- (no package)', value: '-' },
+      { title: '* (all packages)', value: '*' },
       ...Object.keys(packages).map((name) => ({ title: name, value: name }))
     ]
   }) as { packageName: string }
@@ -35,7 +36,9 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
 
   let name = ''
 
-  if (packageName !== '-') {
+  if (packageName === '*') {
+    name = '*: '
+  } else if (packageName !== '-') {
     name = packageName.replace(new RegExp(`^${options.autoNamePrefix}`), '')
     name += ': '
   }

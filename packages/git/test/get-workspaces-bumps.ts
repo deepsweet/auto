@@ -1,7 +1,24 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-import { TGitRepoBump, TGitWorkspacesBump } from '@auto/utils/src/'
+import { TGitWorkspacesBump, TPackages } from '@auto/utils/src/'
 import { options } from '../../utils/test/git-options'
+
+const packages: TPackages = {
+  '@ns/foo': {
+    dir: 'fakes/foo',
+    json: {
+      name: '@ns/foo',
+      version: '0.1.2'
+    }
+  },
+  '@ns/bar': {
+    dir: 'fakes/bar',
+    json: {
+      name: '@ns/bar',
+      version: '2.1.0'
+    }
+  }
+}
 
 test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
@@ -17,7 +34,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'patch',
@@ -49,7 +66,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'minor',
@@ -81,7 +98,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'minor',
@@ -114,7 +131,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'major',
@@ -150,7 +167,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'major',
@@ -187,7 +204,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'major',
@@ -214,9 +231,9 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
       getCommitMessages: () => Promise.resolve([
         `${options.semverPrefixes.patch.value} foo: patch`,
         `${options.autoPrefixes.publish.value} foo: v1.0.1`,
+        `${options.semverPrefixes.major.value} foo: breaking`,
         `${options.semverPrefixes.patch.value} bar: patch`,
         `${options.autoPrefixes.publish.value} bar: v2.0.1`,
-        `${options.semverPrefixes.major.value} foo: breaking`,
         `${options.semverPrefixes.major.value} bar: breaking`
       ])
     }
@@ -225,7 +242,7 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'patch',
@@ -242,6 +259,54 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
       }]
     }] as TGitWorkspacesBump[],
     'bump as patch && patch'
+  )
+
+  unmock('../src/get-workspaces-bumps')
+})
+
+test('git:getWorkspacesBumps all packages', async (t) => {
+  mock('../src/get-workspaces-bumps', {
+    './get-commit-messages': {
+      getCommitMessages: () => Promise.resolve([
+        `${options.semverPrefixes.minor.value} *: minor`,
+        `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.semverPrefixes.patch.value} bar: patch`
+      ])
+    }
+  })
+
+  const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
+
+  t.deepEquals(
+    await getWorkspacesBumps(packages, options),
+    [{
+      name: '@ns/foo',
+      type: 'minor',
+      messages: [
+        {
+          type: 'minor',
+          value: 'minor'
+        },
+        {
+          type: 'patch',
+          value: 'patch'
+        }
+      ]
+    }, {
+      name: '@ns/bar',
+      type: 'minor',
+      messages: [
+        {
+          type: 'minor',
+          value: 'minor'
+        },
+        {
+          type: 'patch',
+          value: 'patch'
+        }
+      ]
+    }] as TGitWorkspacesBump[],
+    'bump as minor && minor'
   )
 
   unmock('../src/get-workspaces-bumps')
@@ -265,7 +330,7 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(options),
+    await getWorkspacesBumps(packages, options),
     [{
       name: '@ns/foo',
       type: 'minor',
