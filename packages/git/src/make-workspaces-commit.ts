@@ -30,12 +30,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     message: 'Type commit message'
   }) as { message: string }
 
-  let name = packageName.replace(/^@/, '')
-
-  if (typeof options.namespace !== 'undefined') {
-    name = name.replace(new RegExp(`^${options.namespace}/`), '')
-  }
-
+  const name = packageName.replace(new RegExp(`^${options.autoNamePrefix}`), '')
   const execaOptions = { stderr: process.stderr }
 
   try {

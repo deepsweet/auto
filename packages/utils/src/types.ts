@@ -16,7 +16,7 @@ export type TOptions = {
     dependencies: TOptionsPrefix,
   }
   customPrefixes: TOptionsPrefix[],
-  namespace?: string
+  autoNamePrefix: string
 }
 
 export type TPackageJson = {

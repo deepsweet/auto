@@ -45,7 +45,7 @@ test('git:makeWorkspacesCommit', async (t) => {
   unmock('../src/make-workspaces-commit')
 })
 
-test('git:makeWorkspacesCommit: no namespace in options', async (t) => {
+test('git:makeWorkspacesCommit: no auto name prefix in options', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
   const promptsSpy = createSpy(({ index }) => {
     if (index === 0) {
@@ -76,13 +76,13 @@ test('git:makeWorkspacesCommit: no namespace in options', async (t) => {
     }
   }, {
     ...options,
-    namespace: undefined
+    autoNamePrefix: ''
   })
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['commit', '-m', 'prefix ns/foo: message']]
+      ['git', ['commit', '-m', 'prefix @ns/foo: message']]
     ],
     'should write proper message'
   )

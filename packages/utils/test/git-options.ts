@@ -63,5 +63,5 @@ export const options: TOptions = {
       value: '🛠'
     }
   ],
-  namespace: 'ns'
+  autoNamePrefix: '@ns/'
 }
