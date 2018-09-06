@@ -1,6 +1,6 @@
 {
   "name": "@auto/fs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.6",
+    "@auto/utils": "^0.0.7",
     "esm": "^3.0.81",
     "fast-glob": "^2.2.2"
   }

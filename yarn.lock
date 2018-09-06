@@ -2,20 +2,6 @@
 # yarn lockfile v1
 
 
-"@auto/git@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@auto/git/-/git-0.0.9.tgz#728c202685b13facd2c0d9488a070791fdc8d599"
-  dependencies:
-    "@auto/utils" "^0.0.4"
-    esm "^3.0.80"
-    execa "^0.11.0"
-
-"@auto/utils@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@auto/utils/-/utils-0.0.4.tgz#743e5917eeb8abc72f6430c366503396f3720d26"
-  dependencies:
-    esm "^3.0.80"
-
 "@babel/code-frame@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.51.tgz#bd71d9b192af978df915829d39d4094456439a0c"
@@ -1848,10 +1834,6 @@ eslint@^5.0.0, eslint@^5.4.0:
     table "^4.0.3"
     text-table "^0.2.0"
 
-esm@^3.0.80:
-  version "3.0.82"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.82.tgz#e8c4363a14e30936bedf49a44bf962e2c91866ff"
-
 esm@^3.0.81:
   version "3.0.81"
   resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.81.tgz#3d78df013960b6d30bb5a5adfafe5d9da654b9d2"
@@ -1903,9 +1885,9 @@ execa@^0.10.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-0.11.0.tgz#0b3c71daf9b9159c252a863cd981af1b4410d97a"
+execa@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-1.0.0.tgz#c6236a5bb4df6d6f15e88e7f017798216749ddd8"
   dependencies:
     cross-spawn "^6.0.0"
     get-stream "^4.0.0"
