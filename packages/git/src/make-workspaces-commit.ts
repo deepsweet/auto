@@ -21,7 +21,10 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     type: 'autocomplete',
     name: 'packageName',
     message: 'Type package name',
-    choices: Object.keys(packages).map((name) => ({ title: name, value: name }))
+    choices: [
+      { title: '-', value: '-' },
+      ...Object.keys(packages).map((name) => ({ title: name, value: name }))
+    ]
   }) as { packageName: string }
 
   const { message } = await prompts({
@@ -30,7 +33,13 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     message: 'Type commit message'
   }) as { message: string }
 
-  const name = packageName.replace(new RegExp(`^${options.autoNamePrefix}`), '')
+  let name = ''
+
+  if (packageName !== '-') {
+    name = packageName.replace(new RegExp(`^${options.autoNamePrefix}`), '')
+    name += ': '
+  }
+
   const execaOptions = { stderr: process.stderr }
 
   try {
@@ -39,7 +48,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       [
         'commit',
         '-m',
-        `${prefix} ${name}: ${message}`
+        `${prefix} ${name}${message}`
       ],
       execaOptions
     )
