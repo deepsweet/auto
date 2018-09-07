@@ -3,6 +3,11 @@ import prompts from 'prompts'
 import execa from 'execa'
 import { TPackages, TOptions } from '@auto/utils/src/'
 
+export const suggestFilter = (input: string, choices: Prompt.Choice[]): Promise<Prompt.Choice[]> =>
+  Promise.resolve(
+    choices.filter((choice) => choice.value.includes(input))
+  )
+
 export const makeWorkspacesCommit = async (packages: TPackages, options: TOptions) => {
   const { prefix } = await prompts({
     type: 'select',
@@ -29,9 +34,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       { title: '* (all packages)', value: '*' },
       ...Object.keys(packages).map((name) => ({ title: name, value: name }))
     ],
-    suggest: (input, choices) => Promise.resolve(
-      choices.filter((choice) => choice.value.includes(input))
-    )
+    suggest: suggestFilter
   }) as { packageName?: string }
 
   if (typeof packageName === 'undefined') {
