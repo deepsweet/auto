@@ -3,7 +3,13 @@ import prompts from 'prompts'
 import execa from 'execa'
 import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'
 
-export const suggestFilter = (input: string, choices: Prompt.Choice[]): Promise<Prompt.Choice[]> =>
+type TPrompt = {
+  title: string,
+  value: any,
+  selected: boolean
+}
+
+export const suggestFilter = (input: string, choices: TPrompt[]): Promise<TPrompt[]> =>
   Promise.resolve(
     choices.filter((choice) => choice.value.includes(input))
   )
