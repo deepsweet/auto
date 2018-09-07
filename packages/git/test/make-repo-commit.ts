@@ -32,3 +32,55 @@ test('git:makeRepoCommit', async (t) => {
 
   unmock('../src/make-repo-commit')
 })
+
+test('git:makeRepoCommit: should throw on prefix undefined', async (t) => {
+  const execaSpy = createSpy(() => Promise.resolve())
+  const promptsSpy = createSpy(({ index }) => {
+    return Promise.resolve({})
+  })
+
+  mock('../src/make-repo-commit', {
+    execa: { default: execaSpy },
+    prompts: { default: promptsSpy }
+  })
+
+  const { makeRepoCommit } = await import('../src/make-repo-commit')
+
+  try {
+    await makeRepoCommit(options)
+
+    t.fail('should not get here')
+  } catch (e) {
+    t.equals(e.message, 'Change type is required')
+  }
+
+  unmock('../src/make-repo-commit')
+})
+
+test('git:makeRepoCommit: should throw on message undefined', async (t) => {
+  const execaSpy = createSpy(() => Promise.resolve())
+  const promptsSpy = createSpy(({ index }) => {
+    if (index === 0) {
+      return Promise.resolve({ prefix: 'prefix' })
+    }
+
+    return Promise.resolve({})
+  })
+
+  mock('../src/make-repo-commit', {
+    execa: { default: execaSpy },
+    prompts: { default: promptsSpy }
+  })
+
+  const { makeRepoCommit } = await import('../src/make-repo-commit')
+
+  try {
+    await makeRepoCommit(options)
+
+    t.fail('should not get here')
+  } catch (e) {
+    t.equals(e.message, 'Commit message is required')
+  }
+
+  unmock('../src/make-repo-commit')
+})

@@ -15,13 +15,21 @@ export const makeRepoCommit = async (options: TOptions) => {
       ...options.customPrefixes
     ],
     initial: 1
-  }) as { prefix: string }
+  }) as { prefix?: string }
+
+  if (typeof prefix === 'undefined') {
+    throw new Error('Change type is required')
+  }
 
   const { message } = await prompts({
     type: 'text',
     name: 'message',
     message: 'Type commit message'
-  }) as { message: string }
+  }) as { message?: string }
+
+  if (typeof message === 'undefined') {
+    throw new Error('Commit message is required')
+  }
 
   await execa(
     'git',
