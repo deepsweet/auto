@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import prompts from 'prompts'
 import execa from 'execa'
-import { TPackages, TOptions } from '@auto/utils/src/'
+import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'
 
 export const suggestFilter = (input: string, choices: Prompt.Choice[]): Promise<Prompt.Choice[]> =>
   Promise.resolve(
@@ -56,7 +56,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
   if (packageName === '*') {
     name = '*: '
   } else if (packageName !== '-') {
-    name = packageName.replace(new RegExp(`^${options.autoNamePrefix}`), '')
+    name = removeAutoNamePrefix(packageName, options.autoNamePrefix)
     name += ': '
   }
 
