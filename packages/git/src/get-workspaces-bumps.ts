@@ -24,6 +24,10 @@ export const getWorkspacesBumps = async (packages: TPackages, options: TOptions)
       : [parsed.name]
 
     for (const name of parsedNames) {
+      if (!packageNames.includes(name)) {
+        continue
+      }
+
       if (completedPackages.includes(name)) {
         continue
       }

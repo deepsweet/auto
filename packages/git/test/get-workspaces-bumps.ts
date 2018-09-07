@@ -322,6 +322,7 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
         'beep',
         `${options.autoPrefixes.dependencies.value} foo: upgrade dependencies`,
         `${options.semverPrefixes.patch.value} foo: patch`,
+        `${options.semverPrefixes.patch.value} baz: patch`,
         `${options.autoPrefixes.publish.value} foo: v1.0.1`
       ])
     }
