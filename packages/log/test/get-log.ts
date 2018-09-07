@@ -63,7 +63,7 @@ test('getLog', (t) => {
         messages: [
           {
             type: 'patch',
-            value: 'upgrade dependencies: @ns/b, @ns/c'
+            value: 'upgrade dependencies: b, c'
           }
         ]
       }
@@ -147,7 +147,7 @@ test('getLog', (t) => {
           },
           {
             type: 'patch',
-            value: 'upgrade dependencies: @ns/b, @ns/c'
+            value: 'upgrade dependencies: b, c'
           }
         ]
       }

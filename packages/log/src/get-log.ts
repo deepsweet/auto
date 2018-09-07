@@ -1,5 +1,6 @@
 import {
   compareReleaseTypes,
+  removeAutoNamePrefix,
   TGitWorkspacesBump,
   TOptions,
   TWorkspacesLog,
@@ -13,7 +14,7 @@ const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
     }
   }
 
-  return null
+  return []
 }
 
 export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesLog[] => {
@@ -22,25 +23,13 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
       return res
     }
 
-    const messages = getMessages(gitBumps, bump.name)
-
-    if (messages === null) {
-      if (bump.deps !== null) {
-        return res.concat({
-          name: bump.name,
-          version: bump.version,
-          type: bump.type,
-          messages: [{
-            type: bump.type,
-            value: `upgrade dependencies: ${Object.keys(bump.deps).join(', ')}`
-          }]
-        })
-      }
-
-      return res
-    }
+    let messages = getMessages(gitBumps, bump.name)
 
     if (bump.deps !== null) {
+      const bumpDepsNames = Object.keys(bump.deps)
+        .map((name) => removeAutoNamePrefix(name, options.autoNamePrefix))
+        .join(', ')
+
       return res.concat({
         name: bump.name,
         version: bump.version,
@@ -48,18 +37,21 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
         messages: messages
           .concat({
             type: bump.type,
-            value: `upgrade dependencies: ${Object.keys(bump.deps).join(', ')}`
+            value: `upgrade dependencies: ${bumpDepsNames}`
           })
           .sort((a, b) => compareReleaseTypes(b.type, a.type))
       })
+    }
+
+    if (messages.length === 0) {
+      return res
     }
 
     return res.concat({
       name: bump.name,
       version: bump.version,
       type: bump.type,
-      messages: messages
-        .sort((a, b) => compareReleaseTypes(b.type, a.type))
+      messages: messages.sort((a, b) => compareReleaseTypes(b.type, a.type))
     })
   }, [] as TWorkspacesLog[])
 }
