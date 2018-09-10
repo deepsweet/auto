@@ -24,11 +24,13 @@
   },
   "dependencies": {
     "@auto/utils": "^0.0.8",
+    "escape-string-regexp": "^1.0.5",
     "esm": "^3.0.81",
     "execa": "^1.0.0",
     "prompts": "^1.0.0"
   },
   "devDependencies": {
+    "@types/escape-string-regexp": "^1.0.0",
     "@types/execa": "^0.9.0"
   }
 }

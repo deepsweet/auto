@@ -1,6 +1,7 @@
 import { compareReleaseTypes, TGitWorkspacesBump, TOptions, TPackages } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
 import { parseWorkspacesCommitMessage } from './parse-workspaces-commit-message'
+import { makeRegExp } from './suggest-filter'
 
 type TGitBumps = {
   [key: string]: TGitWorkspacesBump
@@ -19,9 +20,15 @@ export const getWorkspacesBumps = async (packages: TPackages, options: TOptions)
       continue
     }
 
-    const parsedNames = parsed.name === '*'
-      ? packageNames
-      : [parsed.name]
+    let parsedNames = null
+
+    if (parsed.name.includes('*')) {
+      const regExp = makeRegExp(parsed.name)
+
+      parsedNames = packageNames.filter((name) => regExp.test(name))
+    } else {
+      parsedNames = [parsed.name]
+    }
 
     for (const name of parsedNames) {
       if (!packageNames.includes(name)) {

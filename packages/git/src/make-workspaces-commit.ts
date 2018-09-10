@@ -2,17 +2,9 @@
 import prompts from 'prompts'
 import execa from 'execa'
 import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'
+import { suggestFilter } from './suggest-filter'
 
-type TPrompt = {
-  title: string,
-  value: any,
-  selected: boolean
-}
 
-export const suggestFilter = (input: string, choices: TPrompt[]): Promise<TPrompt[]> =>
-  Promise.resolve(
-    choices.filter((choice) => choice.value.includes(input))
-  )
 
 export const makeWorkspacesCommit = async (packages: TPackages, options: TOptions) => {
   const { prefix } = await prompts({
@@ -35,11 +27,8 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     type: 'autocomplete',
     name: 'packageName',
     message: 'Type package name',
-    choices: [
-      { title: '- (no package)', value: '-' },
-      { title: '* (all packages)', value: '*' },
-      ...Object.keys(packages).map((name) => ({ title: name, value: name }))
-    ],
+    limit: 20,
+    choices: Object.keys(packages).map((name) => ({ title: name, value: name })),
     suggest: suggestFilter
   }) as { packageName?: string }
 
@@ -59,9 +48,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
 
   let name = ''
 
-  if (packageName === '*') {
-    name = '*: '
-  } else if (packageName !== '-') {
+  if (packageName !== '') {
     name = removeAutoNamePrefix(packageName, options.autoNamePrefix)
     name += ': '
   }

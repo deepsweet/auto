@@ -98,7 +98,7 @@ test('git:makeWorkspacesCommit: no package name (`-`)', async (t) => {
     }
 
     if (index === 1) {
-      return Promise.resolve({ packageName: '-' })
+      return Promise.resolve({ packageName: '' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -278,29 +278,4 @@ test('git:makeWorkspacesCommit: should throw on message undefined', async (t) =>
   }
 
   unmock('../src/make-workspaces-commit')
-})
-
-test('git:makeWorkspacesCommit: suggestFilter', async (t) => {
-  const { suggestFilter } = await import('../src/make-workspaces-commit')
-
-  t.deepEqual(
-    await suggestFilter(
-      '-',
-      [
-        { title: 'foo', value: 'foo', selected: true },
-        { title: 'bar', value: 'bar', selected: false },
-        { title: '-', value: '-', selected: false },
-        { title: 'foo-', value: 'foo-', selected: false },
-        { title: '-bar', value: '-bar', selected: false },
-        { title: 'foo-bar', value: 'foo-bar', selected: false }
-      ]
-    ),
-    [
-      { title: '-', value: '-', selected: false },
-      { title: 'foo-', value: 'foo-', selected: false },
-      { title: '-bar', value: '-bar', selected: false },
-      { title: 'foo-bar', value: 'foo-bar', selected: false }
-    ],
-    'should filter choices'
-  )
 })
