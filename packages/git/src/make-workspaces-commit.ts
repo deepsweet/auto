@@ -4,8 +4,6 @@ import execa from 'execa'
 import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'
 import { suggestFilter } from './suggest-filter'
 
-
-
 export const makeWorkspacesCommit = async (packages: TPackages, options: TOptions) => {
   const { prefix } = await prompts({
     type: 'select',
