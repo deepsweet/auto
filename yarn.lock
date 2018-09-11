@@ -759,15 +759,16 @@
     eslint-plugin-standard "^3.0.1"
     typescript-eslint-parser "^18.0.0"
 
-"@deepsweet/start-preset-node-ts-monorepo@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@deepsweet/start-preset-node-ts-monorepo/-/start-preset-node-ts-monorepo-0.3.3.tgz#95b380665412a404a20bab5117467b166ba3c5bb"
+"@deepsweet/start-preset-node-ts-monorepo@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@deepsweet/start-preset-node-ts-monorepo/-/start-preset-node-ts-monorepo-0.3.4.tgz#78d83e68cf1204442b9e6fb15f5aa7401995eb81"
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
     "@babel/preset-env" "^7.0.0"
     "@babel/preset-typescript" "^7.0.0"
     "@babel/register" "^7.0.0"
+    "@start/plugin" "^0.2.0"
     "@start/plugin-assert" "^0.2.0"
     "@start/plugin-env" "^0.3.0"
     "@start/plugin-find" "^0.2.0"
@@ -3250,6 +3251,13 @@ progress@^2.0.0:
 prompts@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-1.0.0.tgz#c3560198e8b2e686daadd957bca585adad03526e"
+  dependencies:
+    kleur "^2.0.1"
+    sisteransi "^1.0.0"
+
+prompts@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/prompts/-/prompts-1.1.0.tgz#8a8b33030943e8355e06f81bebc436f7aa669d42"
   dependencies:
     kleur "^2.0.1"
     sisteransi "^1.0.0"
