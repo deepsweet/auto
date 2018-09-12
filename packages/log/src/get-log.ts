@@ -4,7 +4,8 @@ import {
   TGitWorkspacesBump,
   TOptions,
   TWorkspacesLog,
-  TWorkspacesPackageBump
+  TWorkspacesPackageBump,
+  TMessage
 } from '@auto/utils/src/'
 
 const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
@@ -15,6 +16,20 @@ const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
   }
 
   return []
+}
+
+const sortMessages = (messages: TMessage[]): TMessage[] => {
+  return messages.sort((a, b) => {
+    if (b.type === 'dependencies') {
+      return -1
+    }
+
+    if (a.type === 'dependencies') {
+      return 1
+    }
+
+    return compareReleaseTypes(b.type, a.type)
+  })
 }
 
 export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesLog[] => {
@@ -34,12 +49,12 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
         name: bump.name,
         version: bump.version,
         type: bump.type,
-        messages: messages
-          .concat({
+        messages: sortMessages(
+          messages.concat({
             type: bump.type,
             value: `upgrade dependencies: ${bumpDepsNames}`
           })
-          .sort((a, b) => compareReleaseTypes(b.type, a.type))
+        )
       })
     }
 
@@ -51,7 +66,7 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
       name: bump.name,
       version: bump.version,
       type: bump.type,
-      messages: messages.sort((a, b) => compareReleaseTypes(b.type, a.type))
+      messages: sortMessages(messages)
     })
   }, [] as TWorkspacesLog[])
 }
