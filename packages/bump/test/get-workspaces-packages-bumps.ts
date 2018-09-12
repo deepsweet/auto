@@ -445,6 +445,157 @@ test('bump:getPackageBumps: b -> a', (t) => {
   t.end()
 })
 
+test('bump:getPackageBumps: self + b -> a', (t) => {
+  t.deepEquals(
+    getWorkspacesPackagesBumps(
+      {
+        a: {
+          dir: '/fakes/a',
+          json: {
+            name: 'a',
+            version: '0.1.0'
+          }
+        },
+        b: {
+          dir: '/fakes/b',
+          json: {
+            name: 'b',
+            version: '1.2.3',
+            dependencies: {
+              a: '0.1.0'
+            }
+          }
+        }
+      },
+      [
+        { name: 'b', type: 'patch', messages: [] },
+        { name: 'a', type: 'patch', messages: [] }
+      ]
+    ),
+    [
+      {
+        name: 'a',
+        dir: '/fakes/a',
+        version: '0.1.1',
+        type: 'patch',
+        deps: null,
+        devDeps: null
+      },
+      {
+        name: 'b',
+        dir: '/fakes/b',
+        version: '1.2.4',
+        type: 'patch',
+        deps: {
+          a: '0.1.1'
+        },
+        devDeps: null
+      }
+    ],
+    'self = deps'
+  )
+
+  t.deepEquals(
+    getWorkspacesPackagesBumps(
+      {
+        a: {
+          dir: '/fakes/a',
+          json: {
+            name: 'a',
+            version: '0.1.0'
+          }
+        },
+        b: {
+          dir: '/fakes/b',
+          json: {
+            name: 'b',
+            version: '1.2.3',
+            dependencies: {
+              a: '0.1.0'
+            }
+          }
+        }
+      },
+      [
+        { name: 'b', type: 'major', messages: [] },
+        { name: 'a', type: 'patch', messages: [] }
+      ]
+    ),
+    [
+      {
+        name: 'a',
+        dir: '/fakes/a',
+        version: '0.1.1',
+        type: 'patch',
+        deps: null,
+        devDeps: null
+      },
+      {
+        name: 'b',
+        dir: '/fakes/b',
+        version: '2.0.0',
+        type: 'major',
+        deps: {
+          a: '0.1.1'
+        },
+        devDeps: null
+      }
+    ],
+    'self > patch'
+  )
+
+  t.deepEquals(
+    getWorkspacesPackagesBumps(
+      {
+        a: {
+          dir: '/fakes/a',
+          json: {
+            name: 'a',
+            version: '0.1.0'
+          }
+        },
+        b: {
+          dir: '/fakes/b',
+          json: {
+            name: 'b',
+            version: '1.2.3',
+            dependencies: {
+              a: '0.1.0'
+            }
+          }
+        }
+      },
+      [
+        { name: 'b', type: 'patch', messages: [] },
+        { name: 'a', type: 'major', messages: [] }
+      ]
+    ),
+    [
+      {
+        name: 'a',
+        dir: '/fakes/a',
+        version: '1.0.0',
+        type: 'major',
+        deps: null,
+        devDeps: null
+      },
+      {
+        name: 'b',
+        dir: '/fakes/b',
+        version: '2.0.0',
+        type: 'major',
+        deps: {
+          a: '1.0.0'
+        },
+        devDeps: null
+      }
+    ],
+    'self < deps'
+  )
+
+  t.end()
+})
+
 test('bump:getPackageBumps: b |> a', (t) => {
   t.deepEquals(
     getWorkspacesPackagesBumps(

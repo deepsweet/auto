@@ -68,7 +68,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorks
       if (Reflect.has(bumpStack, dependent.name)) {
         const bumpStackItem = bumpStack[dependent.name]
 
-        if (bumpedVersion !== null) {
+        if (bumpedVersion !== null && compareReleaseTypes(bumpStackItem.type, type) < 0) {
           bumpStackItem.version = bumpedVersion
           bumpStackItem.type = type
         }
