@@ -64,7 +64,7 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
         [
           'commit',
           '-m',
-          `${options.semverPrefixes.patch.value} a: upgrade dependencies`,
+          `${options.autoPrefixes.dependencies.value} a: upgrade dependencies`,
           'fakes/a/package.json'
         ]
       ]
@@ -75,7 +75,7 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
   unmock('../src/write-workspaces-dependencies-commit')
 })
 
-test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
+test('git:writeWorkspacesDependenciesCommit: single dev dependency', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
   mock('../src/write-workspaces-dependencies-commit', {
