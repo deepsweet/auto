@@ -48,8 +48,10 @@ export type TParsedWorkspacesMessage = {
   name: string
 } & TParsedRepoMessage
 
+export type TMessageType = TBumpType | 'dependencies'
+
 export type TMessage = {
-  type: TBumpType,
+  type: TMessageType,
   value: string
 }
 
