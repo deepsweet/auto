@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { getWorkspacesPackagesBumps } from '../src/get-workspaces-packages-bumps'
-import { options as defaultOptions } from '../../utils/test/git-options'
+import { options as defaultOptions } from '../../utils/test/options'
 import { TOptions } from '@auto/utils/src'
 
 const options: TOptions = { ...defaultOptions, zeroMajorBump: 'major' }

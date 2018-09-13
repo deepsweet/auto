@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { bumpVersion } from '../src/bump-version'
 import { TBumpType, TOptions } from '@auto/utils/src/'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 
 test('bump:bumpVersion', (t) => {
   t.strictEquals(bumpVersion('1.2.3', 'patch', options), '1.2.4', '\'1.2.3\' bumped to \'1.2.4\' as patch')

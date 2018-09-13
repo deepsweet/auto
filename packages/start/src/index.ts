@@ -20,7 +20,7 @@ export const getPackagesBumps = (options: TOptions) =>
 
     const packages = await getWorkspacesPackages()
     const gitBumps = await getWorkspacesBumps(packages, options)
-    const packagesBumps = await getWorkspacesPackagesBumps(packages, gitBumps)
+    const packagesBumps = await getWorkspacesPackagesBumps(packages, gitBumps, options)
 
     return {
       packagesBumps,

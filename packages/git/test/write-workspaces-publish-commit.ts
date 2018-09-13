@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 
 test('git:writeWorkspacesPublishCommit: single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())

@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { getLog } from '../src/get-log'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 import { TWorkspacesLog, TGitWorkspacesBump } from '@auto/utils/src/'
 
 test('getLog', (t) => {

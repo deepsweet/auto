@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 import { parseWorkspacesCommitMessage } from '../src/parse-workspaces-commit-message'
 
 test('git:parseWorkspacesCommitMessage', async (t) => {

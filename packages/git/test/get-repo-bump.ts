@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 import { mock, unmock } from 'mocku'
 import { TGitRepoBump } from '@auto/utils/src/'
 

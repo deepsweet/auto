@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { TGitWorkspacesBump, TPackages } from '@auto/utils/src/'
-import { options } from '../../utils/test/git-options'
+import { options } from '../../utils/test/options'
 
 const packages: TPackages = {
   '@ns/foo': {
