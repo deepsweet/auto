@@ -81,10 +81,8 @@ export type TWorkspacesPackageBump = {
   } | null
 }
 
-export type TLogMessageType = TBumpType | 'dependencies'
-
-export type TLogMessage = {
-  type: TLogMessageType,
+export type TWorkspacesLogMessage = {
+  type: TBumpType | 'dependencies',
   value: string
 }
 
@@ -92,5 +90,13 @@ export type TWorkspacesLog = {
   name: string,
   version: string,
   type: TBumpType,
-  messages: TLogMessage[]
+  messages: TWorkspacesLogMessage[]
+}
+
+export type TRepoLogMessage = TGitMessage
+
+export type TRepoLog = {
+  version: string,
+  type: TBumpType,
+  messages: TRepoLogMessage[]
 }
