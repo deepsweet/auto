@@ -1,5 +1,9 @@
 import test from 'blue-tape'
 import { getWorkspacesPackagesBumps } from '../src/get-workspaces-packages-bumps'
+import { options as defaultOptions } from '../../utils/test/git-options'
+import { TOptions } from '@auto/utils/src'
+
+const options: TOptions = { ...defaultOptions, zeroMajorBump: 'major' }
 
 test('bump:getPackageBumps: single package', (t) => {
   t.deepEquals(
@@ -15,7 +19,8 @@ test('bump:getPackageBumps: single package', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -43,7 +48,8 @@ test('bump:getPackageBumps: single package', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -71,7 +77,8 @@ test('bump:getPackageBumps: single package', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -119,7 +126,8 @@ test('bump:getPackageBumps: multiple independent packages', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] },
         { name: 'c', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -177,7 +185,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -225,7 +234,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -273,7 +283,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -321,7 +332,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -369,7 +381,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -417,7 +430,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -470,7 +484,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
       [
         { name: 'b', type: 'patch', messages: [] },
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -519,7 +534,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
       [
         { name: 'b', type: 'major', messages: [] },
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -568,7 +584,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
       [
         { name: 'b', type: 'patch', messages: [] },
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -620,7 +637,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -668,7 +686,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -716,7 +735,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -764,7 +784,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -812,7 +833,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -860,7 +882,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -922,7 +945,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -990,7 +1014,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1058,7 +1083,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1126,7 +1152,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1194,7 +1221,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1262,7 +1290,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1334,7 +1363,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1402,7 +1432,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1470,7 +1501,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1538,7 +1570,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1606,7 +1639,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1674,7 +1708,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1746,7 +1781,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1814,7 +1850,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1882,7 +1919,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -1950,7 +1988,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2018,7 +2057,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2086,7 +2126,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2158,7 +2199,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2216,7 +2258,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2274,7 +2317,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2332,7 +2376,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2390,7 +2435,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2448,7 +2494,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       },
       [
         { name: 'a', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2513,7 +2560,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2587,7 +2635,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2661,7 +2710,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2736,7 +2786,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'major', messages: [] },
         { name: 'c', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2813,7 +2864,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
       },
       [
         { name: 'a', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2875,7 +2927,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -2947,7 +3000,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'patch', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -3020,7 +3074,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'major', messages: [] },
         { name: 'c', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -3095,7 +3150,8 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -3164,7 +3220,8 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {
@@ -3216,7 +3273,8 @@ test('bump:getPackageBumps: throw', (t) => {
       },
       [
         { name: 'b', type: 'minor', messages: [] }
-      ]
+      ],
+      options
     ),
     /Unable to find package/,
     'not existing package'
@@ -3260,7 +3318,8 @@ test('bump:getPackageBumps: sort', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'major', messages: [] }
-      ]
+      ],
+      options
     ),
     [
       {

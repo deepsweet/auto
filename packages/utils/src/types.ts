@@ -16,7 +16,8 @@ export type TOptions = {
     dependencies: TOptionsPrefix,
   },
   customPrefixes: TOptionsPrefix[],
-  autoNamePrefix: string
+  autoNamePrefix: string,
+  zeroMajorBump: 'minor' | 'major'
 }
 
 export type TPackageJson = {

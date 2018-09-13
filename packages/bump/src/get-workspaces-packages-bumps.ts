@@ -4,12 +4,12 @@ import {
   TGitWorkspacesBump,
   TWorkspacesPackageBump,
   TBumpType,
-  TPackages
+  TPackages, TOptions
 } from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
 
-export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorkspacesBump[]): TWorkspacesPackageBump[] => {
+export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesPackageBump[] => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)
@@ -42,7 +42,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorks
       let bumpedVersion = null
 
       if (dependent.range !== null) {
-        const tempRange = bumpRange(dependent.range, version, type)
+        const tempRange = bumpRange(dependent.range, version, type, options)
         const stackRange = getStackDepsRange(dependent.name, name)
 
         // if bumped range is different from the range from stack (existing or not) then bump
@@ -52,7 +52,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorks
       }
 
       if (dependent.devRange !== null) {
-        bumpedDevRange = bumpRange(dependent.devRange, version, type)
+        bumpedDevRange = bumpRange(dependent.devRange, version, type, options)
       }
 
       // if no ranges were bumped then there is no need to proceed
@@ -62,7 +62,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorks
 
       // if range was bumped then dependent version should be bumped as well
       if (bumpedRange !== null) {
-        bumpedVersion = bumpVersion(dependentPackage.json.version, type)
+        bumpedVersion = bumpVersion(dependentPackage.json.version, type, options)
       }
 
       if (Reflect.has(bumpStack, dependent.name)) {
@@ -136,14 +136,14 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorks
 
       bumpStack[bump.name] = {
         ...bumpStackItem,
-        version: bumpVersion(packageItem.json.version, bump.type),
+        version: bumpVersion(packageItem.json.version, bump.type, options),
         type: bump.type
       }
     } else {
       bumpStack[bump.name] = {
         name: bump.name,
         dir: packageItem.dir,
-        version: bumpVersion(packageItem.json.version, bump.type),
+        version: bumpVersion(packageItem.json.version, bump.type, options),
         type: bump.type,
         deps: null,
         devDeps: null

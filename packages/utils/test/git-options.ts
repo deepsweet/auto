@@ -61,5 +61,6 @@ export const options: TOptions = {
       value: '🛠'
     }
   ],
-  autoNamePrefix: '@ns/'
+  autoNamePrefix: '@ns/',
+  zeroMajorBump: 'minor'
 }

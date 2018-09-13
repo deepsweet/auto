@@ -1,8 +1,8 @@
 import semver from 'semver'
-import { TBumpType } from '@auto/utils/src/'
+import { TBumpType, TOptions } from '@auto/utils/src/'
 import { bumpVersion } from '@auto/bump/src/bump-version'
 
-export const bumpRange = (range: string, version: string, type: TBumpType): string => {
+export const bumpRange = (range: string, version: string, type: TBumpType, options: TOptions): string => {
   if (/[<>=|]/.test(range)) {
     throw new Error(`range '${range}' is not supported`)
   }
@@ -20,7 +20,7 @@ export const bumpRange = (range: string, version: string, type: TBumpType): stri
   }
 
   const symb = matches[1]
-  const newVersion = bumpVersion(version, type)
+  const newVersion = bumpVersion(version, type, options)
 
   if (typeof symb === 'undefined') {
     return newVersion
