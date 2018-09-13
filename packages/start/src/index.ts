@@ -41,7 +41,7 @@ export const publishPrompt = (options: TOptions) =>
       console.log(`${log.name} → ${log.type} → v${log.version}\n`)
 
       log.messages.forEach((message) => {
-        console.log(`${options.semverPrefixes[message.type].value} ${message.value}`)
+        console.log(`${options.requiredPrefixes[message.type].value} ${message.value}`)
       })
     })
 

@@ -2,10 +2,10 @@ import { TOptions, TParsedMessageType, TParsedWorkspacesMessage } from '@auto/ut
 
 export const parseWorkspacesCommitMessage = (message: string, options: TOptions): TParsedWorkspacesMessage | null => {
   const prefixes: [TParsedMessageType, string][] = [
-    ['major', options.semverPrefixes.major.value],
-    ['minor', options.semverPrefixes.minor.value],
-    ['patch', options.semverPrefixes.patch.value],
-    ['publish', options.autoPrefixes.publish.value]
+    ['major', options.requiredPrefixes.major.value],
+    ['minor', options.requiredPrefixes.minor.value],
+    ['patch', options.requiredPrefixes.patch.value],
+    ['publish', options.requiredPrefixes.publish.value]
   ]
 
   for (const [type, value] of prefixes) {

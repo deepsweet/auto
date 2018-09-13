@@ -24,9 +24,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.patch.value} foo: patch 2`,
-        `${options.semverPrefixes.patch.value} foo: patch 1`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.patch.value} foo: patch 2`,
+        `${options.requiredPrefixes.patch.value} foo: patch 1`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -56,9 +56,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -88,9 +88,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -120,10 +120,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.major.value} foo: major`,
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.major.value} foo: major`,
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -156,10 +156,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.semverPrefixes.major.value} foo: major`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.major.value} foo: major`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -193,10 +193,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.semverPrefixes.major.value} foo: major`,
-        `${options.autoPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.major.value} foo: major`,
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
       ])
     }
   })
@@ -229,12 +229,12 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.autoPrefixes.publish.value} foo: v1.0.1`,
-        `${options.semverPrefixes.major.value} foo: breaking`,
-        `${options.semverPrefixes.patch.value} bar: patch`,
-        `${options.autoPrefixes.publish.value} bar: v2.0.1`,
-        `${options.semverPrefixes.major.value} bar: breaking`
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.publish.value} foo: v1.0.1`,
+        `${options.requiredPrefixes.major.value} foo: breaking`,
+        `${options.requiredPrefixes.patch.value} bar: patch`,
+        `${options.requiredPrefixes.publish.value} bar: v2.0.1`,
+        `${options.requiredPrefixes.major.value} bar: breaking`
       ])
     }
   })
@@ -268,9 +268,9 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} *: minor`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.semverPrefixes.patch.value} bar: patch`
+        `${options.requiredPrefixes.minor.value} *: minor`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.patch.value} bar: patch`
       ])
     }
   })
@@ -316,9 +316,9 @@ test('git:getWorkspacesBumps string + star symbol', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} ns/*: minor`,
-        `${options.semverPrefixes.patch.value} ns/foo: patch`,
-        `${options.semverPrefixes.patch.value} ns/bar: patch`
+        `${options.requiredPrefixes.minor.value} ns/*: minor`,
+        `${options.requiredPrefixes.patch.value} ns/foo: patch`,
+        `${options.requiredPrefixes.patch.value} ns/bar: patch`
       ])
     }
   })
@@ -370,14 +370,14 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} foo: minor`,
-        `${options.semverPrefixes.minor.value} foo`,
-        `${options.semverPrefixes.major.value}`,
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.minor.value} foo`,
+        `${options.requiredPrefixes.major.value}`,
         'beep',
-        `${options.autoPrefixes.dependencies.value} foo: upgrade dependencies`,
-        `${options.semverPrefixes.patch.value} foo: patch`,
-        `${options.semverPrefixes.patch.value} baz: patch`,
-        `${options.autoPrefixes.publish.value} foo: v1.0.1`
+        `${options.requiredPrefixes.dependencies.value} foo: upgrade dependencies`,
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.patch.value} baz: patch`,
+        `${options.requiredPrefixes.publish.value} foo: v1.0.1`
       ])
     }
   })

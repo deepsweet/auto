@@ -14,7 +14,7 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.semverPrefixes.major.value} breaking change\nnew line`,
+      `${options.requiredPrefixes.major.value} breaking change\nnew line`,
       options
     ),
     {

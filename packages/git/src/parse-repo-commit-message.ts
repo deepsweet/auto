@@ -2,10 +2,10 @@ import { TOptions, TParsedMessageType, TParsedRepoMessage } from '@auto/utils/sr
 
 export const parseRepoCommitMessage = (message: string, options: TOptions): TParsedRepoMessage | null => {
   const prefixes: [TParsedMessageType, string][] = [
-    ['major', options.semverPrefixes.major.value],
-    ['minor', options.semverPrefixes.minor.value],
-    ['patch', options.semverPrefixes.patch.value],
-    ['publish', options.autoPrefixes.publish.value]
+    ['major', options.requiredPrefixes.major.value],
+    ['minor', options.requiredPrefixes.minor.value],
+    ['patch', options.requiredPrefixes.patch.value],
+    ['publish', options.requiredPrefixes.publish.value]
   ]
 
   for (const [type, value] of prefixes) {

@@ -7,9 +7,9 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.patch.value} patch 2`,
-        `${options.semverPrefixes.patch.value} patch 1`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.patch.value} patch 2`,
+        `${options.requiredPrefixes.patch.value} patch 1`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -38,9 +38,9 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} minor`,
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -69,9 +69,9 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.semverPrefixes.minor.value} minor`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -101,10 +101,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.major.value} major`,
-        `${options.semverPrefixes.minor.value} minor`,
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.major.value} major`,
+        `${options.requiredPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -136,10 +136,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} minor`,
-        `${options.semverPrefixes.major.value} major`,
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.major.value} major`,
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -172,10 +172,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} minor`,
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.semverPrefixes.major.value} major`,
-        `${options.autoPrefixes.publish.value} v1.2.3`
+        `${options.requiredPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.major.value} major`,
+        `${options.requiredPrefixes.publish.value} v1.2.3`
       ])
     }
   })
@@ -207,12 +207,12 @@ test('git:getRepoBump skipped commits', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.semverPrefixes.minor.value} minor`,
+        `${options.requiredPrefixes.minor.value} minor`,
         '💥',
         'beep',
-        `${options.autoPrefixes.dependencies.value} upgrade dependencies`,
-        `${options.semverPrefixes.patch.value} patch`,
-        `${options.autoPrefixes.publish.value} v1.0.1`
+        `${options.requiredPrefixes.dependencies.value} upgrade dependencies`,
+        `${options.requiredPrefixes.patch.value} patch`,
+        `${options.requiredPrefixes.publish.value} v1.0.1`
       ])
     }
   })

@@ -32,7 +32,7 @@ test('git:writeWorkspacesPublishCommit: single package', async (t) => {
         [
           'commit',
           '-m',
-          `${options.autoPrefixes.publish.value} a: v0.1.1`,
+          `${options.requiredPrefixes.publish.value} a: v0.1.1`,
           'fakes/a/package.json'
         ]
       ]

@@ -10,9 +10,9 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     name: 'prefix',
     message: 'Select change type',
     choices: [
-      options.semverPrefixes.major,
-      options.semverPrefixes.minor,
-      options.semverPrefixes.patch,
+      options.requiredPrefixes.major,
+      options.requiredPrefixes.minor,
+      options.requiredPrefixes.patch,
       ...options.customPrefixes
     ]
   }) as { prefix?: string }

@@ -1,7 +1,7 @@
 import { TOptions } from '../src/types'
 
 export const options: TOptions = {
-  semverPrefixes: {
+  requiredPrefixes: {
     major: {
       title: 'Breaking change',
       value: '💥'
@@ -13,9 +13,7 @@ export const options: TOptions = {
     patch: {
       title: 'Bugfix',
       value: '🐞'
-    }
-  },
-  autoPrefixes: {
+    },
     publish: {
       title: 'New version',
       value: '📦'

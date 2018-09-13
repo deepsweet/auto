@@ -7,7 +7,7 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
 
   if (packageBump.deps !== null || packageBump.devDeps !== null) {
     const packageJsonPath = path.join(packageBump.dir, 'package.json')
-    const prefix = options.autoPrefixes.dependencies.value
+    const prefix = options.requiredPrefixes.dependencies.value
 
     await execa(
       'git',

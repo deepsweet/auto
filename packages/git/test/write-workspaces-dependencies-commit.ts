@@ -64,7 +64,7 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
         [
           'commit',
           '-m',
-          `${options.autoPrefixes.dependencies.value} a: upgrade dependencies`,
+          `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
           'fakes/a/package.json'
         ]
       ]
@@ -106,7 +106,7 @@ test('git:writeWorkspacesDependenciesCommit: single dev dependency', async (t) =
         [
           'commit',
           '-m',
-          `${options.autoPrefixes.dependencies.value} a: upgrade dependencies`,
+          `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
           'fakes/a/package.json'
         ]
       ]

@@ -8,13 +8,13 @@ export type TOptionsPrefix = {
 }
 
 export type TOptions = {
-  semverPrefixes: {
-    [key in TBumpType]: TOptionsPrefix
-  },
-  autoPrefixes: {
+  requiredPrefixes: {
+    major: TOptionsPrefix,
+    minor: TOptionsPrefix,
+    patch: TOptionsPrefix,
     publish: TOptionsPrefix,
     dependencies: TOptionsPrefix,
-  }
+  },
   customPrefixes: TOptionsPrefix[],
   autoNamePrefix: string
 }

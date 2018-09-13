@@ -10,7 +10,7 @@ export const writeRepoPublishCommit = async (packageBump: TRepoPackageBump, opti
     [
       'commit',
       '-m',
-      `${options.autoPrefixes.publish.value} v${packageBump.version}`,
+      `${options.requiredPrefixes.publish.value} v${packageBump.version}`,
       packageJsonPath
     ],
     {
