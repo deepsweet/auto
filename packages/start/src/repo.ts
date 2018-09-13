@@ -76,7 +76,6 @@ export const writeRepoPackageBump = (options: TOptions) =>
     } = await import('@auto/git/src/')
     const { packageBump, logMessage } = props as TRepoPluginData & StartPluginPropsAfter
 
-
     await writeRepoPackageVersion(packageBump)
     logMessage('write package version')
 

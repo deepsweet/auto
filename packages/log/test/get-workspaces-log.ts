@@ -192,7 +192,7 @@ test('getWorkspacesLog', (t) => {
     [
       {
         name: '@ns/a',
-        version: '2.0.0',
+        version: '1.2.3',
         type: 'major',
         messages: [
           {
