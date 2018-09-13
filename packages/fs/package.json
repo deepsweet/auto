@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auto/utils": "^0.0.8",
-    "esm": "^3.0.81",
+    "esm": "^3.0.82",
     "fast-glob": "^2.2.2"
   }
 }

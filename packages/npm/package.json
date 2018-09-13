@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auto/fs": "^0.0.5",
-    "esm": "^3.0.81",
+    "esm": "^3.0.82",
     "execa": "^1.0.0"
   },
   "devDependencies": {

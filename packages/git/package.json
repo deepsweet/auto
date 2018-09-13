@@ -25,9 +25,9 @@
   "dependencies": {
     "@auto/utils": "^0.0.8",
     "escape-string-regexp": "^1.0.5",
-    "esm": "^3.0.81",
+    "esm": "^3.0.82",
     "execa": "^1.0.0",
-    "prompts": "^1.0.0"
+    "prompts": "^1.1.0"
   },
   "devDependencies": {
     "@types/escape-string-regexp": "^1.0.0",
