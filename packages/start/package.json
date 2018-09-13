@@ -1,6 +1,6 @@
 {
   "name": "@auto/start",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,11 +23,11 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/bump": "^0.0.13",
-    "@auto/fs": "^0.0.5",
-    "@auto/git": "^0.0.15",
-    "@auto/log": "^0.0.4",
-    "@auto/npm": "^0.0.13",
+    "@auto/bump": "^0.0.14",
+    "@auto/fs": "^0.0.6",
+    "@auto/git": "^0.0.17",
+    "@auto/log": "^0.0.5",
+    "@auto/npm": "^0.0.14",
     "@start/plugin": "^0.2.0",
     "prompts": "^1.1.0"
   }

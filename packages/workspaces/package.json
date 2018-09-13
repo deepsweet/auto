@@ -1,6 +1,6 @@
 {
   "name": "@auto/workspaces",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.8",
+    "@auto/utils": "^0.0.9",
     "esm": "^3.0.82"
   }
 }

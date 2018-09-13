@@ -1,6 +1,6 @@
 {
   "name": "@auto/git",
-  "version": "0.0.15",
+  "version": "0.0.17",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.8",
+    "@auto/utils": "^0.0.9",
     "escape-string-regexp": "^1.0.5",
     "esm": "^3.0.82",
     "execa": "^1.0.0",
