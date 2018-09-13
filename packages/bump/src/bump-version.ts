@@ -8,5 +8,9 @@ export const bumpVersion = (version: string, type: TBumpType) => {
     throw new Error(`invalid version ${version}`)
   }
 
+  if (coercedVersion.major === 0 && type === 'major') {
+    return coercedVersion.inc('minor').version
+  }
+
   return coercedVersion.inc(type).version
 }
