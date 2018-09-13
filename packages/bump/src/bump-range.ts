@@ -1,6 +1,6 @@
 import semver from 'semver'
 import { TBumpType, TOptions } from '@auto/utils/src/'
-import { bumpVersion } from '@auto/bump/src/bump-version'
+import { bumpVersion } from './bump-version'
 
 export const bumpRange = (range: string, version: string, type: TBumpType, options: TOptions): string => {
   if (/[<>=|]/.test(range)) {
