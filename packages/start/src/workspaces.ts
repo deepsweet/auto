@@ -1,14 +1,14 @@
 /* eslint-disable no-throw-literal */
 import plugin, { StartPlugin, StartPluginPropsAfter } from '@start/plugin'
 import {
-  TGitWorkspacesBump,
+  TWorkspacesGitBump,
   TOptions,
   TWorkspacesPackageBump
 } from '@auto/utils/src/'
 
 export type TWorkspacesPluginData = {
   packagesBumps: TWorkspacesPackageBump[],
-  gitBumps: TGitWorkspacesBump[]
+  gitBumps: TWorkspacesGitBump[]
 }
 
 export const makeWorkspacesCommit = (options: TOptions) =>

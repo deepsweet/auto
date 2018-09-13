@@ -1,6 +1,6 @@
-import { TOptions, TParsedMessageType, TParsedRepoMessage } from '@auto/utils/src/'
+import { TOptions, TParsedMessageType, TRepoParsedMessage } from '@auto/utils/src/'
 
-export const parseRepoCommitMessage = (message: string, options: TOptions): TParsedRepoMessage | null => {
+export const parseRepoCommitMessage = (message: string, options: TOptions): TRepoParsedMessage | null => {
   const prefixes: [TParsedMessageType, string][] = [
     ['major', options.requiredPrefixes.major.value],
     ['minor', options.requiredPrefixes.minor.value],

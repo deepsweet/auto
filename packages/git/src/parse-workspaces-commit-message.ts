@@ -1,6 +1,6 @@
-import { TOptions, TParsedMessageType, TParsedWorkspacesMessage } from '@auto/utils/src/'
+import { TOptions, TParsedMessageType, TWorkspacesParsedMessage } from '@auto/utils/src/'
 
-export const parseWorkspacesCommitMessage = (message: string, options: TOptions): TParsedWorkspacesMessage | null => {
+export const parseWorkspacesCommitMessage = (message: string, options: TOptions): TWorkspacesParsedMessage | null => {
   const prefixes: [TParsedMessageType, string][] = [
     ['major', options.requiredPrefixes.major.value],
     ['minor', options.requiredPrefixes.minor.value],

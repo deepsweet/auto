@@ -1,14 +1,14 @@
 import {
   compareReleaseTypes,
   removeAutoNamePrefix,
-  TGitWorkspacesBump,
+  TWorkspacesGitBump,
   TOptions,
   TWorkspacesLog,
   TWorkspacesPackageBump,
   TWorkspacesLogMessage
 } from '@auto/utils/src/'
 
-const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
+const getMessages = (gitBumps: TWorkspacesGitBump[], name: string) => {
   for (const bump of gitBumps) {
     if (bump.name === name) {
       return bump.messages
@@ -18,7 +18,7 @@ const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
   return []
 }
 
-export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesLog[] => {
+export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TWorkspacesGitBump[], options: TOptions): TWorkspacesLog[] => {
   return packageBumps.reduce((res, bump) => {
     if (bump.version === null || bump.type === null) {
       return res

@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { options } from '../../utils/test/options'
 import { mock, unmock } from 'mocku'
-import { TGitRepoBump } from '@auto/utils/src/'
+import { TRepoGitBump } from '@auto/utils/src/'
 
 test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
@@ -27,7 +27,7 @@ test('git:getRepoBump single package', async (t) => {
         type: 'patch',
         value: 'patch 1'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as patch + patch'
   )
 
@@ -58,7 +58,7 @@ test('git:getRepoBump single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as patch + minor'
   )
 
@@ -90,7 +90,7 @@ test('git:getRepoBump single package', async (t) => {
         value: 'minor'
 
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as minor + patch'
   )
 
@@ -125,7 +125,7 @@ test('git:getRepoBump single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as patch + minor + major'
   )
 
@@ -161,7 +161,7 @@ test('git:getRepoBump single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as patch + major + minor'
   )
 
@@ -196,7 +196,7 @@ test('git:getRepoBump single package', async (t) => {
         type: 'major',
         value: 'major'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'bump as major + patch + minor'
   )
 
@@ -230,7 +230,7 @@ test('git:getRepoBump skipped commits', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    } as TGitRepoBump,
+    } as TRepoGitBump,
     'skip invalid commit messages'
   )
 

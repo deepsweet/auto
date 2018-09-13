@@ -40,28 +40,28 @@ export type TPackages = {
 
 export type TParsedMessageType = TBumpType | 'publish'
 
-export type TParsedRepoMessage = {
+export type TRepoParsedMessage = {
   type: TParsedMessageType,
   message: string
 }
 
-export type TParsedWorkspacesMessage = {
+export type TWorkspacesParsedMessage = {
   name: string
-} & TParsedRepoMessage
+} & TRepoParsedMessage
 
 export type TGitMessage = {
   type: TBumpType,
   value: string
 }
 
-export type TGitRepoBump = {
+export type TRepoGitBump = {
   type: TBumpType,
   messages: TGitMessage[]
 }
 
-export type TGitWorkspacesBump = {
+export type TWorkspacesGitBump = {
   name: string,
-} & TGitRepoBump
+} & TRepoGitBump
 
 export type TRepoPackageBump = {
   type: TBumpType,

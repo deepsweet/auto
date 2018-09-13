@@ -1,10 +1,10 @@
-import { compareReleaseTypes, TGitRepoBump, TOptions, TBumpType } from '@auto/utils/src/'
+import { compareReleaseTypes, TRepoGitBump, TOptions, TBumpType } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
 import { parseRepoCommitMessage } from './parse-repo-commit-message'
 
-export const getRepoBump = async (options: TOptions): Promise<TGitRepoBump | null> => {
+export const getRepoBump = async (options: TOptions): Promise<TRepoGitBump | null> => {
   const messages = await getCommitMessages()
-  let bump: TGitRepoBump | null = null
+  let bump: TRepoGitBump | null = null
 
   for (const message of messages) {
     const parsed = parseRepoCommitMessage(message, options)

@@ -1,13 +1,13 @@
-import { compareReleaseTypes, TGitWorkspacesBump, TOptions, TPackages } from '@auto/utils/src/'
+import { compareReleaseTypes, TWorkspacesGitBump, TOptions, TPackages } from '@auto/utils/src/'
 import { getCommitMessages } from './get-commit-messages'
 import { parseWorkspacesCommitMessage } from './parse-workspaces-commit-message'
 import { makeRegExp } from './suggest-filter'
 
 type TGitBumps = {
-  [key: string]: TGitWorkspacesBump
+  [key: string]: TWorkspacesGitBump
 }
 
-export const getWorkspacesBumps = async (packages: TPackages, options: TOptions): Promise<TGitWorkspacesBump[]> => {
+export const getWorkspacesBumps = async (packages: TPackages, options: TOptions): Promise<TWorkspacesGitBump[]> => {
   const messages = await getCommitMessages()
   const bumps: TGitBumps = {}
   const completedPackages: string[] = []

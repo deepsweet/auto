@@ -1,10 +1,10 @@
 /* eslint-disable no-throw-literal */
 import plugin, { StartPluginPropsAfter } from '@start/plugin'
-import { TGitRepoBump, TOptions, TRepoPackageBump } from '@auto/utils/src/'
+import { TRepoGitBump, TOptions, TRepoPackageBump } from '@auto/utils/src/'
 
 export type TRepoPluginData = {
   packageBump: TRepoPackageBump,
-  gitBump: TGitRepoBump
+  gitBump: TRepoGitBump
 }
 
 export const makeRepoCommit = (options: TOptions) =>

@@ -1,7 +1,7 @@
 import { getDependentsCount, getDependentsOf } from '@auto/workspaces/src/'
 import {
   compareReleaseTypes,
-  TGitWorkspacesBump,
+  TWorkspacesGitBump,
   TWorkspacesPackageBump,
   TBumpType,
   TPackages, TOptions
@@ -9,7 +9,7 @@ import {
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
 
-export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesPackageBump[] => {
+export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspacesGitBump[], options: TOptions): TWorkspacesPackageBump[] => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)

@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { getWorkspacesLog } from '../src/get-workspaces-log'
 import { options } from '../../utils/test/options'
-import { TWorkspacesLog, TGitWorkspacesBump } from '@auto/utils/src/'
+import { TWorkspacesLog, TWorkspacesGitBump } from '@auto/utils/src/'
 
 test('getWorkspacesLog', (t) => {
   t.deepEquals(
@@ -83,7 +83,7 @@ test('getWorkspacesLog', (t) => {
           devDeps: null
         }
       ],
-      [] as TGitWorkspacesBump[],
+      [] as TWorkspacesGitBump[],
       options
     ),
     [],

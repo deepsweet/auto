@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-import { TGitWorkspacesBump, TPackages } from '@auto/utils/src/'
+import { TWorkspacesGitBump, TPackages } from '@auto/utils/src/'
 import { options } from '../../utils/test/options'
 
 const packages: TPackages = {
@@ -45,7 +45,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'patch',
         value: 'patch 1'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as patch + patch'
   )
 
@@ -77,7 +77,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as patch + minor'
   )
 
@@ -109,7 +109,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'minor',
         value: 'minor'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as minor + patch'
   )
 
@@ -145,7 +145,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as patch + minor + major'
   )
 
@@ -182,7 +182,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as patch + major + minor'
   )
 
@@ -218,7 +218,7 @@ test('git:getWorkspacesBumps single package', async (t) => {
         type: 'major',
         value: 'major'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as major + patch + minor'
   )
 
@@ -257,7 +257,7 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as patch && patch'
   )
 
@@ -305,7 +305,7 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
           value: 'patch'
         }
       ]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as minor && minor'
   )
 
@@ -359,7 +359,7 @@ test('git:getWorkspacesBumps string + star symbol', async (t) => {
           value: 'patch'
         }
       ]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'bump as minor && minor'
   )
 
@@ -396,7 +396,7 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
         type: 'patch',
         value: 'patch'
       }]
-    }] as TGitWorkspacesBump[],
+    }] as TWorkspacesGitBump[],
     'skip invalid commit messages'
   )
 
