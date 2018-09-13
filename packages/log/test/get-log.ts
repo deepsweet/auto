@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { getLog } from '../src/get-log'
 import { options } from '../../utils/test/git-options'
-import { TWorkspacesLog } from '@auto/utils/src/'
+import { TWorkspacesLog, TGitWorkspacesBump } from '@auto/utils/src/'
 
 test('getLog', (t) => {
   t.deepEquals(
@@ -62,7 +62,7 @@ test('getLog', (t) => {
         type: 'patch',
         messages: [
           {
-            type: 'patch',
+            type: 'dependencies',
             value: 'upgrade dependencies: b, c'
           }
         ]
@@ -83,7 +83,7 @@ test('getLog', (t) => {
           devDeps: null
         }
       ],
-      [] as TWorkspacesLog[],
+      [] as TGitWorkspacesBump[],
       options
     ),
     [],
@@ -146,7 +146,7 @@ test('getLog', (t) => {
             value: 'patch'
           },
           {
-            type: 'patch',
+            type: 'dependencies',
             value: 'upgrade dependencies: b, c'
           }
         ]
