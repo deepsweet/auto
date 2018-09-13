@@ -48,16 +48,14 @@ export type TParsedWorkspacesMessage = {
   name: string
 } & TParsedRepoMessage
 
-export type TMessageType = TBumpType | 'dependencies'
-
-export type TMessage = {
-  type: TMessageType,
+export type TGitMessage = {
+  type: TBumpType,
   value: string
 }
 
 export type TGitRepoBump = {
   type: TBumpType,
-  messages: TMessage[]
+  messages: TGitMessage[]
 }
 
 export type TGitWorkspacesBump = {
@@ -82,6 +80,16 @@ export type TWorkspacesPackageBump = {
   } | null
 }
 
+export type TLogMessageType = TBumpType | 'dependencies'
+
+export type TLogMessage = {
+  type: TLogMessageType,
+  value: string
+}
+
 export type TWorkspacesLog = {
-  version: string
-} & TGitWorkspacesBump
+  name: string,
+  version: string,
+  type: TBumpType,
+  messages: TLogMessage[]
+}
