@@ -1,1 +1,2 @@
-export { getLog } from './get-log'
+export { getRepoLog } from './get-repo-log'
+export { getWorkspacesLog } from './get-workspaces-log'

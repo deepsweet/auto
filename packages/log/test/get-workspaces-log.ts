@@ -1,11 +1,11 @@
 import test from 'blue-tape'
-import { getLog } from '../src/get-log'
+import { getWorkspacesLog } from '../src/get-workspaces-log'
 import { options } from '../../utils/test/options'
 import { TWorkspacesLog, TGitWorkspacesBump } from '@auto/utils/src/'
 
-test('getLog', (t) => {
+test('getWorkspacesLog', (t) => {
   t.deepEquals(
-    getLog(
+    getWorkspacesLog(
       [
         {
           name: '@ns/a',
@@ -32,7 +32,7 @@ test('getLog', (t) => {
   )
 
   t.deepEquals(
-    getLog(
+    getWorkspacesLog(
       [
         {
           name: '@ns/a',
@@ -72,7 +72,7 @@ test('getLog', (t) => {
   )
 
   t.deepEquals(
-    getLog(
+    getWorkspacesLog(
       [
         {
           name: '@ns/a',
@@ -91,7 +91,7 @@ test('getLog', (t) => {
   )
 
   t.deepEquals(
-    getLog(
+    getWorkspacesLog(
       [
         {
           name: '@ns/a',
@@ -156,13 +156,13 @@ test('getLog', (t) => {
   )
 
   t.deepEquals(
-    getLog(
+    getWorkspacesLog(
       [
         {
           name: '@ns/a',
           dir: 'fakes/a',
           version: '1.2.3',
-          type: 'patch',
+          type: 'major',
           deps: null,
           devDeps: null
         }
@@ -170,7 +170,7 @@ test('getLog', (t) => {
       [
         {
           name: '@ns/a',
-          type: 'patch',
+          type: 'major',
           messages: [
             {
               type: 'minor',
@@ -192,8 +192,8 @@ test('getLog', (t) => {
     [
       {
         name: '@ns/a',
-        version: '1.2.3',
-        type: 'patch',
+        version: '2.0.0',
+        type: 'major',
         messages: [
           {
             type: 'major',

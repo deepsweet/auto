@@ -5,7 +5,7 @@ import {
   TOptions,
   TWorkspacesLog,
   TWorkspacesPackageBump,
-  TLogMessage
+  TWorkspacesLogMessage
 } from '@auto/utils/src/'
 
 const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
@@ -18,7 +18,7 @@ const getMessages = (gitBumps: TGitWorkspacesBump[], name: string) => {
   return []
 }
 
-export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesLog[] => {
+export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWorkspacesBump[], options: TOptions): TWorkspacesLog[] => {
   return packageBumps.reduce((res, bump) => {
     if (bump.version === null || bump.type === null) {
       return res
@@ -40,7 +40,7 @@ export const getLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TGitWor
           {
             type: 'dependencies',
             value: `upgrade dependencies: ${bumpDepsNames}`
-          } as TLogMessage
+          } as TWorkspacesLogMessage
         ]
       } as TWorkspacesLog)
     }
