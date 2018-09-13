@@ -38,10 +38,8 @@ export type TPackages = {
   }
 }
 
-export type TParsedMessageType = TBumpType | 'publish'
-
 export type TRepoParsedMessage = {
-  type: TParsedMessageType,
+  type: TBumpType | 'publish',
   message: string
 }
 
