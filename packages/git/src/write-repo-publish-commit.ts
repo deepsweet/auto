@@ -14,7 +14,7 @@ export const writeRepoPublishCommit = async (packageBump: TRepoPackageBump, opti
       packageJsonPath
     ],
     {
-      stdout: process.stdout,
+      stdout: null,
       stderr: null
     }
   )

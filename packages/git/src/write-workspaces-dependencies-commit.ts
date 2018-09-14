@@ -18,7 +18,7 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
         packageJsonPath
       ],
       {
-        stdout: process.stdout,
+        stdout: null,
         stderr: null
       }
     )

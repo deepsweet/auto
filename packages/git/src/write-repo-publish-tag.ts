@@ -11,7 +11,7 @@ export const writeRepoPublishTag = async (packageBump: TRepoPackageBump) => {
       `v${packageBump.version}`
     ],
     {
-      stdout: process.stdout,
+      stdout: null,
       stderr: null
     }
   )

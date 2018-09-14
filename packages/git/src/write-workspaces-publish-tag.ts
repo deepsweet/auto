@@ -14,7 +14,7 @@ export const writeWorkspacesPublishTag = async (packageBump: TWorkspacesPackageB
         `${name}@${packageBump.version}`
       ],
       {
-        stdout: process.stdout,
+        stdout: null,
         stderr: null
       }
     )
