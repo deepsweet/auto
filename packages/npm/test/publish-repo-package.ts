@@ -24,7 +24,7 @@ test('npm:publishRepoPackage, default', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://registry.npmjs.org/', rootDir]]
+      ['npm', ['publish', '--registry', 'https://registry.npmjs.org/', rootDir]]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -48,7 +48,7 @@ test('npm:publishRepoPackage, user provided registry', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://my-registry', rootDir]]
+      ['npm', ['publish', '--registry', 'https://my-registry', rootDir]]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -77,7 +77,7 @@ test('npm:publishRepoPackage, packageJson registry', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://my-registry', rootDir]]
+      ['npm', ['publish', '--registry', 'https://my-registry', rootDir]]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -108,7 +108,7 @@ test('npm:publishRepoPackage, priority test', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://options-registry', rootDir]]
+      ['npm', ['publish', '--registry', 'https://options-registry', rootDir]]
     ],
     'should spawn NPM with necessary arguments'
   )

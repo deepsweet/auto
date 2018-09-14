@@ -12,7 +12,7 @@ export const publishRepoPackage = async (userOptions?: TPublishOptions) => {
     ...userOptions
   }
 
-  await execa('npm', ['publish', 'registry', options.registry, process.cwd()], {
+  await execa('npm', ['publish', '--registry', options.registry, process.cwd()], {
     stdin: process.stdin,
     stdout: process.stdout,
     stderr: null

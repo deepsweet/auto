@@ -31,7 +31,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://registry.npmjs.org/', '/foo/bar/baz']]
+      ['npm', ['publish', '--registry', 'https://registry.npmjs.org/', '/foo/bar/baz']]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -65,7 +65,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://custom-registry', '/foo/bar/baz']]
+      ['npm', ['publish', '--registry', 'https://custom-registry', '/foo/bar/baz']]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -103,7 +103,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://my-registry', '/foo/bar/baz']]
+      ['npm', ['publish', '--registry', 'https://my-registry', '/foo/bar/baz']]
     ],
     'should spawn NPM with necessary arguments'
   )
@@ -144,7 +144,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['npm', ['publish', 'registry', 'https://options-registry', '/foo/bar/baz']]
+      ['npm', ['publish', '--registry', 'https://options-registry', '/foo/bar/baz']]
     ],
     'should spawn NPM with necessary arguments'
   )

@@ -13,7 +13,7 @@ export const publishWorkspacesPackage = async (bumpPackage: TWorkspacesPackageBu
     ...userOptions
   }
 
-  await execa('npm', ['publish', 'registry', options.registry, bumpPackage.dir], {
+  await execa('npm', ['publish', '--registry', options.registry, bumpPackage.dir], {
     stdin: process.stdin,
     stdout: process.stdout,
     stderr: null
