@@ -2701,9 +2701,9 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-mocku@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/mocku/-/mocku-0.3.2.tgz#4c3ac20d65742b78b45118799a7ab30ed446aa1f"
+mocku@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/mocku/-/mocku-0.4.0.tgz#9c5674658a59a75309249dea85ec638b69a1ec02"
   dependencies:
     get-caller-file "^2.0.0"
 

@@ -1,5 +1,5 @@
 import test from 'blue-tape'
-import { mock, unmock } from 'mocku'
+import { mock, unmock, deleteFromCache } from 'mocku'
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
@@ -37,6 +37,7 @@ test('fs:getWorkspacesPackages workspaces[]', async (t) => {
     },
     fs
   })
+  deleteFromCache('fast-glob')
 
   const { getWorkspacesPackages } = await import('../src/get-workspaces-packages')
   t.deepEquals(
