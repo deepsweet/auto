@@ -28,6 +28,12 @@ export type TPackageJson = {
   },
   devDependencies?: {
     [k: string]: string
+  },
+  workspaces?: string[] | {
+    packages: string[],
+  },
+  publishConfig?: {
+    registry?: string
   }
 } & TJsonMap
 
