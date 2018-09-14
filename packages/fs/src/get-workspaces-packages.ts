@@ -1,6 +1,6 @@
-import path from 'path'
-import { TPackageJson, TPackages } from '@auto/utils/src/'
+import { TPackages } from '@auto/utils/src/'
 import { getWorkspacesPackageDirs } from './get-workspaces-package-dirs'
+import { getPackage } from './get-package'
 
 export const getWorkspacesPackages = async () => {
   const dirs = await getWorkspacesPackageDirs()
@@ -8,8 +8,7 @@ export const getWorkspacesPackages = async () => {
   return dirs.reduce(
     async (prev, dir) => {
       const packages = await prev
-      const packageJsonPath = path.join(dir, 'package.json')
-      const packageJson: TPackageJson = await import(packageJsonPath)
+      const packageJson = await getPackage(dir)
 
       packages[packageJson.name] = {
         dir,

@@ -1,15 +1,15 @@
 import path from 'path'
 import { writeFile } from 'fs'
 import { promisify } from 'util'
-import { TWorkspacesPackageBump, TPackageJson } from '@auto/utils/src/'
+import { TWorkspacesPackageBump } from '@auto/utils/src/'
+import { getPackage } from './get-package'
 
 const pWriteFile = promisify(writeFile)
 
 export const writeWorkspacesPackageVersion = async (packageBump: TWorkspacesPackageBump) => {
   if (packageBump.version !== null) {
     const packageJsonPath = path.join(packageBump.dir, 'package.json')
-
-    const { default: packageJson }: { default: TPackageJson } = await import(packageJsonPath)
+    const packageJson = await getPackage(packageBump.dir)
 
     packageJson.version = packageBump.version
 

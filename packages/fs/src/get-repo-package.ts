@@ -1,8 +1,6 @@
-import path from 'path'
 import { TPackageJson } from '@auto/utils/src/'
+import { getPackage } from './get-package'
 
 export const getRepoPackage = (): Promise<TPackageJson> => {
-  const packageJsonPath = path.join(process.cwd(), 'package.json')
-
-  return import(packageJsonPath)
+  return getPackage(process.cwd())
 }

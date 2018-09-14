@@ -1,13 +1,14 @@
 import path from 'path'
 import { writeFile } from 'fs'
 import { promisify } from 'util'
-import { TPackageJson, TRepoPackageBump } from '@auto/utils/src/'
+import { TRepoPackageBump } from '@auto/utils/src/'
+import { getPackage } from './get-package'
 
 const pWriteFile = promisify(writeFile)
 
 export const writeRepoPackageVersion = async (packageBump: TRepoPackageBump) => {
   const packageJsonPath = path.join(process.cwd(), 'package.json')
-  const { default: packageJson }: { default: TPackageJson } = await import(packageJsonPath)
+  const packageJson = await getPackage(process.cwd())
 
   packageJson.version = packageBump.version
 

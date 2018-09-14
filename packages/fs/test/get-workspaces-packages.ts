@@ -10,22 +10,30 @@ const vol = Volume.fromJSON({
 })
 const fs = createFsFromVolume(vol)
 
-test('fs:getWorkspacesPackages no cross dependencies', async (t) => {
+test('fs:getWorkspacesPackages workspaces[]', async (t) => {
   mock('../src/get-workspaces-packages', {
     [`${rootDir}/package.json`]: {
-      workspaces: ['fakes/*']
+      default: {
+        workspaces: ['fakes/*']
+      }
     },
     [`${rootDir}/fakes/a/package.json`]: {
-      name: '@ns/a',
-      version: '1.0.0'
+      default: {
+        name: '@ns/a',
+        version: '1.0.0'
+      }
     },
     [`${rootDir}/fakes/b/package.json`]: {
-      name: '@ns/b',
-      version: '2.0.0'
+      default: {
+        name: '@ns/b',
+        version: '2.0.0'
+      }
     },
     [`${rootDir}/fakes/c/package.json`]: {
-      name: '@ns/c',
-      version: '3.0.0'
+      default: {
+        name: '@ns/c',
+        version: '3.0.0'
+      }
     },
     fs
   })
@@ -56,7 +64,7 @@ test('fs:getWorkspacesPackages no cross dependencies', async (t) => {
         }
       }
     },
-    'packages directories'
+    'should return packages'
   )
 
   unmock('../src/get-workspaces-packages')

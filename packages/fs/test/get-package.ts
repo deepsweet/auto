@@ -8,8 +8,8 @@ const vol = Volume.fromJSON({
 })
 const fs = createFsFromVolume(vol)
 
-test('fs:getRepoPackage', async (t) => {
-  mock('../src/get-repo-package', {
+test('fs:getPackage', async (t) => {
+  mock('../src/get-package', {
     [`${rootDir}/package.json`]: {
       default: {
         name: '@ns/a',
@@ -19,9 +19,9 @@ test('fs:getRepoPackage', async (t) => {
     fs
   })
 
-  const { getRepoPackage } = await import('../src/get-repo-package')
+  const { getPackage } = await import('../src/get-package')
   t.deepEquals(
-    await getRepoPackage(),
+    await getPackage(rootDir),
     {
       name: '@ns/a',
       version: '1.0.0'
@@ -29,5 +29,5 @@ test('fs:getRepoPackage', async (t) => {
     'should get package content'
   )
 
-  unmock('../src/get-repo-package')
+  unmock('../src/get-package')
 })
