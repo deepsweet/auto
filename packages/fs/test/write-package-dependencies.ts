@@ -1,6 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createFsFromVolume, Volume } from 'memfs'
+import { createSpy, getSpyCalls } from 'spyfn'
 
 const rootDir = process.cwd()
 
@@ -12,8 +13,12 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
     })
   })
   const fs = createFsFromVolume(vol)
+  const yarnSpy = createSpy(() => Promise.resolve())
 
   mock('../src/write-package-dependencies', {
+    './yarn-install': {
+      yarnInstall: yarnSpy
+    },
     [`${rootDir}/fakes/a/package.json`]: {
       default: {
         name: '@ns/a',
@@ -46,6 +51,12 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
     'should ignore version'
   )
 
+  t.deepEquals(
+    getSpyCalls(yarnSpy),
+    [],
+    'should not call yarn install'
+  )
+
   unmock('../src/write-package-dependencies')
 })
 
@@ -54,8 +65,12 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
     [`${rootDir}/fakes/a/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
+  const yarnSpy = createSpy(() => Promise.resolve())
 
   mock('../src/write-package-dependencies', {
+    './yarn-install': {
+      yarnInstall: yarnSpy
+    },
     [`${rootDir}/fakes/a/package.json`]: {
       default: {
         name: '@ns/a',
@@ -99,6 +114,14 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
     'should write bumps, and ignore version'
   )
 
+  t.deepEquals(
+    getSpyCalls(yarnSpy),
+    [
+      []
+    ],
+    'should call yarn install'
+  )
+
   unmock('../src/write-package-dependencies')
 })
 
@@ -107,8 +130,12 @@ test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) =>
     [`${rootDir}/fakes/a/package.json`]: ''
   })
   const fs = createFsFromVolume(vol)
+  const yarnSpy = createSpy(() => Promise.resolve())
 
   mock('../src/write-package-dependencies', {
+    './yarn-install': {
+      yarnInstall: yarnSpy
+    },
     [`${rootDir}/fakes/a/package.json`]: {
       default: {
         name: '@ns/a',
@@ -150,6 +177,14 @@ test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) =>
       }
     },
     'should write bumps, and ignore version'
+  )
+
+  t.deepEquals(
+    getSpyCalls(yarnSpy),
+    [
+      []
+    ],
+    'should call yarn install'
   )
 
   unmock('../src/write-package-dependencies')
