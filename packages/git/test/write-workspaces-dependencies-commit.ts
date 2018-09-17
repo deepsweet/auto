@@ -1,4 +1,5 @@
 import test from 'blue-tape'
+import path from 'path'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { options } from '../../utils/test/options'
@@ -65,7 +66,8 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
           'commit',
           '-m',
           `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
-          'fakes/a/package.json'
+          'fakes/a/package.json',
+          path.resolve('yarn.lock')
         ]
       ]
     ],
@@ -107,7 +109,8 @@ test('git:writeWorkspacesDependenciesCommit: single dev dependency', async (t) =
           'commit',
           '-m',
           `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
-          'fakes/a/package.json'
+          'fakes/a/package.json',
+          path.resolve('yarn.lock')
         ]
       ]
     ],

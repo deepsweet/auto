@@ -7,6 +7,7 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
 
   if (packageBump.deps !== null || packageBump.devDeps !== null) {
     const packageJsonPath = path.join(packageBump.dir, 'package.json')
+    const yarnLockPath = path.resolve('yarn.lock')
     const prefix = options.requiredPrefixes.dependencies.value
 
     await execa(
@@ -15,7 +16,8 @@ export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspaces
         'commit',
         '-m',
         `${prefix} ${name}: upgrade dependencies`,
-        packageJsonPath
+        packageJsonPath,
+        yarnLockPath
       ],
       {
         stdout: null,
