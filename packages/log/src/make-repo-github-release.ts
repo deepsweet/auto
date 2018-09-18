@@ -12,7 +12,8 @@ export const makeRepoGithubRelease = async (log: TRepoLog, githubOptions: TGithu
     uri: `${GITHUB_API_REPOS_URL}${githubOptions.username}/${githubOptions.repo}/releases`,
     method: 'POST',
     headers: {
-      Authorization: `token ${githubOptions.token}`
+      Authorization: `token ${githubOptions.token}`,
+      'User-Agent': 'auto-tools'
     },
     json: {
       tag_name: `v${log.version}`,

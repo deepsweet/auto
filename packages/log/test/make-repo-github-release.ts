@@ -44,7 +44,10 @@ test('makeRepoGithubRelease', async (t) => {
       [{
         uri: 'https://api.github.com/repos/username/repo/releases',
         method: 'POST',
-        headers: { Authorization: 'token token' },
+        headers: {
+          Authorization: 'token token',
+          'User-Agent': 'auto-tools'
+        },
         json: {
           tag_name: 'v0.1.2',
           name: 'v0.1.2',
