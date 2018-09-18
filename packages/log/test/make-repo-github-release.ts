@@ -2,7 +2,7 @@ import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
 import { options } from '@auto/utils/test/options'
-import { TGithubOptions } from '../src'
+import { TOptions } from '@auto/utils/src'
 
 test('makeRepoGithubRelease', async (t) => {
   const spy = createSpy(() => Promise.resolve())
@@ -30,11 +30,7 @@ test('makeRepoGithubRelease', async (t) => {
         }
       ]
     },
-    {
-      token: 'token',
-      username: 'username',
-      repo: 'repo'
-    },
+    'token',
     options
   )
 
@@ -88,16 +84,53 @@ test('makeRepoGithubRelease: throws if there is no token', async (t) => {
           }
         ]
       },
-      {
-        username: 'username',
-        repo: 'repo'
-      } as TGithubOptions,
+      // @ts-ignore
+      undefined,
       options
     )
 
     t.fail('should not get here')
   } catch (e) {
     t.equals(e.message, 'GitHub token is required')
+  }
+
+  unmock('../src/make-repo-github-release')
+})
+
+test('makeRepoGithubRelease: throws if there is no github options', async (t) => {
+  const spy = createSpy(() => Promise.resolve())
+
+  mock('../src/make-repo-github-release', {
+    'request-promise-native': {
+      default: spy
+    }
+  })
+
+  const { makeRepoGithubRelease } = await import('../src/make-repo-github-release')
+
+  try {
+    await makeRepoGithubRelease(
+      {
+        version: '0.1.2',
+        type: 'minor',
+        messages: [
+          {
+            type: 'minor',
+            value: 'minor'
+          },
+          {
+            type: 'patch',
+            value: 'patch'
+          }
+        ]
+      },
+      'token',
+      {} as TOptions
+    )
+
+    t.fail('should not get here')
+  } catch (e) {
+    t.equals(e.message, 'GitHub options is required')
   }
 
   unmock('../src/make-repo-github-release')
