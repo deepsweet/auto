@@ -1,6 +1,6 @@
 {
   "name": "@auto/npm",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "",
   "keywords": "",
   "repository": "deepsweet/auto",
@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/fs": "^0.0.10",
+    "@auto/fs": "^0.0.11",
     "esm": "^3.0.82",
     "execa": "^1.0.0"
   },
