@@ -17,7 +17,21 @@ export type TOptions = {
   },
   customPrefixes: TOptionsPrefix[],
   autoNamePrefix: string,
-  zeroMajorBump: 'minor' | 'major'
+  zeroMajorBump: 'minor' | 'major',
+  github?: {
+    username: string,
+    repo: string
+  },
+  slack?: {
+    channel: string,
+    username: string,
+    iconEmoji: string,
+    colors: {
+      major: string,
+      minor: string,
+      patch: string
+    }
+  }
 }
 
 export type TPackageJson = {

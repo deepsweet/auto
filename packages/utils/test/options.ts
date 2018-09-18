@@ -62,5 +62,19 @@ export const options: TOptions = {
     }
   ],
   autoNamePrefix: '@ns/',
-  zeroMajorBump: 'minor'
+  zeroMajorBump: 'minor',
+  github: {
+    username: 'username',
+    repo: 'repo'
+  },
+  slack: {
+    username: 'username',
+    channel: 'channel',
+    iconEmoji: 'emoji',
+    colors: {
+      major: 'major',
+      minor: 'minor',
+      patch: 'patch'
+    }
+  }
 }
