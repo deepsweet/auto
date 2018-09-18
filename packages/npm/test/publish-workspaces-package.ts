@@ -2,6 +2,7 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
+// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()

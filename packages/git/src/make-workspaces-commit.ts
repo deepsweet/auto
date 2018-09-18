@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+// @ts-ignore
 import prompts from 'prompts'
 import execa from 'execa'
 import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'

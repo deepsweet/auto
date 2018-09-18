@@ -5,17 +5,7 @@
     "noEmit": true,
     "pretty": true,
     "lib": ["esnext"],
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "paths": {
-      "memfs": [
-        "types/memfs"
-      ]
-    },
-    "typeRoots": [
-      "types/prompts",
-      "node_modules/@types"
-    ]
+    "moduleResolution": "node"
   },
-  "exclude": ["node_modules/", "coverage/", "packages/*/build/", "tmp/", "types/memfs"]
+  "exclude": ["node_modules/", "coverage/", "packages/*/build/", "tmp/"]
 }
