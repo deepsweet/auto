@@ -3,7 +3,7 @@ import { TGithubOptions } from './types'
 import request from 'request-promise-native'
 import { GITHUB_API_REPOS_URL } from './utils'
 
-export const makeRepoGithubReleases = async (log: TRepoLog, githubOptions: TGithubOptions, autoOptions: TOptions) => {
+export const makeRepoGithubRelease = async (log: TRepoLog, githubOptions: TGithubOptions, autoOptions: TOptions) => {
   if (typeof githubOptions.token !== 'string') {
     throw new Error('GitHub token is required')
   }

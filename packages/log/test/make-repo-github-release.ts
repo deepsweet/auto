@@ -4,7 +4,7 @@ import { mock, unmock } from 'mocku'
 import { options } from '@auto/utils/test/options'
 import { TGithubOptions } from '../src'
 
-test('makeRepoGithubReleases', async (t) => {
+test('makeRepoGithubRelease', async (t) => {
   const spy = createSpy(() => Promise.resolve())
 
   mock('../src/make-repo-github-release', {
@@ -13,9 +13,9 @@ test('makeRepoGithubReleases', async (t) => {
     }
   })
 
-  const { makeRepoGithubReleases } = await import('../src/make-repo-github-release')
+  const { makeRepoGithubRelease } = await import('../src/make-repo-github-release')
 
-  await makeRepoGithubReleases(
+  await makeRepoGithubRelease(
     {
       version: '0.1.2',
       type: 'minor',
@@ -58,7 +58,7 @@ test('makeRepoGithubReleases', async (t) => {
   unmock('../src/make-repo-github-release')
 })
 
-test('makeRepoGithubReleases: throws if there is no token', async (t) => {
+test('makeRepoGithubRelease: throws if there is no token', async (t) => {
   const spy = createSpy(() => Promise.resolve())
 
   mock('../src/make-repo-github-release', {
@@ -67,10 +67,10 @@ test('makeRepoGithubReleases: throws if there is no token', async (t) => {
     }
   })
 
-  const { makeRepoGithubReleases } = await import('../src/make-repo-github-release')
+  const { makeRepoGithubRelease } = await import('../src/make-repo-github-release')
 
   try {
-    await makeRepoGithubReleases(
+    await makeRepoGithubRelease(
       {
         version: '0.1.2',
         type: 'minor',
