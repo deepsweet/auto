@@ -13,6 +13,7 @@ export const makeRepoCommit = async (options: TOptions) => {
       options.requiredPrefixes.major,
       options.requiredPrefixes.minor,
       options.requiredPrefixes.patch,
+      options.requiredPrefixes.initial,
       ...options.customPrefixes
     ],
     initial: 1

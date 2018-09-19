@@ -14,6 +14,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       options.requiredPrefixes.major,
       options.requiredPrefixes.minor,
       options.requiredPrefixes.patch,
+      options.requiredPrefixes.initial,
       ...options.customPrefixes
     ]
   }) as { prefix?: string }
