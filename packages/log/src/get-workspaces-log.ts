@@ -1,5 +1,5 @@
 import {
-  compareReleaseTypes,
+  compareMessageTypes,
   removeAutoNamePrefix,
   TWorkspacesGitBump,
   TOptions,
@@ -36,13 +36,13 @@ export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBump
         version: bump.version,
         type: bump.type,
         messages: [
-          ...messages.sort((a, b) => compareReleaseTypes(b.type, a.type)),
+          ...messages.sort((a, b) => compareMessageTypes(b.type, a.type)),
           {
             type: 'dependencies',
             value: `upgrade dependencies: ${bumpDepsNames}`
           } as TWorkspacesLogMessage
         ]
-      } as TWorkspacesLog)
+      })
     }
 
     if (messages.length === 0) {
@@ -53,7 +53,7 @@ export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBump
       name: bump.name,
       version: bump.version,
       type: bump.type,
-      messages: messages.sort((a, b) => compareReleaseTypes(b.type, a.type))
+      messages: messages.sort((a, b) => compareMessageTypes(b.type, a.type))
     })
   }, [] as TWorkspacesLog[])
 }

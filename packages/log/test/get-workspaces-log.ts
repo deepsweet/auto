@@ -213,5 +213,63 @@ test('getWorkspacesLog', (t) => {
     'messages only: should return sorted messages'
   )
 
+  t.deepEquals(
+    getWorkspacesLog(
+      [
+        {
+          name: '@ns/a',
+          dir: 'fakes/a',
+          version: '1.2.3',
+          type: 'major',
+          deps: null,
+          devDeps: null
+        }
+      ],
+      [
+        {
+          name: '@ns/a',
+          type: 'major',
+          messages: [
+            {
+              type: 'minor',
+              value: 'minor'
+            },
+            {
+              type: 'initial',
+              value: 'initial'
+            },
+            {
+              type: 'major',
+              value: 'major'
+            }
+          ]
+        }
+      ],
+      options
+    ),
+    [
+      {
+        name: '@ns/a',
+        version: '1.2.3',
+        type: 'major',
+        messages: [
+          {
+            type: 'initial',
+            value: 'initial'
+          },
+          {
+            type: 'major',
+            value: 'major'
+          },
+          {
+            type: 'minor',
+            value: 'minor'
+          }
+        ]
+      }
+    ] as TWorkspacesLog[],
+    'messages only: should return sorted messages'
+  )
+
   t.end()
 })

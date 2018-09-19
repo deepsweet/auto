@@ -77,5 +77,50 @@ test('getRepoLog', (t) => {
     'should return sorted messages'
   )
 
+  t.deepEquals(
+    getRepoLog(
+      {
+        version: '1.2.3',
+        type: 'major'
+      },
+      {
+        type: 'major',
+        messages: [
+          {
+            type: 'minor',
+            value: 'minor'
+          },
+          {
+            type: 'initial',
+            value: 'initial'
+          },
+          {
+            type: 'major',
+            value: 'major'
+          }
+        ]
+      }
+    ),
+    {
+      version: '1.2.3',
+      type: 'major',
+      messages: [
+        {
+          type: 'initial',
+          value: 'initial'
+        },
+        {
+          type: 'major',
+          value: 'major'
+        },
+        {
+          type: 'minor',
+          value: 'minor'
+        }
+      ]
+    } as TRepoLog,
+    'should return sorted messages'
+  )
+
   t.end()
 })
