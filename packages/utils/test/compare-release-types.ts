@@ -2,7 +2,7 @@ import test from 'blue-tape'
 import { compareReleaseTypes } from '../src/compare-release-types'
 import { TBumpType } from '../src/types'
 
-test('compare-release-type', (t) => {
+test('compare-release-types', (t) => {
   t.true(compareReleaseTypes('patch', 'patch') === 0, 'patch = patch')
   t.true(compareReleaseTypes('patch', 'minor') < 0, 'patch < minor')
   t.true(compareReleaseTypes('patch', 'major') < 0, 'patch < major')

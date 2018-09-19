@@ -3,6 +3,10 @@ import { TBumpType } from './types'
 const types: TBumpType[] = ['patch', 'minor', 'major']
 
 export const compareReleaseTypes = (a: TBumpType | null, b: TBumpType | null) => {
+  if (a === b) {
+    return 0
+  }
+
   if (a === null) {
     return -1
   }
