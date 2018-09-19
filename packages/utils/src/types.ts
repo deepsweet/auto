@@ -14,10 +14,12 @@ export type TOptions = {
     patch: TOptionsPrefix,
     publish: TOptionsPrefix,
     dependencies: TOptionsPrefix,
+    initial: TOptionsPrefix
   },
   customPrefixes: TOptionsPrefix[],
   autoNamePrefix: string,
   zeroBreakingChangeType: TBumpType,
+  initialType: TBumpType,
   github?: {
     username: string,
     repo: string

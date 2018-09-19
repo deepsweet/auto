@@ -21,6 +21,10 @@ export const options: TOptions = {
     dependencies: {
       title: 'Dependencies',
       value: '♻️'
+    },
+    initial: {
+      title: 'Initial',
+      value: '🐣️'
     }
   },
   customPrefixes: [
@@ -63,6 +67,7 @@ export const options: TOptions = {
   ],
   autoNamePrefix: '@ns/',
   zeroBreakingChangeType: 'minor',
+  initialType: 'minor',
   github: {
     username: 'username',
     repo: 'repo'
