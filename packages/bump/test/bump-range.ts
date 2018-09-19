@@ -44,11 +44,6 @@ test('bump:bumpRange', (t) => {
   t.strictEquals(bumpRange('^0.2', '0.2.3', 'major', options), '^0.3.0', '\'^0.2\' bumped to \'^0.3.0\' as major')
   t.strictEquals(bumpRange('^0', '0.2.3', 'major', options), '^0.3.0', '\'^0\' bumped to \'^0.3.0\' as major')
 
-  const majorOptions: TOptions = { ...options, zeroMajorBump: 'major' }
-  t.strictEquals(bumpRange('^0.2.3', '0.2.3', 'major', majorOptions), '^1.0.0', '\'^0.2.4\' bumped to \'^1.0.0\' as major')
-  t.strictEquals(bumpRange('^0.2', '0.2.3', 'major', majorOptions), '^1.0.0', '\'^0.2\' bumped to \'^1.0.0\' as major')
-  t.strictEquals(bumpRange('^0', '0.2.3', 'major', majorOptions), '^1.0.0', '\'^0\' bumped to \'^1.0.0\' as major')
-
   t.throws(() => bumpRange('>1', '1.2.3', 'patch', options), /is not supported/, 'should throw on range \'>1\'')
   t.throws(() => bumpRange('>=1', '1.2.3', 'patch', options), /is not supported/, 'should throw on range \'>=1\'')
   t.throws(() => bumpRange('<1', '0.2.3', 'patch', options), /is not supported/, 'should throw on range \'<1\'')

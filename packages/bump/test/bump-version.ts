@@ -24,10 +24,41 @@ test('bump:bumpVersion', (t) => {
   t.strictEquals(bumpVersion('0.2', 'major', options), '0.3.0', '\'0.2\' bumped to \'0.3.0\' as major')
   t.strictEquals(bumpVersion('0', 'major', options), '0.1.0', '\'0\' bumped to \'0.1.0\' as major')
 
-  const majorOptions: TOptions = { ...options, zeroMajorBump: 'major' }
-  t.strictEquals(bumpVersion('0.2.3', 'major', majorOptions), '1.0.0', '\'0.2.3\' bumped to \'1.0.0\' as major')
-  t.strictEquals(bumpVersion('0.2', 'major', majorOptions), '1.0.0', '\'0.2\' bumped to \'1.0.0\' as major')
-  t.strictEquals(bumpVersion('0', 'major', majorOptions), '1.0.0', '\'0\' bumped to \'1.0.0\' as major')
+  const majorOptions: TOptions = { ...options, zeroBreakingChangeType: 'major' }
+  t.strictEquals(bumpVersion('1.2.3', 'major', majorOptions), '2.0.0', 'major + major + major')
+  t.strictEquals(bumpVersion('1.2', 'major', majorOptions), '2.0.0', 'major + major + major')
+  t.strictEquals(bumpVersion('1', 'major', majorOptions), '2.0.0', 'major + major + major')
+
+  t.strictEquals(bumpVersion('0.2.3', 'major', majorOptions), '1.0.0', 'minor + major + major')
+  t.strictEquals(bumpVersion('0.2', 'major', majorOptions), '1.0.0', 'minor + major + major')
+
+  t.strictEquals(bumpVersion('0.0.3', 'major', majorOptions), '1.0.0', 'patch + major + major')
+  t.strictEquals(bumpVersion('0.0', 'major', majorOptions), '1.0.0', 'patch + major + major')
+  t.strictEquals(bumpVersion('0', 'major', majorOptions), '1.0.0', 'patch + major + major')
+
+  const minorOptions: TOptions = { ...options, zeroBreakingChangeType: 'minor' }
+  t.strictEquals(bumpVersion('1.2.3', 'major', minorOptions), '2.0.0', 'major + major + minor')
+  t.strictEquals(bumpVersion('1.2', 'major', minorOptions), '2.0.0', 'major + major + minor')
+  t.strictEquals(bumpVersion('1', 'major', minorOptions), '2.0.0', 'major + major + minor')
+
+  t.strictEquals(bumpVersion('0.2.3', 'major', minorOptions), '0.3.0', 'minor + major + minor')
+  t.strictEquals(bumpVersion('0.2', 'major', minorOptions), '0.3.0', 'minor + major + minor')
+
+  t.strictEquals(bumpVersion('0.0.3', 'major', minorOptions), '0.1.0', 'patch + major + minor')
+  t.strictEquals(bumpVersion('0.0', 'major', minorOptions), '0.1.0', 'patch + major + minor')
+  t.strictEquals(bumpVersion('0', 'major', minorOptions), '0.1.0', 'patch + major + minor')
+
+  const patchOptions: TOptions = { ...options, zeroBreakingChangeType: 'patch' }
+  t.strictEquals(bumpVersion('1.2.3', 'major', patchOptions), '2.0.0', 'major + major + patch')
+  t.strictEquals(bumpVersion('1.2', 'major', patchOptions), '2.0.0', 'major + major + patch')
+  t.strictEquals(bumpVersion('1', 'major', patchOptions), '2.0.0', 'major + major + patch')
+
+  t.strictEquals(bumpVersion('0.2.3', 'major', patchOptions), '1.0.0', 'minor + major + patch')
+  t.strictEquals(bumpVersion('0.2', 'major', patchOptions), '1.0.0', 'minor + major + patch')
+
+  t.strictEquals(bumpVersion('0.0.3', 'major', patchOptions), '0.0.4', 'patch + major + patch')
+  t.strictEquals(bumpVersion('0.0', 'major', patchOptions), '0.0.1', 'patch + major + patch')
+  t.strictEquals(bumpVersion('0', 'major', patchOptions), '0.0.1', 'patch + major + patch')
 
   t.throws(() => bumpVersion('blabla', 'patch', options), /invalid version/, 'should throw on range \'blabla\'')
   t.throws(() => bumpVersion('1.2.3', 'blabla' as TBumpType, options), /invalid increment argument/, 'should throw on release type \'blabla\'')

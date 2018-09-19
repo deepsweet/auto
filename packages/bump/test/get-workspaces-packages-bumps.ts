@@ -3,7 +3,7 @@ import { getWorkspacesPackagesBumps } from '../src/get-workspaces-packages-bumps
 import { options as defaultOptions } from '../../utils/test/options'
 import { TOptions } from '@auto/utils/src'
 
-const options: TOptions = { ...defaultOptions, zeroMajorBump: 'major' }
+const options: TOptions = { ...defaultOptions, zeroBreakingChangeType: 'major' }
 
 test('bump:getPackageBumps: single package', (t) => {
   t.deepEquals(
