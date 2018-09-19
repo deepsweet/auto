@@ -15,7 +15,7 @@ test('git:makeWorkspacesCommit single package', async (t) => {
     }
 
     if (index === 2) {
-      return Promise.resolve({ packageName: '' })
+      return Promise.resolve({ packageName: '-' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -111,7 +111,7 @@ test('git:makeWorkspacesCommit: no auto name prefix in options', async (t) => {
     }
 
     if (index === 2) {
-      return Promise.resolve({ packageName: '' })
+      return Promise.resolve({ packageName: '-' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -156,7 +156,7 @@ test('git:makeWorkspacesCommit: no package name', async (t) => {
     }
 
     if (index === 1) {
-      return Promise.resolve({ packageName: '' })
+      return Promise.resolve({ packageName: '-' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -310,7 +310,7 @@ test('git:makeWorkspacesCommit: should throw on message undefined', async (t) =>
     }
 
     if (index === 2) {
-      return Promise.resolve({ packageName: '' })
+      return Promise.resolve({ packageName: '-' })
     }
 
     return Promise.resolve({})

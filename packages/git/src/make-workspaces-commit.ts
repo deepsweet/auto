@@ -31,15 +31,17 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
       name: 'packageName',
       message: 'Type package name',
       limit: 20,
-      choices: Object.keys(packages).map((name) => ({ title: name, value: name })),
-      suggest: suggestFilter
+      choices: Object.keys(packages)
+        .filter((name) => !packageNames.includes(name))
+        .map((name) => ({ title: name, value: name })),
+      suggest: suggestFilter(packageNames.length > 0 ? '(done)' : '(no package)')
     }) as { packageName?: string }
 
     if (typeof packageName === 'undefined') {
       throw new Error('Package name is required')
     }
 
-    if (packageName === '') {
+    if (packageName === '-') {
       break
     }
 

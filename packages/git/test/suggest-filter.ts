@@ -3,22 +3,20 @@ import { suggestFilter } from '../src/suggest-filter'
 
 test('git:makeWorkspacesCommit: suggestFilter', async (t) => {
   t.deepEquals(
-    await suggestFilter(
+    await suggestFilter('(no package)')(
       '',
       [
         { title: 'foo', value: 'foo' },
         { title: 'bar', value: 'bar' },
-        { title: '-', value: '-' },
         { title: 'foo-', value: 'foo-' },
         { title: '-bar', value: '-bar' },
         { title: 'foo-bar', value: 'foo-bar' }
       ]
     ),
     [
-      { title: '(no package)', value: '' },
+      { title: '(no package)', value: '-' },
       { title: 'foo', value: 'foo' },
       { title: 'bar', value: 'bar' },
-      { title: '-', value: '-' },
       { title: 'foo-', value: 'foo-' },
       { title: '-bar', value: '-bar' },
       { title: 'foo-bar', value: 'foo-bar' }
@@ -27,7 +25,7 @@ test('git:makeWorkspacesCommit: suggestFilter', async (t) => {
   )
 
   t.deepEquals(
-    await suggestFilter(
+    await suggestFilter('(no package)')(
       '-',
       [
         { title: 'foo', value: 'foo' },
@@ -48,22 +46,20 @@ test('git:makeWorkspacesCommit: suggestFilter', async (t) => {
   )
 
   t.deepEquals(
-    await suggestFilter(
+    await suggestFilter('(no package)')(
       '*',
       [
         { title: 'foo', value: 'foo' },
         { title: 'bar', value: 'bar' },
-        { title: '-', value: '-' },
         { title: 'foo-', value: 'foo-' },
         { title: '-bar', value: '-bar' },
         { title: 'foo-bar', value: 'foo-bar' }
       ]
     ),
     [
-      { title: '* (6)', value: '*' },
+      { title: '* (5)', value: '*' },
       { title: 'foo', value: 'foo' },
       { title: 'bar', value: 'bar' },
-      { title: '-', value: '-' },
       { title: 'foo-', value: 'foo-' },
       { title: '-bar', value: '-bar' },
       { title: 'foo-bar', value: 'foo-bar' }
@@ -72,20 +68,18 @@ test('git:makeWorkspacesCommit: suggestFilter', async (t) => {
   )
 
   t.deepEquals(
-    await suggestFilter(
+    await suggestFilter('(no package)')(
       '-*',
       [
         { title: 'foo', value: 'foo' },
         { title: 'bar', value: 'bar' },
-        { title: '-', value: '-' },
         { title: 'foo-', value: 'foo-' },
         { title: '-bar', value: '-bar' },
         { title: 'foo-bar', value: 'foo-bar' }
       ]
     ),
     [
-      { title: '-* (4)', value: '-*' },
-      { title: '-', value: '-' },
+      { title: '-* (3)', value: '-*' },
       { title: 'foo-', value: 'foo-' },
       { title: '-bar', value: '-bar' },
       { title: 'foo-bar', value: 'foo-bar' }

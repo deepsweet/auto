@@ -11,25 +11,26 @@ export const makeRegExp = (input: string) => {
   return new RegExp(escapedInput)
 }
 
-export const suggestFilter = (input: string, choices: TPrompt[]): Promise<TPrompt[]> => {
-  if (input.includes('*')) {
-    const regExp = makeRegExp(input)
-    let filteredChoices = choices.filter((choice) => regExp.test(choice.value))
+export const suggestFilter = (noPackageMessage: string) =>
+  (input: string, choices: TPrompt[]): Promise<TPrompt[]> => {
+    if (input.includes('*')) {
+      const regExp = makeRegExp(input)
+      let filteredChoices = choices.filter((choice) => regExp.test(choice.value))
+
+      return Promise.resolve([
+        { title: `${input} (${filteredChoices.length})`, value: input },
+        ...filteredChoices
+      ])
+    }
+
+    let firstElement: TPrompt[] = []
+
+    if (input === '') {
+      firstElement = [{ title: noPackageMessage, value: '-' }]
+    }
 
     return Promise.resolve([
-      { title: `${input} (${filteredChoices.length})`, value: input },
-      ...filteredChoices
+      ...firstElement,
+      ...choices.filter((choice) => choice.value.includes(input))
     ])
   }
-
-  let firstElement: TPrompt[] = []
-
-  if (input === '') {
-    firstElement = [{ title: '(no package)', value: '' }]
-  }
-
-  return Promise.resolve([
-    ...firstElement,
-    ...choices.filter((choice) => choice.value.includes(input))
-  ])
-}
