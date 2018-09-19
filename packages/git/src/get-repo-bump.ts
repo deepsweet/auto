@@ -17,6 +17,27 @@ export const getRepoBump = async (options: TOptions): Promise<TRepoGitBump | nul
       break
     }
 
+    if (parsed.type === 'initial') {
+      if (bump !== null) {
+        bump.messages.push({
+          type: parsed.type,
+          value: parsed.message
+        })
+
+        bump.type = options.initialType
+      } else {
+        bump = {
+          type: options.initialType,
+          messages: [{
+            type: parsed.type,
+            value: parsed.message
+          }]
+        }
+      }
+
+      break
+    }
+
     if (bump !== null) {
       bump.messages.push({
         type: parsed.type,

@@ -5,7 +5,8 @@ export const parseWorkspacesCommitMessage = (message: string, options: TOptions)
     ['major', options.requiredPrefixes.major.value],
     ['minor', options.requiredPrefixes.minor.value],
     ['patch', options.requiredPrefixes.patch.value],
-    ['publish', options.requiredPrefixes.publish.value]
+    ['publish', options.requiredPrefixes.publish.value],
+    ['initial', options.requiredPrefixes.initial.value]
   ]
 
   for (const [type, value] of prefixes) {

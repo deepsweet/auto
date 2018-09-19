@@ -44,6 +44,31 @@ export const getWorkspacesBumps = async (packages: TPackages, options: TOptions)
         continue
       }
 
+      if (parsed.type === 'initial') {
+        if (Reflect.has(bumps, name)) {
+          const bump = bumps[name]
+
+          bump.messages.push({
+            type: parsed.type,
+            value: parsed.message
+          })
+
+          bump.type = options.initialType
+        } else {
+          bumps[name] = {
+            name,
+            type: options.initialType,
+            messages: [{
+              type: parsed.type,
+              value: parsed.message
+            }]
+          }
+        }
+
+        completedPackages.push(name)
+        continue
+      }
+
       if (Reflect.has(bumps, name)) {
         const bump = bumps[name]
 

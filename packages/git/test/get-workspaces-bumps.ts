@@ -17,6 +17,13 @@ const packages: TPackages = {
       name: '@ns/bar',
       version: '2.1.0'
     }
+  },
+  '@ns/baz': {
+    dir: 'fakes/baz',
+    json: {
+      name: '@ns/baz',
+      version: '0.0.0'
+    }
   }
 }
 
@@ -26,7 +33,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
       getCommitMessages: () => Promise.resolve([
         `${options.requiredPrefixes.patch.value} foo: patch 2`,
         `${options.requiredPrefixes.patch.value} foo: patch 1`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -58,7 +66,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
       getCommitMessages: () => Promise.resolve([
         `${options.requiredPrefixes.minor.value} foo: minor`,
         `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -90,7 +99,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
       getCommitMessages: () => Promise.resolve([
         `${options.requiredPrefixes.patch.value} foo: patch`,
         `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -123,7 +133,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
         `${options.requiredPrefixes.major.value} foo: major`,
         `${options.requiredPrefixes.minor.value} foo: minor`,
         `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -159,7 +170,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
         `${options.requiredPrefixes.minor.value} foo: minor`,
         `${options.requiredPrefixes.major.value} foo: major`,
         `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -196,7 +208,8 @@ test('git:getWorkspacesBumps single package', async (t) => {
         `${options.requiredPrefixes.minor.value} foo: minor`,
         `${options.requiredPrefixes.patch.value} foo: patch`,
         `${options.requiredPrefixes.major.value} foo: major`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`
+        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
+        `${options.requiredPrefixes.initial.value} foo: initial`
       ])
     }
   })
@@ -234,7 +247,9 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
         `${options.requiredPrefixes.major.value} foo: breaking`,
         `${options.requiredPrefixes.patch.value} bar: patch`,
         `${options.requiredPrefixes.publish.value} bar: v2.0.1`,
-        `${options.requiredPrefixes.major.value} bar: breaking`
+        `${options.requiredPrefixes.major.value} bar: breaking`,
+        `${options.requiredPrefixes.initial.value} foo: initial`,
+        `${options.requiredPrefixes.initial.value} bar: initial`
       ])
     }
   })
@@ -305,6 +320,15 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
           value: 'patch'
         }
       ]
+    }, {
+      name: '@ns/baz',
+      type: 'minor',
+      messages: [
+        {
+          type: 'minor',
+          value: 'minor'
+        }
+      ]
     }] as TWorkspacesGitBump[],
     'bump as minor && minor'
   )
@@ -359,6 +383,15 @@ test('git:getWorkspacesBumps string + star symbol', async (t) => {
           value: 'patch'
         }
       ]
+    }, {
+      name: '@ns/baz',
+      type: 'minor',
+      messages: [
+        {
+          type: 'minor',
+          value: 'minor'
+        }
+      ]
     }] as TWorkspacesGitBump[],
     'bump as minor && minor'
   )
@@ -376,7 +409,7 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
         'beep',
         `${options.requiredPrefixes.dependencies.value} foo: upgrade dependencies`,
         `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.patch.value} baz: patch`,
+        `${options.requiredPrefixes.patch.value} NonExistingPackage: patch`,
         `${options.requiredPrefixes.publish.value} foo: v1.0.1`
       ])
     }
@@ -398,6 +431,61 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
       }]
     }] as TWorkspacesGitBump[],
     'skip invalid commit messages'
+  )
+
+  unmock('../src/get-workspaces-bumps')
+})
+
+test('git:getWorkspacesBumps multiple packages initial', async (t) => {
+  mock('../src/get-workspaces-bumps', {
+    './get-commit-messages': {
+      getCommitMessages: () => Promise.resolve([
+        `${options.requiredPrefixes.patch.value} foo: patch`,
+        `${options.requiredPrefixes.major.value} foo: breaking`,
+        `${options.requiredPrefixes.patch.value} bar: patch`,
+        `${options.requiredPrefixes.initial.value} baz: initial`,
+        `${options.requiredPrefixes.publish.value} bar: v2.0.1`,
+        `${options.requiredPrefixes.major.value} bar: breaking`,
+        `${options.requiredPrefixes.initial.value} foo: initial`,
+        `${options.requiredPrefixes.minor.value} foo: minor`,
+        `${options.requiredPrefixes.initial.value} bar: initial`
+      ])
+    }
+  })
+
+  const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
+
+  t.deepEquals(
+    await getWorkspacesBumps(packages, options),
+    [{
+      name: '@ns/foo',
+      type: 'minor',
+      messages: [{
+        type: 'patch',
+        value: 'patch'
+      }, {
+        type: 'major',
+        value: 'breaking'
+      }, {
+        type: 'initial',
+        value: 'initial'
+      }]
+    }, {
+      name: '@ns/bar',
+      type: 'patch',
+      messages: [{
+        type: 'patch',
+        value: 'patch'
+      }]
+    }, {
+      name: '@ns/baz',
+      type: 'minor',
+      messages: [{
+        type: 'initial',
+        value: 'initial'
+      }]
+    }] as TWorkspacesGitBump[],
+    'bump as patch && patch'
   )
 
   unmock('../src/get-workspaces-bumps')
