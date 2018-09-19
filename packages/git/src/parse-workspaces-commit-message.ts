@@ -1,6 +1,7 @@
 import { TOptions, TParsedMessageType, TWorkspacesParsedMessage } from '@auto/utils/src/'
+import { makeRegExp } from './suggest-filter'
 
-export const parseWorkspacesCommitMessage = (message: string, options: TOptions): TWorkspacesParsedMessage | null => {
+export const parseWorkspacesCommitMessage = (message: string, packageNames: string[], options: TOptions): TWorkspacesParsedMessage | null => {
   const prefixes: [TParsedMessageType, string][] = [
     ['major', options.requiredPrefixes.major.value],
     ['minor', options.requiredPrefixes.minor.value],
@@ -17,11 +18,36 @@ export const parseWorkspacesCommitMessage = (message: string, options: TOptions)
       continue
     }
 
-    const name = result[1]
+    const namesStr = result[1].trim()
+    const names = namesStr.split(',')
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0)
+      .reduce((result, name) => {
+        if (name.includes('*')) {
+          const regExp = makeRegExp(name)
+          const matchedNames = packageNames.filter((name) => regExp.test(name))
+
+          for (const matchedName of matchedNames) {
+            if (!result.includes(matchedName)) {
+              result.push(matchedName)
+            }
+          }
+
+          return result
+        }
+
+        const fullName = `${options.autoNamePrefix}${name}`
+
+        if (packageNames.includes(fullName)) {
+          result.push(fullName)
+        }
+
+        return result
+      }, [] as string[])
 
     return {
       type,
-      name: name === '*' ? name : `${options.autoNamePrefix}${name}`,
+      names,
       message: result[2].trim()
     }
   }
