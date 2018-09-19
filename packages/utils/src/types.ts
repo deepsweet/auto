@@ -60,7 +60,7 @@ export type TPackages = {
   }
 }
 
-export type TParsedMessageType = TBumpType | 'publish'
+export type TParsedMessageType = TBumpType | 'publish' | 'initial'
 
 export type TRepoParsedMessage = {
   type: TParsedMessageType,
@@ -71,8 +71,10 @@ export type TWorkspacesParsedMessage = {
   name: string
 } & TRepoParsedMessage
 
+export type TGitMessageType = TBumpType | 'initial'
+
 export type TGitMessage = {
-  type: TBumpType,
+  type: TGitMessageType,
   value: string
 }
 
@@ -104,7 +106,7 @@ export type TWorkspacesPackageBump = {
 }
 
 export type TWorkspacesLogMessage = {
-  type: TBumpType | 'dependencies',
+  type: TBumpType | 'dependencies' | 'initial',
   value: string
 }
 
