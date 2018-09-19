@@ -17,7 +17,7 @@ export type TOptions = {
   },
   customPrefixes: TOptionsPrefix[],
   autoNamePrefix: string,
-  zeroMajorBump: 'minor' | 'major',
+  zeroBreakingChangeType: TBumpType,
   github?: {
     username: string,
     repo: string

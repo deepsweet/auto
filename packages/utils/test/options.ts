@@ -62,7 +62,7 @@ export const options: TOptions = {
     }
   ],
   autoNamePrefix: '@ns/',
-  zeroMajorBump: 'minor',
+  zeroBreakingChangeType: 'minor',
   github: {
     username: 'username',
     repo: 'repo'
