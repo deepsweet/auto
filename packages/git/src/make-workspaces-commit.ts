@@ -23,17 +23,31 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
     throw new Error('Change type is required')
   }
 
-  const { packageName } = await prompts({
-    type: 'autocomplete',
-    name: 'packageName',
-    message: 'Type package name',
-    limit: 20,
-    choices: Object.keys(packages).map((name) => ({ title: name, value: name })),
-    suggest: suggestFilter
-  }) as { packageName?: string }
+  const packageNames: string [] = []
 
-  if (typeof packageName === 'undefined') {
-    throw new Error('Package name is required')
+  while (true) {
+    const { packageName } = await prompts({
+      type: 'autocomplete',
+      name: 'packageName',
+      message: 'Type package name',
+      limit: 20,
+      choices: Object.keys(packages).map((name) => ({ title: name, value: name })),
+      suggest: suggestFilter
+    }) as { packageName?: string }
+
+    if (typeof packageName === 'undefined') {
+      throw new Error('Package name is required')
+    }
+
+    if (packageName === '') {
+      break
+    }
+
+    packageNames.push(packageName)
+
+    if (packageName === '*') {
+      break
+    }
   }
 
   const { message } = await prompts({
@@ -48,8 +62,10 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
 
   let name = ''
 
-  if (packageName !== '') {
-    name = removeAutoNamePrefix(packageName, options.autoNamePrefix)
+  if (packageNames.length > 0) {
+    name = packageNames
+      .map((packageName) => removeAutoNamePrefix(packageName, options.autoNamePrefix))
+      .join(', ')
     name += ': '
   }
 

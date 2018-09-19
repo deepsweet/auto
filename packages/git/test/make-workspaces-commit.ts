@@ -3,7 +3,7 @@ import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { options } from '../../utils/test/options'
 
-test('git:makeWorkspacesCommit', async (t) => {
+test('git:makeWorkspacesCommit single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
   const promptsSpy = createSpy(({ index }) => {
     if (index === 0) {
@@ -12,6 +12,10 @@ test('git:makeWorkspacesCommit', async (t) => {
 
     if (index === 1) {
       return Promise.resolve({ packageName: '@ns/foo' })
+    }
+
+    if (index === 2) {
+      return Promise.resolve({ packageName: '' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -45,6 +49,56 @@ test('git:makeWorkspacesCommit', async (t) => {
   unmock('../src/make-workspaces-commit')
 })
 
+test('git:makeWorkspacesCommit multiple packages', async (t) => {
+  const execaSpy = createSpy(() => Promise.resolve())
+  const promptsSpy = createSpy(({ index }) => {
+    if (index === 0) {
+      return Promise.resolve({ prefix: 'prefix' })
+    }
+
+    if (index === 1) {
+      return Promise.resolve({ packageName: '@ns/foo' })
+    }
+
+    if (index === 2) {
+      return Promise.resolve({ packageName: 'bar*' })
+    }
+
+    if (index === 3) {
+      return Promise.resolve({ packageName: '*' })
+    }
+
+    return Promise.resolve({ message: 'message' })
+  })
+
+  mock('../src/make-workspaces-commit', {
+    execa: { default: execaSpy },
+    prompts: { default: promptsSpy }
+  })
+
+  const { makeWorkspacesCommit } = await import('../src/make-workspaces-commit')
+
+  await makeWorkspacesCommit({
+    '@ns/foo': {
+      dir: 'fakes/foo',
+      json: {
+        name: '@ns/foo',
+        version: '1.2.3'
+      }
+    }
+  }, options)
+
+  t.deepEquals(
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
+    [
+      ['git', ['commit', '-m', 'prefix foo, bar*, *: message']]
+    ],
+    'should write proper message'
+  )
+
+  unmock('../src/make-workspaces-commit')
+})
+
 test('git:makeWorkspacesCommit: no auto name prefix in options', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
   const promptsSpy = createSpy(({ index }) => {
@@ -54,6 +108,10 @@ test('git:makeWorkspacesCommit: no auto name prefix in options', async (t) => {
 
     if (index === 1) {
       return Promise.resolve({ packageName: '@ns/foo' })
+    }
+
+    if (index === 2) {
+      return Promise.resolve({ packageName: '' })
     }
 
     return Promise.resolve({ message: 'message' })
@@ -90,7 +148,7 @@ test('git:makeWorkspacesCommit: no auto name prefix in options', async (t) => {
   unmock('../src/make-workspaces-commit')
 })
 
-test('git:makeWorkspacesCommit: no package name (`-`)', async (t) => {
+test('git:makeWorkspacesCommit: no package name', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
   const promptsSpy = createSpy(({ index }) => {
     if (index === 0) {
@@ -132,7 +190,7 @@ test('git:makeWorkspacesCommit: no package name (`-`)', async (t) => {
   unmock('../src/make-workspaces-commit')
 })
 
-test('git:makeWorkspacesCommit: all packages (`*`)', async (t) => {
+test('git:makeWorkspacesCommit: all packages `*`', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
   const promptsSpy = createSpy(({ index }) => {
     if (index === 0) {
@@ -249,6 +307,10 @@ test('git:makeWorkspacesCommit: should throw on message undefined', async (t) =>
 
     if (index === 1) {
       return Promise.resolve({ packageName: '@ns/foo' })
+    }
+
+    if (index === 2) {
+      return Promise.resolve({ packageName: '' })
     }
 
     return Promise.resolve({})
