@@ -68,7 +68,7 @@ export type TRepoParsedMessage = {
 }
 
 export type TWorkspacesParsedMessage = {
-  name: string
+  names: string[]
 } & TRepoParsedMessage
 
 export type TGitMessageType = TBumpType | 'initial'
