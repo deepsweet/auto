@@ -4,6 +4,7 @@ import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
 // @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
+import { options } from '@auto/utils/test/options'
 
 const rootDir = process.cwd()
 const vol = Volume.fromJSON({
@@ -20,14 +21,17 @@ test('npm:publishWorkspacesPackage', async (t) => {
 
   const { publishWorkspacesPackage } = await import('../src/publish-workspaces-package')
 
-  await publishWorkspacesPackage({
-    name: 'baz',
-    dir: '/foo/bar/baz',
-    version: '1.2.3',
-    type: 'minor',
-    deps: null,
-    devDeps: null
-  })
+  await publishWorkspacesPackage(
+    {
+      name: 'baz',
+      dir: '/foo/bar/baz',
+      version: '1.2.3',
+      type: 'minor',
+      deps: null,
+      devDeps: null
+    },
+    options
+  )
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
@@ -59,7 +63,10 @@ test('npm:publishWorkspacesPackage', async (t) => {
       devDeps: null
     },
     {
-      registry: 'https://custom-registry'
+      ...options,
+      npm: {
+        registry: 'https://custom-registry'
+      }
     }
   )
 
@@ -98,7 +105,8 @@ test('npm:publishWorkspacesPackage', async (t) => {
       type: 'minor',
       deps: null,
       devDeps: null
-    }
+    },
+    options
   )
 
   t.deepEquals(
@@ -138,7 +146,10 @@ test('npm:publishWorkspacesPackage', async (t) => {
       devDeps: null
     },
     {
-      registry: 'https://options-registry'
+      ...options,
+      npm: {
+        registry: 'https://options-registry'
+      }
     }
   )
 

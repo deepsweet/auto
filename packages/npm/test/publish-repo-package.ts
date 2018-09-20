@@ -4,6 +4,7 @@ import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
 // @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
+import { options } from '@auto/utils/test/options'
 
 const rootDir = process.cwd()
 const vol = Volume.fromJSON({
@@ -20,7 +21,7 @@ test('npm:publishRepoPackage, default', async (t) => {
 
   const { publishRepoPackage } = await import('../src/publish-repo-package')
 
-  await publishRepoPackage()
+  await publishRepoPackage(options)
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
@@ -43,7 +44,10 @@ test('npm:publishRepoPackage, user provided registry', async (t) => {
   const { publishRepoPackage } = await import('../src/publish-repo-package')
 
   await publishRepoPackage({
-    registry: 'https://my-registry'
+    ...options,
+    npm: {
+      registry: 'https://my-registry'
+    }
   })
 
   t.deepEquals(
@@ -73,7 +77,7 @@ test('npm:publishRepoPackage, packageJson registry', async (t) => {
 
   const { publishRepoPackage } = await import('../src/publish-repo-package')
 
-  await publishRepoPackage()
+  await publishRepoPackage(options)
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
@@ -103,7 +107,10 @@ test('npm:publishRepoPackage, priority test', async (t) => {
   const { publishRepoPackage } = await import('../src/publish-repo-package')
 
   await publishRepoPackage({
-    registry: 'https://options-registry'
+    ...options,
+    npm: {
+      registry: 'https://options-registry'
+    }
   })
 
   t.deepEquals(
