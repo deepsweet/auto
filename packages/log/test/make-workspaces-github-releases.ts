@@ -63,8 +63,8 @@ test('makeWorkspacesGithubReleases', async (t) => {
           'User-Agent': 'auto-tools'
         },
         json: {
-          tag_name: '@ns/a@0.1.2',
-          name: '@ns/a@0.1.2',
+          tag_name: 'a@0.1.2',
+          name: 'a@0.1.2',
           body: '* 🌱 minor\n* 🐞 patch'
         }
       }],
@@ -76,8 +76,8 @@ test('makeWorkspacesGithubReleases', async (t) => {
           'User-Agent': 'auto-tools'
         },
         json: {
-          tag_name: '@ns/b@1.2.3',
-          name: '@ns/b@1.2.3',
+          tag_name: 'b@1.2.3',
+          name: 'b@1.2.3',
           body: '* 🌱 minor\n* 🐞 patch'
         }
       }]

@@ -12,6 +12,8 @@ export const makeWorkspacesGithubReleases = async (logs: TWorkspacesLog[], token
   }
 
   for (const log of logs) {
+    const name = log.name.replace(new RegExp(`^${options.autoNamePrefix}`), '')
+
     await request({
       uri: `${GITHUB_API_REPOS_URL}${options.github.username}/${options.github.repo}/releases`,
       method: 'POST',
@@ -20,8 +22,8 @@ export const makeWorkspacesGithubReleases = async (logs: TWorkspacesLog[], token
         'User-Agent': 'auto-tools'
       },
       json: {
-        tag_name: `${log.name}@${log.version}`,
-        name: `${log.name}@${log.version}`,
+        tag_name: `${name}@${log.version}`,
+        name: `${name}@${log.version}`,
         body: log.messages
           .map((message) => `* ${options.requiredPrefixes[message.type].value} ${message.value}`)
           .join('\n')
