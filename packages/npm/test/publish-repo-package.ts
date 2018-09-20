@@ -2,7 +2,6 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 import { options } from '@auto/utils/test/options'
 

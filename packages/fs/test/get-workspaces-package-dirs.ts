@@ -1,6 +1,5 @@
 import test from 'blue-tape'
 import { mock, unmock, deleteFromCache } from 'mocku'
-// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()

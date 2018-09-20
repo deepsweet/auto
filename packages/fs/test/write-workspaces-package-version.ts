@@ -1,6 +1,5 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
@@ -32,7 +31,7 @@ test('fs:writeWorkspacesPackageVersion: single version bump', async (t) => {
     devDeps: null
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -81,7 +80,7 @@ test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
     devDeps: null
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -134,7 +133,7 @@ test('fs:writeWorkspacesPackageVersion: ignore devDependencies', async (t) => {
     }
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -183,7 +182,7 @@ test('fs:writeWorkspacesPackageVersion: no version bump', async (t) => {
     devDeps: null
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(

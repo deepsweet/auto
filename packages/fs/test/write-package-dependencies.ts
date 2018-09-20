@@ -1,6 +1,5 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 import { createSpy, getSpyCalls } from 'spyfn'
 
@@ -40,7 +39,7 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
     devDeps: null
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -99,7 +98,7 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
     devDeps: null
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -164,7 +163,7 @@ test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) =>
     }
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(

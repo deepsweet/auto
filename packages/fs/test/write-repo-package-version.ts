@@ -1,6 +1,5 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-// @ts-ignore
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
@@ -28,7 +27,7 @@ test('fs:writeRepoPackageVersion: single version bump', async (t) => {
     type: 'patch'
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -70,7 +69,7 @@ test('fs:riteRepoPackageVersion: ignore dependencies', async (t) => {
     type: 'patch'
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
@@ -116,7 +115,7 @@ test('fs:writeRepoPackageVersion: ignore devDependencies', async (t) => {
     type: 'patch'
   })
 
-  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8')
+  const packageData = fs.readFileSync(`${rootDir}/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
 
   t.deepEquals(
