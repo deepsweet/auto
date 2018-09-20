@@ -33,6 +33,9 @@ export type TOptions = {
       minor: string,
       patch: string
     }
+  },
+  npm?: {
+    registry: string
   }
 }
 
