@@ -23,7 +23,7 @@ export const sendRepoSlackMessage = async (log: TRepoLog, prefixes: TPrefixes, o
           {
             title: `v${log.version}`,
             value: log.messages
-              .map((message) => `${prefixes.required[log.type].value} ${message.value}`)
+              .map((message) => `${prefixes.required[message.type].value} ${message.value}`)
               .join('\n')
           }
         ]

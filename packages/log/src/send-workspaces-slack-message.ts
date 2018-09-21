@@ -23,7 +23,7 @@ export const sendWorkspacesSlackMessage = async (logs: TWorkspacesLog[], prefixe
           {
             title: `${bump.name} v${bump.version}`,
             value: bump.messages
-              .map((message) => `${prefixes.required[bump.type].value} ${message.value}`)
+              .map((message) => `${prefixes.required[message.type].value} ${message.value}`)
               .join('\n')
           }
         ]

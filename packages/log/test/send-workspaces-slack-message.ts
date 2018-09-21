@@ -56,6 +56,10 @@ test('sendWorkspacesSlackMessage', async (t) => {
           {
             type: 'patch',
             value: 'patch'
+          },
+          {
+            type: 'dependencies',
+            value: 'update dependencies'
           }
         ]
       }
@@ -79,11 +83,17 @@ test('sendWorkspacesSlackMessage', async (t) => {
           attachments: [
             {
               color: 'minor',
-              fields: [{ title: 'a v0.1.2', value: '🌱 minor\n🌱 patch' }]
+              fields: [{
+                title: 'a v0.1.2',
+                value: `${prefixes.required.minor.value} minor\n${prefixes.required.patch.value} patch`
+              }]
             },
             {
               color: 'minor',
-              fields: [{ title: 'b v1.2.3', value: '🌱 minor\n🌱 patch' }]
+              fields: [{
+                title: 'b v1.2.3',
+                value: `${prefixes.required.minor.value} minor\n${prefixes.required.patch.value} patch\n${prefixes.required.dependencies.value} update dependencies`
+              }]
             }
           ]
         }

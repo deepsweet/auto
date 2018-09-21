@@ -52,18 +52,20 @@ test('sendRepoSlackMessage', async (t) => {
       [{
         uri: 'https://hooks.slack.com/services/token',
         method: 'POST',
-        json:
-          {
-            channel: 'channel',
-            username: 'username',
-            link_names: '1',
-            icon_emoji: 'emoji',
-            unfurl_media: false,
-            attachments: [{
-              color: 'minor',
-              fields: [{ title: 'v0.1.2', value: '🌱 minor\n🌱 patch' }]
+        json: {
+          channel: 'channel',
+          username: 'username',
+          link_names: '1',
+          icon_emoji: 'emoji',
+          unfurl_media: false,
+          attachments: [{
+            color: 'minor',
+            fields: [{
+              title: 'v0.1.2',
+              value: `${prefixes.required.minor.value} minor\n${prefixes.required.patch.value} patch`
             }]
-          }
+          }]
+        }
       }]
     ],
     'should make request'
@@ -101,7 +103,7 @@ test('sendRepoSlackMessage: throws if there is no token', async (t) => {
       },
       prefixes,
       // @ts-ignore
-      {...slackOptions, token: undefined}
+      { ...slackOptions, token: undefined }
     )
 
     t.fail('should not get here')
