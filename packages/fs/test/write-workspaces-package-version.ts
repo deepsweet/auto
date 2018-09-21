@@ -23,7 +23,7 @@ test('fs:writeWorkspacesPackageVersion: single version bump', async (t) => {
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
   await writeWorkspacesPackageVersion({
-    name: '@ns/a',
+    name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
@@ -69,13 +69,13 @@ test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
   await writeWorkspacesPackageVersion({
-    name: '@ns/a',
+    name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: {
-      '@ns/b': '0.0.2',
-      '@ns/c': '0.0.3'
+      'b': '0.0.2',
+      'c': '0.0.3'
     },
     devDeps: null
   })
@@ -122,14 +122,14 @@ test('fs:writeWorkspacesPackageVersion: ignore devDependencies', async (t) => {
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
   await writeWorkspacesPackageVersion({
-    name: '@ns/a',
+    name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
     devDeps: {
-      '@ns/b': '0.0.2',
-      '@ns/c': '0.0.3'
+      'b': '0.0.2',
+      'c': '0.0.3'
     }
   })
 
@@ -174,7 +174,7 @@ test('fs:writeWorkspacesPackageVersion: no version bump', async (t) => {
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
   await writeWorkspacesPackageVersion({
-    name: '@ns/a',
+    name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: null,
     type: null,

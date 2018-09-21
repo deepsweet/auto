@@ -1,8 +1,14 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { options } from '@auto/utils/test/options'
-import { TOptions } from '@auto/utils/src'
+import { prefixes } from '@auto/utils/test/prefixes'
+import { TGithubOptions } from '../src/types'
+
+const githubOptions: TGithubOptions = {
+  token: 'token',
+  username: 'username',
+  repo: 'repo'
+}
 
 test('makeWorkspacesGithubReleases', async (t) => {
   const spy = createSpy(() => Promise.resolve())
@@ -18,7 +24,7 @@ test('makeWorkspacesGithubReleases', async (t) => {
   await makeWorkspacesGithubReleases(
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '0.1.2',
         type: 'minor',
         messages: [
@@ -33,7 +39,7 @@ test('makeWorkspacesGithubReleases', async (t) => {
         ]
       },
       {
-        name: '@ns/b',
+        name: 'b',
         version: '1.2.3',
         type: 'minor',
         messages: [
@@ -48,8 +54,8 @@ test('makeWorkspacesGithubReleases', async (t) => {
         ]
       }
     ],
-    'token',
-    options
+    prefixes,
+    githubOptions
   )
 
   t.deepEquals(
@@ -103,7 +109,7 @@ test('makeWorkspacesGithubReleases: throws if there is no token', async (t) => {
     await makeWorkspacesGithubReleases(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           version: '0.1.2',
           type: 'minor',
           messages: [
@@ -118,7 +124,7 @@ test('makeWorkspacesGithubReleases: throws if there is no token', async (t) => {
           ]
         },
         {
-          name: '@ns/b',
+          name: 'b',
           version: '1.2.3',
           type: 'minor',
           messages: [
@@ -133,71 +139,14 @@ test('makeWorkspacesGithubReleases: throws if there is no token', async (t) => {
           ]
         }
       ],
+      prefixes,
       // @ts-ignore
-      undefined,
-      options
+      { ...githubOptions, token: undefined }
     )
 
     t.fail('should not get here')
   } catch (e) {
     t.equals(e.message, 'GitHub token is required')
-  }
-
-  unmock('../src/make-workspaces-github-releases')
-})
-
-test('makeWorkspacesGithubReleases: throws if there is no github options', async (t) => {
-  const spy = createSpy(() => Promise.resolve())
-
-  mock('../src/make-workspaces-github-releases', {
-    'request-promise-native': {
-      default: spy
-    }
-  })
-
-  const { makeWorkspacesGithubReleases } = await import('../src/make-workspaces-github-releases')
-
-  try {
-    await makeWorkspacesGithubReleases(
-      [
-        {
-          name: '@ns/a',
-          version: '0.1.2',
-          type: 'minor',
-          messages: [
-            {
-              type: 'minor',
-              value: 'minor'
-            },
-            {
-              type: 'patch',
-              value: 'patch'
-            }
-          ]
-        },
-        {
-          name: '@ns/b',
-          version: '1.2.3',
-          type: 'minor',
-          messages: [
-            {
-              type: 'minor',
-              value: 'minor'
-            },
-            {
-              type: 'patch',
-              value: 'patch'
-            }
-          ]
-        }
-      ],
-      'token',
-      {} as TOptions
-    )
-
-    t.fail('should not get here')
-  } catch (e) {
-    t.equals(e.message, 'GitHub options is required')
   }
 
   unmock('../src/make-workspaces-github-releases')

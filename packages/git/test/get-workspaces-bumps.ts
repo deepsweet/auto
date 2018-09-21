@@ -1,27 +1,32 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
-import { TWorkspacesGitBump, TPackages } from '@auto/utils/src/'
-import { options } from '../../utils/test/options'
+import { TWorkspacesGitBump, TPackages } from '@auto/utils/src/types'
+import { TGitOptions } from '../src/types'
+import { prefixes } from '@auto/utils/test/prefixes'
+
+const gitOptions: TGitOptions = {
+  initialType: 'minor'
+}
 
 const packages: TPackages = {
-  '@ns/foo': {
+  'foo': {
     dir: 'fakes/foo',
     json: {
-      name: '@ns/foo',
+      name: 'foo',
       version: '0.1.2'
     }
   },
-  '@ns/bar': {
+  'bar': {
     dir: 'fakes/bar',
     json: {
-      name: '@ns/bar',
+      name: 'bar',
       version: '2.1.0'
     }
   },
-  '@ns/baz': {
+  'baz': {
     dir: 'fakes/baz',
     json: {
-      name: '@ns/baz',
+      name: 'baz',
       version: '0.0.0'
     }
   }
@@ -31,10 +36,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} foo: patch 2`,
-        `${options.requiredPrefixes.patch.value} foo: patch 1`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.patch.value} foo: patch 2`,
+        `${prefixes.required.patch.value} foo: patch 1`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -42,9 +47,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'patch',
       messages: [{
         type: 'patch',
@@ -64,10 +69,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -75,9 +80,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'minor',
       messages: [{
         type: 'minor',
@@ -97,10 +102,10 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -108,9 +113,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'minor',
       messages: [{
         type: 'patch',
@@ -130,11 +135,11 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.major.value} foo: major`,
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.major.value} foo: major`,
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -142,9 +147,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'major',
       messages: [{
         type: 'major',
@@ -167,11 +172,11 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.major.value} foo: major`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.major.value} foo: major`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -179,9 +184,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'major',
       messages: [{
         type: 'minor',
@@ -205,11 +210,11 @@ test('git:getWorkspacesBumps single package', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.major.value} foo: major`,
-        `${options.requiredPrefixes.publish.value} foo: v1.2.3`,
-        `${options.requiredPrefixes.initial.value} foo: initial`
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.major.value} foo: major`,
+        `${prefixes.required.publish.value} foo: v1.2.3`,
+        `${prefixes.required.initial.value} foo: initial`
       ])
     }
   })
@@ -217,9 +222,9 @@ test('git:getWorkspacesBumps single package', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'major',
       messages: [{
         type: 'minor',
@@ -242,14 +247,14 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.0.1`,
-        `${options.requiredPrefixes.major.value} foo: breaking`,
-        `${options.requiredPrefixes.patch.value} bar: patch`,
-        `${options.requiredPrefixes.publish.value} bar: v2.0.1`,
-        `${options.requiredPrefixes.major.value} bar: breaking`,
-        `${options.requiredPrefixes.initial.value} foo: initial`,
-        `${options.requiredPrefixes.initial.value} bar: initial`
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.publish.value} foo: v1.0.1`,
+        `${prefixes.required.major.value} foo: breaking`,
+        `${prefixes.required.patch.value} bar: patch`,
+        `${prefixes.required.publish.value} bar: v2.0.1`,
+        `${prefixes.required.major.value} bar: breaking`,
+        `${prefixes.required.initial.value} foo: initial`,
+        `${prefixes.required.initial.value} bar: initial`
       ])
     }
   })
@@ -257,16 +262,16 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'patch',
       messages: [{
         type: 'patch',
         value: 'patch'
       }]
     }, {
-      name: '@ns/bar',
+      name: 'bar',
       type: 'patch',
       messages: [{
         type: 'patch',
@@ -283,9 +288,9 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} *: minor`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.patch.value} bar: patch`
+        `${prefixes.required.minor.value} *: minor`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.patch.value} bar: patch`
       ])
     }
   })
@@ -293,9 +298,9 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'minor',
       messages: [
         {
@@ -308,7 +313,7 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
         }
       ]
     }, {
-      name: '@ns/bar',
+      name: 'bar',
       type: 'minor',
       messages: [
         {
@@ -321,7 +326,7 @@ test('git:getWorkspacesBumps star symbol', async (t) => {
         }
       ]
     }, {
-      name: '@ns/baz',
+      name: 'baz',
       type: 'minor',
       messages: [
         {
@@ -340,9 +345,8 @@ test('git:getWorkspacesBumps string + star symbol', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} ns/*: minor`,
-        `${options.requiredPrefixes.patch.value} ns/foo: patch`,
-        `${options.requiredPrefixes.patch.value} ns/bar: patch`
+        `${prefixes.required.minor.value} ba*: minor`,
+        `${prefixes.required.patch.value} foo: patch`
       ])
     }
   })
@@ -350,46 +354,32 @@ test('git:getWorkspacesBumps string + star symbol', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(
-      packages,
-      {
-        ...options,
-        autoNamePrefix: '@'
-      }
-    ),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'bar',
       type: 'minor',
       messages: [
         {
           type: 'minor',
           value: 'minor'
-        },
-        {
-          type: 'patch',
-          value: 'patch'
         }
       ]
     }, {
-      name: '@ns/bar',
+      name: 'baz',
       type: 'minor',
       messages: [
         {
           type: 'minor',
           value: 'minor'
-        },
-        {
-          type: 'patch',
-          value: 'patch'
         }
       ]
     }, {
-      name: '@ns/baz',
-      type: 'minor',
+      name: 'foo',
+      type: 'patch',
       messages: [
         {
-          type: 'minor',
-          value: 'minor'
+          type: 'patch',
+          value: 'patch'
         }
       ]
     }] as TWorkspacesGitBump[],
@@ -403,14 +393,14 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.minor.value} foo`,
-        `${options.requiredPrefixes.major.value}`,
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.minor.value} foo`,
+        `${prefixes.required.major.value}`,
         'beep',
-        `${options.requiredPrefixes.dependencies.value} foo: upgrade dependencies`,
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.patch.value} NonExistingPackage: patch`,
-        `${options.requiredPrefixes.publish.value} foo: v1.0.1`
+        `${prefixes.required.dependencies.value} foo: upgrade dependencies`,
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.patch.value} NonExistingPackage: patch`,
+        `${prefixes.required.publish.value} foo: v1.0.1`
       ])
     }
   })
@@ -418,9 +408,9 @@ test('git:getWorkspacesBumps skipped commits', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'minor',
       messages: [{
         type: 'minor',
@@ -440,15 +430,15 @@ test('git:getWorkspacesBumps multiple packages initial', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} foo: patch`,
-        `${options.requiredPrefixes.major.value} foo: breaking`,
-        `${options.requiredPrefixes.patch.value} bar: patch`,
-        `${options.requiredPrefixes.initial.value} baz: initial`,
-        `${options.requiredPrefixes.publish.value} bar: v2.0.1`,
-        `${options.requiredPrefixes.major.value} bar: breaking`,
-        `${options.requiredPrefixes.initial.value} foo: initial`,
-        `${options.requiredPrefixes.minor.value} foo: minor`,
-        `${options.requiredPrefixes.initial.value} bar: initial`
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.major.value} foo: breaking`,
+        `${prefixes.required.patch.value} bar: patch`,
+        `${prefixes.required.initial.value} baz: initial`,
+        `${prefixes.required.publish.value} bar: v2.0.1`,
+        `${prefixes.required.major.value} bar: breaking`,
+        `${prefixes.required.initial.value} foo: initial`,
+        `${prefixes.required.minor.value} foo: minor`,
+        `${prefixes.required.initial.value} bar: initial`
       ])
     }
   })
@@ -456,9 +446,9 @@ test('git:getWorkspacesBumps multiple packages initial', async (t) => {
   const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
 
   t.deepEquals(
-    await getWorkspacesBumps(packages, options),
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
     [{
-      name: '@ns/foo',
+      name: 'foo',
       type: 'minor',
       messages: [{
         type: 'patch',
@@ -471,14 +461,14 @@ test('git:getWorkspacesBumps multiple packages initial', async (t) => {
         value: 'initial'
       }]
     }, {
-      name: '@ns/bar',
+      name: 'bar',
       type: 'patch',
       messages: [{
         type: 'patch',
         value: 'patch'
       }]
     }, {
-      name: '@ns/baz',
+      name: 'baz',
       type: 'minor',
       messages: [{
         type: 'initial',

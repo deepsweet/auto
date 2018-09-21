@@ -1,34 +1,29 @@
 import request from 'request-promise-native'
-import { TOptions, TWorkspacesLog } from '@auto/utils/src'
+import { TPrefixes } from '@auto/utils/src'
 import { SLACK_HOOKS_URL } from './utils'
+import { TSlackOptions, TWorkspacesLog } from './types'
 
-export const sendWorkspacesSlackMessage = async (logs: TWorkspacesLog[], token: string, options: TOptions) => {
-  if (typeof token !== 'string') {
+export const sendWorkspacesSlackMessage = async (logs: TWorkspacesLog[], prefixes: TPrefixes, options: TSlackOptions) => {
+  if (typeof options.token !== 'string') {
     throw new Error('Slack token is required')
   }
 
-  if (typeof options.slack === 'undefined') {
-    throw new Error('Slack options is required')
-  }
-
-  const slackOptions = options.slack
-
   await request({
-    uri: `${SLACK_HOOKS_URL}${token}`,
+    uri: `${SLACK_HOOKS_URL}${options.token}`,
     method: 'POST',
     json: {
-      channel: slackOptions.channel,
-      username: slackOptions.username,
+      channel: options.channel,
+      username: options.username,
       link_names: '1',
-      icon_emoji: slackOptions.iconEmoji,
+      icon_emoji: options.iconEmoji,
       unfurl_media: false,
       attachments: logs.map((bump) => ({
-        color: slackOptions.colors[bump.type],
+        color: options.colors[bump.type],
         fields: [
           {
             title: `${bump.name} v${bump.version}`,
             value: bump.messages
-              .map((message) => `${options.requiredPrefixes[bump.type].value} ${message.value}`)
+              .map((message) => `${prefixes.required[bump.type].value} ${message.value}`)
               .join('\n')
           }
         ]

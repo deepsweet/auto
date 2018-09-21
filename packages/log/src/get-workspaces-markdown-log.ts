@@ -1,6 +1,7 @@
-import { TOptions, TWorkspacesLog } from '@auto/utils/src'
+import { TPrefixes } from '@auto/utils/src'
+import { TWorkspacesLog } from './types'
 
-export const getWorkspacesMarkdownLog = (logs: TWorkspacesLog[], options: TOptions): string => {
+export const getWorkspacesMarkdownLog = (logs: TWorkspacesLog[], prefixes: TPrefixes): string => {
   let result = ''
 
   logs.forEach((log, index) => {
@@ -11,7 +12,7 @@ export const getWorkspacesMarkdownLog = (logs: TWorkspacesLog[], options: TOptio
     result += `## ${log.name} v${log.version}\n\n`
 
     log.messages.forEach((message) => {
-      result += `* ${options.requiredPrefixes[message.type].value} ${message.value}\n`
+      result += `* ${prefixes.required[message.type].value} ${message.value}\n`
     })
   })
 

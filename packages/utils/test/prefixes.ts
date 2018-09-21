@@ -1,7 +1,7 @@
-import { TOptions } from '../src/types'
+import { TPrefixes } from '../src'
 
-export const options: TOptions = {
-  requiredPrefixes: {
+export const prefixes: TPrefixes = {
+  required: {
     major: {
       title: 'Breaking change',
       value: '💥'
@@ -27,7 +27,7 @@ export const options: TOptions = {
       value: '🐣️'
     }
   },
-  customPrefixes: [
+  custom: [
     {
       title: 'Dependencies',
       value: '♻️'
@@ -64,22 +64,5 @@ export const options: TOptions = {
       title: 'Other',
       value: '🛠'
     }
-  ],
-  autoNamePrefix: '@ns/',
-  zeroBreakingChangeType: 'minor',
-  initialType: 'minor',
-  github: {
-    username: 'username',
-    repo: 'repo'
-  },
-  slack: {
-    username: 'username',
-    channel: 'channel',
-    iconEmoji: 'emoji',
-    colors: {
-      major: 'major',
-      minor: 'minor',
-      patch: 'patch'
-    }
-  }
+  ]
 }

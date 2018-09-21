@@ -1,28 +1,25 @@
-import { TOptions, TRepoLog } from '@auto/utils/src'
+import { TPrefixes } from '@auto/utils/src'
 import request from 'request-promise-native'
 import { GITHUB_API_REPOS_URL } from './utils'
+import { TGithubOptions, TRepoLog } from './types'
 
-export const makeRepoGithubRelease = async (log: TRepoLog, token: string, options: TOptions) => {
-  if (typeof token !== 'string') {
+export const makeRepoGithubRelease = async (log: TRepoLog, prefixes: TPrefixes, options: TGithubOptions) => {
+  if (typeof options.token !== 'string') {
     throw new Error('GitHub token is required')
   }
 
-  if (typeof options.github === 'undefined') {
-    throw new Error('GitHub options is required')
-  }
-
   await request({
-    uri: `${GITHUB_API_REPOS_URL}${options.github.username}/${options.github.repo}/releases`,
+    uri: `${GITHUB_API_REPOS_URL}${options.username}/${options.repo}/releases`,
     method: 'POST',
     headers: {
-      Authorization: `token ${token}`,
+      Authorization: `token ${options.token}`,
       'User-Agent': 'auto-tools'
     },
     json: {
       tag_name: `v${log.version}`,
       name: `v${log.version}`,
       body: log.messages
-        .map((message) => `* ${options.requiredPrefixes[message.type].value} ${message.value}`)
+        .map((message) => `* ${prefixes.required[message.type].value} ${message.value}`)
         .join('\n')
     }
   })

@@ -1,13 +1,13 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/options'
 import { parseWorkspacesCommitMessage } from '../src/parse-workspaces-commit-message'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('git:parseWorkspacesCommitMessage', (t) => {
   t.equals(
     parseWorkspacesCommitMessage(
       '🚨 foo: breaking change',
-      ['@ns/foo'],
-      options
+      ['foo'],
+      prefixes
     ),
     null,
     'return `null` if nothing has been matched'
@@ -15,9 +15,9 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.equals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.dependencies.value} foo: dependencies change\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.dependencies.value} foo: dependencies change\nnew line`,
+      ['foo'],
+      prefixes
     ),
     null,
     'return `null` if nothing has been matched'
@@ -25,12 +25,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.publish.value} foo: publish\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.publish.value} foo: publish\nnew line`,
+      ['foo'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'publish',
       message: 'publish\nnew line'
     },
@@ -39,12 +39,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.major.value} foo: breaking change\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.major.value} foo: breaking change\nnew line`,
+      ['foo'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'major',
       message: 'breaking change\nnew line'
     },
@@ -53,12 +53,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.minor.value} foo: minor change\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.minor.value} foo: minor change\nnew line`,
+      ['foo'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'minor',
       message: 'minor change\nnew line'
     },
@@ -67,12 +67,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.patch.value} foo: patch change\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.patch.value} foo: patch change\nnew line`,
+      ['foo'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'patch',
       message: 'patch change\nnew line'
     },
@@ -81,12 +81,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo: initial change\nnew line`,
-      ['@ns/foo'],
-      options
+      `${prefixes.required.initial.value} foo: initial change\nnew line`,
+      ['foo'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'initial',
       message: 'initial change\nnew line'
     },
@@ -95,12 +95,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} *: message`,
-      ['@ns/foo', '@ns/bar'],
-      options
+      `${prefixes.required.initial.value} *: message`,
+      ['foo', 'bar'],
+      prefixes
     ),
     {
-      names: ['@ns/foo', '@ns/bar'],
+      names: ['foo', 'bar'],
       type: 'initial',
       message: 'message'
     },
@@ -109,12 +109,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo*: message`,
-      ['@ns/foo', '@ns/foo1', '@ns/foo2', '@ns/bar'],
-      options
+      `${prefixes.required.initial.value} foo*: message`,
+      ['foo', 'foo1', 'foo2', 'bar'],
+      prefixes
     ),
     {
-      names: ['@ns/foo', '@ns/foo1', '@ns/foo2'],
+      names: ['foo', 'foo1', 'foo2'],
       type: 'initial',
       message: 'message'
     },
@@ -123,12 +123,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo,bar: message`,
-      ['@ns/foo', '@ns/bar', '@ns/baz'],
-      options
+      `${prefixes.required.initial.value} foo,bar: message`,
+      ['foo', 'bar', 'baz'],
+      prefixes
     ),
     {
-      names: ['@ns/foo', '@ns/bar'],
+      names: ['foo', 'bar'],
       type: 'initial',
       message: 'message'
     },
@@ -137,12 +137,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo*,bar: message`,
-      ['@ns/foo1', '@ns/foo2', '@ns/bar', '@ns/baz'],
-      options
+      `${prefixes.required.initial.value} foo*,bar: message`,
+      ['foo1', 'foo2', 'bar', 'baz'],
+      prefixes
     ),
     {
-      names: ['@ns/foo1', '@ns/foo2', '@ns/bar'],
+      names: ['foo1', 'foo2', 'bar'],
       type: 'initial',
       message: 'message'
     },
@@ -151,12 +151,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo*,ba*: message`,
-      ['@ns/foo1', '@ns/foo2', '@ns/bar', '@ns/baz'],
-      options
+      `${prefixes.required.initial.value} foo*,ba*: message`,
+      ['foo1', 'foo2', 'bar', 'baz'],
+      prefixes
     ),
     {
-      names: ['@ns/foo1', '@ns/foo2', '@ns/bar', '@ns/baz'],
+      names: ['foo1', 'foo2', 'bar', 'baz'],
       type: 'initial',
       message: 'message'
     },
@@ -165,12 +165,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo, , bar: message`,
-      ['@ns/foo', '@ns/bar', '@ns/baz'],
-      options
+      `${prefixes.required.initial.value} foo, , bar: message`,
+      ['foo', 'bar', 'baz'],
+      prefixes
     ),
     {
-      names: ['@ns/foo', '@ns/bar'],
+      names: ['foo', 'bar'],
       type: 'initial',
       message: 'message'
     },
@@ -179,12 +179,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo, *: message`,
-      ['@ns/foo', '@ns/foo1', '@ns/bar', '@ns/baz'],
-      options
+      `${prefixes.required.initial.value} foo, *: message`,
+      ['foo', 'foo1', 'bar', 'baz'],
+      prefixes
     ),
     {
-      names: ['@ns/foo', '@ns/foo1', '@ns/bar', '@ns/baz'],
+      names: ['foo', 'foo1', 'bar', 'baz'],
       type: 'initial',
       message: 'message'
     },
@@ -193,12 +193,12 @@ test('git:parseWorkspacesCommitMessage', (t) => {
 
   t.deepEquals(
     parseWorkspacesCommitMessage(
-      `${options.requiredPrefixes.initial.value} foo, baz: message`,
-      ['@ns/foo', '@ns/bar'],
-      options
+      `${prefixes.required.initial.value} foo, baz: message`,
+      ['foo', 'bar'],
+      prefixes
     ),
     {
-      names: ['@ns/foo'],
+      names: ['foo'],
       type: 'initial',
       message: 'message'
     },

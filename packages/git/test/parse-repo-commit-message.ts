@@ -1,12 +1,12 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/options'
 import { parseRepoCommitMessage } from '../src/parse-repo-commit-message'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('git:parseWorkspacesCommitMessage', async (t) => {
   t.equals(
     parseRepoCommitMessage(
       '🚨 breaking change',
-      options
+      prefixes
     ),
     null,
     'return `null` if nothing has been matched'
@@ -14,8 +14,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.equals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.dependencies.value} dependencies change\nnew line`,
-      options
+      `${prefixes.required.dependencies.value} dependencies change\nnew line`,
+      prefixes
     ),
     null,
     'return `null` if nothing has been matched'
@@ -23,8 +23,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.publish.value} publish\nnew line`,
-      options
+      `${prefixes.required.publish.value} publish\nnew line`,
+      prefixes
     ),
     {
       type: 'publish',
@@ -35,8 +35,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.major.value} breaking change\nnew line`,
-      options
+      `${prefixes.required.major.value} breaking change\nnew line`,
+      prefixes
     ),
     {
       type: 'major',
@@ -47,8 +47,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.minor.value} minor change\nnew line`,
-      options
+      `${prefixes.required.minor.value} minor change\nnew line`,
+      prefixes
     ),
     {
       type: 'minor',
@@ -59,8 +59,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.patch.value} patch change\nnew line`,
-      options
+      `${prefixes.required.patch.value} patch change\nnew line`,
+      prefixes
     ),
     {
       type: 'patch',
@@ -71,8 +71,8 @@ test('git:parseWorkspacesCommitMessage', async (t) => {
 
   t.deepEquals(
     parseRepoCommitMessage(
-      `${options.requiredPrefixes.initial.value} initial change\nnew line`,
-      options
+      `${prefixes.required.initial.value} initial change\nnew line`,
+      prefixes
     ),
     {
       type: 'initial',

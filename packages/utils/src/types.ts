@@ -2,41 +2,21 @@ import { TJsonMap } from 'typeon'
 
 export type TBumpType = 'major' | 'minor' | 'patch'
 
-export type TOptionsPrefix = {
+export type TPrefix = {
   title: string,
   value: string
 }
 
-export type TOptions = {
-  requiredPrefixes: {
-    major: TOptionsPrefix,
-    minor: TOptionsPrefix,
-    patch: TOptionsPrefix,
-    publish: TOptionsPrefix,
-    dependencies: TOptionsPrefix,
-    initial: TOptionsPrefix
+export type TPrefixes = {
+  required: {
+    major: TPrefix,
+    minor: TPrefix,
+    patch: TPrefix,
+    publish: TPrefix,
+    dependencies: TPrefix,
+    initial: TPrefix
   },
-  customPrefixes: TOptionsPrefix[],
-  autoNamePrefix: string,
-  zeroBreakingChangeType: TBumpType,
-  initialType: TBumpType,
-  github?: {
-    username: string,
-    repo: string
-  },
-  slack?: {
-    channel: string,
-    username: string,
-    iconEmoji: string,
-    colors: {
-      major: string,
-      minor: string,
-      patch: string
-    }
-  },
-  npm?: {
-    registry: string
-  }
+  custom: TPrefix[],
 }
 
 export type TPackageJson = {
@@ -62,17 +42,6 @@ export type TPackages = {
     json: TPackageJson
   }
 }
-
-export type TParsedMessageType = TBumpType | 'publish' | 'initial'
-
-export type TRepoParsedMessage = {
-  type: TParsedMessageType,
-  message: string
-}
-
-export type TWorkspacesParsedMessage = {
-  names: string[]
-} & TRepoParsedMessage
 
 export type TGitMessageType = TBumpType | 'initial'
 
@@ -106,24 +75,4 @@ export type TWorkspacesPackageBump = {
   devDeps: {
     [name: string]: string
   } | null
-}
-
-export type TWorkspacesLogMessage = {
-  type: TBumpType | 'dependencies' | 'initial',
-  value: string
-}
-
-export type TWorkspacesLog = {
-  name: string,
-  version: string,
-  type: TBumpType,
-  messages: TWorkspacesLogMessage[]
-}
-
-export type TRepoLogMessage = TGitMessage
-
-export type TRepoLog = {
-  version: string,
-  type: TBumpType,
-  messages: TRepoLogMessage[]
 }

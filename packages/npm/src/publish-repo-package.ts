@@ -1,16 +1,16 @@
 import execa from 'execa'
 import { getRepoPackage } from '@auto/fs/src'
-import { TOptions } from '@auto/utils/src'
+import { TNpmOptions } from './types'
 
-export const publishRepoPackage = async (userOptions: TOptions) => {
+export const publishRepoPackage = async (npmOptions?: TNpmOptions) => {
   const packageJson = await getRepoPackage()
   const options = {
     registry: 'https://registry.npmjs.org/',
     ...(packageJson.publishConfig && packageJson.publishConfig.registry && {
       registry: packageJson.publishConfig.registry
     }),
-    ...(userOptions.npm && userOptions.npm.registry && {
-      registry: userOptions.npm.registry
+    ...(npmOptions && npmOptions.registry && {
+      registry: npmOptions.registry
     })
   }
 

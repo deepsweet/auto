@@ -1,8 +1,20 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { options } from '@auto/utils/test/options'
-import { TOptions } from '@auto/utils/src'
+import { prefixes } from '@auto/utils/test/prefixes'
+import { TSlackOptions } from '../src/types'
+
+const slackOptions: TSlackOptions = {
+  token: 'token',
+  username: 'username',
+  channel: 'channel',
+  iconEmoji: 'emoji',
+  colors: {
+    major: 'major',
+    minor: 'minor',
+    patch: 'patch'
+  }
+}
 
 test('sendRepoSlackMessage', async (t) => {
   const spy = createSpy(() => Promise.resolve())
@@ -30,8 +42,8 @@ test('sendRepoSlackMessage', async (t) => {
         }
       ]
     },
-    'token',
-    options
+    prefixes,
+    slackOptions
   )
 
   t.deepEquals(
@@ -87,53 +99,14 @@ test('sendRepoSlackMessage: throws if there is no token', async (t) => {
           }
         ]
       },
+      prefixes,
       // @ts-ignore
-      undefined,
-      options
+      {...slackOptions, token: undefined}
     )
 
     t.fail('should not get here')
   } catch (e) {
     t.equals(e.message, 'Slack token is required')
-  }
-
-  unmock('../src/send-repo-slack-message')
-})
-
-test('sendRepoSlackMessage: throws if there is no slack options', async (t) => {
-  const spy = createSpy(() => Promise.resolve())
-
-  mock('../src/send-repo-slack-message', {
-    'request-promise-native': {
-      default: spy
-    }
-  })
-
-  const { sendRepoSlackMessage } = await import('../src/send-repo-slack-message')
-
-  try {
-    await sendRepoSlackMessage(
-      {
-        version: '0.1.2',
-        type: 'minor',
-        messages: [
-          {
-            type: 'minor',
-            value: 'minor'
-          },
-          {
-            type: 'patch',
-            value: 'patch'
-          }
-        ]
-      },
-      'token',
-      {} as TOptions
-    )
-
-    t.fail('should not get here')
-  } catch (e) {
-    t.equals(e.message, 'Slack options is required')
   }
 
   unmock('../src/send-repo-slack-message')

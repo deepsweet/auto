@@ -1,16 +1,21 @@
 import test from 'blue-tape'
-import { options } from '../../utils/test/options'
 import { mock, unmock } from 'mocku'
-import { TRepoGitBump } from '@auto/utils/src/'
+import { TRepoGitBump } from '@auto/utils/src/types'
+import { TGitOptions } from '../src/types'
+import { prefixes } from '@auto/utils/test/prefixes'
+
+const gitOptions: TGitOptions = {
+  initialType: 'minor'
+}
 
 test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} patch 2`,
-        `${options.requiredPrefixes.patch.value} patch 1`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.patch.value} patch 2`,
+        `${prefixes.required.patch.value} patch 1`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -18,7 +23,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'patch',
       messages: [{
@@ -39,10 +44,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -50,7 +55,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'minor',
       messages: [{
@@ -71,10 +76,10 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -82,7 +87,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'minor',
       messages: [{
@@ -104,11 +109,11 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.major.value} major`,
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.major.value} major`,
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -116,7 +121,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'major',
       messages: [{
@@ -140,11 +145,11 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.major.value} major`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.major.value} major`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -152,7 +157,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'major',
       messages: [{
@@ -177,11 +182,11 @@ test('git:getRepoBump single package', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.major.value} major`,
-        `${options.requiredPrefixes.publish.value} v1.2.3`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.major.value} major`,
+        `${prefixes.required.publish.value} v1.2.3`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -189,7 +194,7 @@ test('git:getRepoBump single package', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'major',
       messages: [{
@@ -213,13 +218,13 @@ test('git:getRepoBump skipped commits', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
+        `${prefixes.required.minor.value} minor`,
         '💥',
         'beep',
-        `${options.requiredPrefixes.dependencies.value} upgrade dependencies`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.publish.value} v1.0.1`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.dependencies.value} upgrade dependencies`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.publish.value} v1.0.1`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -227,7 +232,7 @@ test('git:getRepoBump skipped commits', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
       type: 'minor',
       messages: [{
@@ -248,7 +253,7 @@ test('git:getRepoBump single package initial only', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -256,9 +261,9 @@ test('git:getRepoBump single package initial only', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
-      type: options.initialType,
+      type: gitOptions.initialType,
       messages: [{
         type: 'initial',
         value: 'initial'
@@ -274,10 +279,10 @@ test('git:getRepoBump single package initial', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.major.value} major`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.major.value} major`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -285,9 +290,9 @@ test('git:getRepoBump single package initial', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
-      type: options.initialType,
+      type: gitOptions.initialType,
       messages: [{
         type: 'minor',
         value: 'minor'
@@ -312,11 +317,11 @@ test('git:getRepoBump single package multiple initial', async (t) => {
   mock('../src/get-repo-bump', {
     './get-commit-messages': {
       getCommitMessages: () => Promise.resolve([
-        `${options.requiredPrefixes.minor.value} minor`,
-        `${options.requiredPrefixes.patch.value} patch`,
-        `${options.requiredPrefixes.initial.value} initial`,
-        `${options.requiredPrefixes.major.value} major`,
-        `${options.requiredPrefixes.initial.value} initial`
+        `${prefixes.required.minor.value} minor`,
+        `${prefixes.required.patch.value} patch`,
+        `${prefixes.required.initial.value} initial`,
+        `${prefixes.required.major.value} major`,
+        `${prefixes.required.initial.value} initial`
       ])
     }
   })
@@ -324,9 +329,9 @@ test('git:getRepoBump single package multiple initial', async (t) => {
   const { getRepoBump } = await import('../src/get-repo-bump')
 
   t.deepEquals(
-    await getRepoBump(options),
+    await getRepoBump(prefixes, gitOptions),
     {
-      type: options.initialType,
+      type: gitOptions.initialType,
       messages: [{
         type: 'minor',
         value: 'minor'

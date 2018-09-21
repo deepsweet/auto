@@ -1,8 +1,8 @@
 import path from 'path'
 import execa from 'execa'
-import { TOptions, TRepoPackageBump } from '@auto/utils/src/'
+import { TPrefixes, TRepoPackageBump } from '@auto/utils/src/'
 
-export const writeRepoPublishCommit = async (packageBump: TRepoPackageBump, options: TOptions) => {
+export const writeRepoPublishCommit = async (packageBump: TRepoPackageBump, prefixes: TPrefixes) => {
   const packageJsonPath = path.join(process.cwd(), 'package.json')
 
   await execa(
@@ -10,7 +10,7 @@ export const writeRepoPublishCommit = async (packageBump: TRepoPackageBump, opti
     [
       'commit',
       '-m',
-      `${options.requiredPrefixes.publish.value} v${packageBump.version}`,
+      `${prefixes.required.publish.value} v${packageBump.version}`,
       packageJsonPath
     ],
     {

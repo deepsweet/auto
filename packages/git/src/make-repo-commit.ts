@@ -2,19 +2,19 @@
 // @ts-ignore
 import prompts from 'prompts'
 import execa from 'execa'
-import { TOptions } from '@auto/utils/src/'
+import { TPrefixes } from '@auto/utils/src'
 
-export const makeRepoCommit = async (options: TOptions) => {
+export const makeRepoCommit = async (prefixes: TPrefixes) => {
   const { prefix } = await prompts({
     type: 'select',
     name: 'prefix',
     message: 'Select change type',
     choices: [
-      options.requiredPrefixes.major,
-      options.requiredPrefixes.minor,
-      options.requiredPrefixes.patch,
-      options.requiredPrefixes.initial,
-      ...options.customPrefixes
+      prefixes.required.major,
+      prefixes.required.minor,
+      prefixes.required.patch,
+      prefixes.required.initial,
+      ...prefixes.custom
     ],
     initial: 1
   }) as { prefix?: string }

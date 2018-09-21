@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { options } from '../../utils/test/options'
+import { prefixes } from '../../utils/test/prefixes'
 
 test('git:makeRepoCommit', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -20,7 +20,7 @@ test('git:makeRepoCommit', async (t) => {
 
   const { makeRepoCommit } = await import('../src/make-repo-commit')
 
-  await makeRepoCommit(options)
+  await makeRepoCommit(prefixes)
 
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
@@ -47,7 +47,7 @@ test('git:makeRepoCommit: should throw on prefix undefined', async (t) => {
   const { makeRepoCommit } = await import('../src/make-repo-commit')
 
   try {
-    await makeRepoCommit(options)
+    await makeRepoCommit(prefixes)
 
     t.fail('should not get here')
   } catch (e) {
@@ -75,7 +75,7 @@ test('git:makeRepoCommit: should throw on message undefined', async (t) => {
   const { makeRepoCommit } = await import('../src/make-repo-commit')
 
   try {
-    await makeRepoCommit(options)
+    await makeRepoCommit(prefixes)
 
     t.fail('should not get here')
   } catch (e) {

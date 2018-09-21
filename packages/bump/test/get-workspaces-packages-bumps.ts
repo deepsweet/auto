@@ -1,9 +1,8 @@
 import test from 'blue-tape'
 import { getWorkspacesPackagesBumps } from '../src/get-workspaces-packages-bumps'
-import { options as defaultOptions } from '../../utils/test/options'
-import { TOptions } from '@auto/utils/src'
+import { TBumpOptions } from '../src/types'
 
-const options: TOptions = { ...defaultOptions, zeroBreakingChangeType: 'major' }
+const options: TBumpOptions = { zeroBreakingChangeType: 'major' }
 
 test('bump:getPackageBumps: single package', (t) => {
   t.deepEquals(

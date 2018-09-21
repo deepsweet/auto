@@ -1,32 +1,29 @@
 import request from 'request-promise-native'
-import { TOptions, TRepoLog } from '@auto/utils/src'
+import { TPrefixes } from '@auto/utils/src'
 import { SLACK_HOOKS_URL } from './utils'
+import { TRepoLog, TSlackOptions } from './types'
 
-export const sendRepoSlackMessage = async (log: TRepoLog, token: string, options: TOptions) => {
-  if (typeof token !== 'string') {
+export const sendRepoSlackMessage = async (log: TRepoLog, prefixes: TPrefixes, options: TSlackOptions) => {
+  if (typeof options.token !== 'string') {
     throw new Error('Slack token is required')
   }
 
-  if (typeof options.slack === 'undefined') {
-    throw new Error('Slack options is required')
-  }
-
   await request({
-    uri: `${SLACK_HOOKS_URL}${token}`,
+    uri: `${SLACK_HOOKS_URL}${options.token}`,
     method: 'POST',
     json: {
-      channel: options.slack.channel,
-      username: options.slack.username,
+      channel: options.channel,
+      username: options.username,
       link_names: '1',
-      icon_emoji: options.slack.iconEmoji,
+      icon_emoji: options.iconEmoji,
       unfurl_media: false,
       attachments: [{
-        color: options.slack.colors[log.type],
+        color: options.colors[log.type],
         fields: [
           {
             title: `v${log.version}`,
             value: log.messages
-              .map((message) => `${options.requiredPrefixes[log.type].value} ${message.value}`)
+              .map((message) => `${prefixes.required[log.type].value} ${message.value}`)
               .join('\n')
           }
         ]

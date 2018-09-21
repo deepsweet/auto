@@ -1,3 +1,3 @@
-export type TPublishOptions = {
+export type TNpmOptions = {
   registry?: string
 }

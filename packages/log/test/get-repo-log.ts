@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { getRepoLog } from '../src/get-repo-log'
-import { TRepoLog } from '@auto/utils/src/'
+import { TRepoLog } from '../src/types'
 
 test('getRepoLog', (t) => {
   t.deepEquals(

@@ -4,12 +4,13 @@ import {
   TWorkspacesGitBump,
   TWorkspacesPackageBump,
   TBumpType,
-  TPackages, TOptions
+  TPackages
 } from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
+import { TBumpOptions } from './types'
 
-export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspacesGitBump[], options: TOptions): TWorkspacesPackageBump[] => {
+export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspacesGitBump[], options: TBumpOptions): TWorkspacesPackageBump[] => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)

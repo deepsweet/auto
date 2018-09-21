@@ -1,6 +1,10 @@
 import test from 'blue-tape'
 import { getRepoPackageBump } from '../src/get-repo-package-bump'
-import { options } from '../../utils/test/options'
+import { TBumpOptions } from '../src'
+
+const options: TBumpOptions = {
+  zeroBreakingChangeType: 'minor'
+}
 
 test('bump:getRepoPackageBump', (t) => {
   t.deepEquals(

@@ -1,6 +1,6 @@
 import test from 'blue-tape'
 import { getRepoMarkdownLog } from '../src/get-repo-markdown-log'
-import { options } from '@auto/utils/test/options'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('getRepoMarkdownLog', (t) => {
   t.deepEquals(
@@ -19,7 +19,7 @@ test('getRepoMarkdownLog', (t) => {
           }
         ]
       },
-      options
+      prefixes
     ),
     '## v1.2.3\n\n* 🌱 minor\n* 🐞 patch\n',
     'should get markdown'

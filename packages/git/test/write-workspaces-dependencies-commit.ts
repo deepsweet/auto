@@ -2,7 +2,7 @@ import test from 'blue-tape'
 import path from 'path'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { options } from '../../utils/test/options'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('git:writeWorkspacesDependenciesCommit: no dependencies', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -15,14 +15,14 @@ test('git:writeWorkspacesDependenciesCommit: no dependencies', async (t) => {
 
   await writeWorkspacesDependenciesCommit(
     {
-      name: '@ns/a',
+      name: 'a',
       dir: 'fakes/a',
       type: 'patch',
       version: '0.1.1',
       deps: null,
       devDeps: null
     },
-    options
+    prefixes
   )
 
   t.deepEquals(
@@ -45,16 +45,16 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
 
   await writeWorkspacesDependenciesCommit(
     {
-      name: '@ns/a',
+      name: 'a',
       dir: 'fakes/a',
       type: 'patch',
       version: null,
       deps: {
-        '@ns/b': '~0.2.0'
+        'b': '~0.2.0'
       },
       devDeps: null
     },
-    options
+    prefixes
   )
 
   t.deepEquals(
@@ -65,7 +65,7 @@ test('git:writeWorkspacesDependenciesCommit: single dependency', async (t) => {
         [
           'commit',
           '-m',
-          `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
+          `${prefixes.required.dependencies.value} a: upgrade dependencies`,
           'fakes/a/package.json',
           path.resolve('yarn.lock')
         ]
@@ -88,16 +88,16 @@ test('git:writeWorkspacesDependenciesCommit: single dev dependency', async (t) =
 
   await writeWorkspacesDependenciesCommit(
     {
-      name: '@ns/a',
+      name: 'a',
       dir: 'fakes/a',
       type: null,
       version: null,
       deps: null,
       devDeps: {
-        '@ns/b': '~0.2.0'
+        'b': '~0.2.0'
       }
     },
-    options
+    prefixes
   )
 
   t.deepEquals(
@@ -108,7 +108,7 @@ test('git:writeWorkspacesDependenciesCommit: single dev dependency', async (t) =
         [
           'commit',
           '-m',
-          `${options.requiredPrefixes.dependencies.value} a: upgrade dependencies`,
+          `${prefixes.required.dependencies.value} a: upgrade dependencies`,
           'fakes/a/package.json',
           path.resolve('yarn.lock')
         ]

@@ -1,7 +1,11 @@
 import test from 'blue-tape'
 import { bumpRange } from '../src/bump-range'
-import { TBumpType, TOptions } from '@auto/utils/src/'
-import { options } from '../../utils/test/options'
+import { TBumpType } from '@auto/utils/src/'
+import { TBumpOptions } from '../src'
+
+const options: TBumpOptions = {
+  zeroBreakingChangeType: 'minor'
+}
 
 test('bump:bumpRange', (t) => {
   t.strictEquals(bumpRange('1.2.3', '1.2.3', 'patch', options), '1.2.4', '\'1.2.3\' bumped to \'1.2.4\' as patch')

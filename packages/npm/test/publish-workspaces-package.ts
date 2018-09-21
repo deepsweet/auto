@@ -1,15 +1,8 @@
-/* eslint-disable prefer-promise-reject-errors */
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { createFsFromVolume, Volume } from 'memfs'
-import { options } from '@auto/utils/test/options'
 
 const rootDir = process.cwd()
-const vol = Volume.fromJSON({
-  [`${rootDir}/fake/package.json`]: ''
-})
-const fs = createFsFromVolume(vol)
 
 test('npm:publishWorkspacesPackage', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -28,8 +21,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
       type: 'minor',
       deps: null,
       devDeps: null
-    },
-    options
+    }
   )
 
   t.deepEquals(
@@ -62,10 +54,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
       devDeps: null
     },
     {
-      ...options,
-      npm: {
-        registry: 'https://custom-registry'
-      }
+      registry: 'https://custom-registry'
     }
   )
 
@@ -104,8 +93,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
       type: 'minor',
       deps: null,
       devDeps: null
-    },
-    options
+    }
   )
 
   t.deepEquals(
@@ -145,10 +133,7 @@ test('npm:publishWorkspacesPackage', async (t) => {
       devDeps: null
     },
     {
-      ...options,
-      npm: {
-        registry: 'https://options-registry'
-      }
+      registry: 'https://options-registry'
     }
   )
 

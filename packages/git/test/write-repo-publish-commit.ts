@@ -2,7 +2,7 @@ import path from 'path'
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { options } from '../../utils/test/options'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('git:writeRepoPublishCommit: single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -19,7 +19,7 @@ test('git:writeRepoPublishCommit: single package', async (t) => {
       type: 'patch',
       version: '0.1.1'
     },
-    options
+    prefixes
   )
 
   t.deepEquals(

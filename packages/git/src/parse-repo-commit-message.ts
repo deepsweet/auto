@@ -1,15 +1,16 @@
-import { TOptions, TParsedMessageType, TRepoParsedMessage } from '@auto/utils/src/'
+import { TPrefixes } from '@auto/utils/src/'
+import { TParsedMessageType, TRepoParsedMessage } from './types'
 
-export const parseRepoCommitMessage = (message: string, options: TOptions): TRepoParsedMessage | null => {
-  const prefixes: [TParsedMessageType, string][] = [
-    ['major', options.requiredPrefixes.major.value],
-    ['minor', options.requiredPrefixes.minor.value],
-    ['patch', options.requiredPrefixes.patch.value],
-    ['publish', options.requiredPrefixes.publish.value],
-    ['initial', options.requiredPrefixes.initial.value]
+export const parseRepoCommitMessage = (message: string, prefixes: TPrefixes): TRepoParsedMessage | null => {
+  const parsedPrefixes: [TParsedMessageType, string][] = [
+    ['major', prefixes.required.major.value],
+    ['minor', prefixes.required.minor.value],
+    ['patch', prefixes.required.patch.value],
+    ['publish', prefixes.required.publish.value],
+    ['initial', prefixes.required.initial.value]
   ]
 
-  for (const [type, value] of prefixes) {
+  for (const [type, value] of parsedPrefixes) {
     const regexp = new RegExp(`^${value}\\s((?:[\r\n]|.)+)$`, 'm')
     const result = message.match(regexp)
 

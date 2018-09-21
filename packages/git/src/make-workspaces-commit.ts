@@ -2,20 +2,20 @@
 // @ts-ignore
 import prompts from 'prompts'
 import execa from 'execa'
-import { TPackages, TOptions, removeAutoNamePrefix } from '@auto/utils/src/'
+import { TPackages, TPrefixes } from '@auto/utils/src/'
 import { suggestFilter } from './suggest-filter'
 
-export const makeWorkspacesCommit = async (packages: TPackages, options: TOptions) => {
+export const makeWorkspacesCommit = async (packages: TPackages, prefixes: TPrefixes) => {
   const { prefix } = await prompts({
     type: 'select',
     name: 'prefix',
     message: 'Select change type',
     choices: [
-      options.requiredPrefixes.major,
-      options.requiredPrefixes.minor,
-      options.requiredPrefixes.patch,
-      options.requiredPrefixes.initial,
-      ...options.customPrefixes
+      prefixes.required.major,
+      prefixes.required.minor,
+      prefixes.required.patch,
+      prefixes.required.initial,
+      ...prefixes.custom
     ]
   }) as { prefix?: string }
 
@@ -65,10 +65,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, options: TOption
   let name = ''
 
   if (packageNames.length > 0) {
-    name = packageNames
-      .map((packageName) => removeAutoNamePrefix(packageName, options.autoNamePrefix))
-      .join(', ')
-    name += ': '
+    name = `${packageNames.join(', ')}: `
   }
 
   await execa(

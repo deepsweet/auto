@@ -1,31 +1,30 @@
 import test from 'blue-tape'
 import { getWorkspacesLog } from '../src/get-workspaces-log'
-import { options } from '../../utils/test/options'
-import { TWorkspacesLog, TWorkspacesGitBump } from '@auto/utils/src/'
+import { TWorkspacesGitBump } from '@auto/utils/src/types'
+import { TWorkspacesLog } from '../src/types'
 
 test('getWorkspacesLog', (t) => {
   t.deepEquals(
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: null,
           type: null,
           deps: null,
           devDeps: {
-            '@ns/b': '1.2.3'
+            'b': '1.2.3'
           }
         }
       ],
       [
         {
-          name: '@ns/b',
+          name: 'b',
           type: 'patch',
           messages: []
         }
-      ],
-      options
+      ]
     ),
     [],
     'devDeps: should return empty array'
@@ -35,29 +34,28 @@ test('getWorkspacesLog', (t) => {
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: '1.2.3',
           type: 'patch',
           deps: {
-            '@ns/b': '1.2.3',
-            '@ns/c': '1.2.3'
+            'b': '1.2.3',
+            'c': '1.2.3'
           },
           devDeps: null
         }
       ],
       [
         {
-          name: '@ns/b',
+          name: 'b',
           type: 'patch',
           messages: []
         }
-      ],
-      options
+      ]
     ),
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '1.2.3',
         type: 'patch',
         messages: [
@@ -75,7 +73,7 @@ test('getWorkspacesLog', (t) => {
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: '1.2.3',
           type: 'patch',
@@ -83,8 +81,7 @@ test('getWorkspacesLog', (t) => {
           devDeps: null
         }
       ],
-      [] as TWorkspacesGitBump[],
-      options
+      [] as TWorkspacesGitBump[]
     ),
     [],
     'skip incorrect case in results'
@@ -94,20 +91,20 @@ test('getWorkspacesLog', (t) => {
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: '1.2.3',
           type: 'patch',
           deps: {
-            '@ns/b': '1.2.3',
-            '@ns/c': '1.2.3'
+            'b': '1.2.3',
+            'c': '1.2.3'
           },
           devDeps: null
         }
       ],
       [
         {
-          name: '@ns/a',
+          name: 'a',
           type: 'patch',
           messages: [
             {
@@ -124,12 +121,11 @@ test('getWorkspacesLog', (t) => {
             }
           ]
         }
-      ],
-      options
+      ]
     ),
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '1.2.3',
         type: 'patch',
         messages: [
@@ -159,7 +155,7 @@ test('getWorkspacesLog', (t) => {
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: '1.2.3',
           type: 'major',
@@ -169,7 +165,7 @@ test('getWorkspacesLog', (t) => {
       ],
       [
         {
-          name: '@ns/a',
+          name: 'a',
           type: 'major',
           messages: [
             {
@@ -186,12 +182,11 @@ test('getWorkspacesLog', (t) => {
             }
           ]
         }
-      ],
-      options
+      ]
     ),
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '1.2.3',
         type: 'major',
         messages: [
@@ -217,7 +212,7 @@ test('getWorkspacesLog', (t) => {
     getWorkspacesLog(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           dir: 'fakes/a',
           version: '1.2.3',
           type: 'major',
@@ -227,7 +222,7 @@ test('getWorkspacesLog', (t) => {
       ],
       [
         {
-          name: '@ns/a',
+          name: 'a',
           type: 'major',
           messages: [
             {
@@ -244,12 +239,11 @@ test('getWorkspacesLog', (t) => {
             }
           ]
         }
-      ],
-      options
+      ]
     ),
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '1.2.3',
         type: 'major',
         messages: [

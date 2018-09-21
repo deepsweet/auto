@@ -1,7 +1,7 @@
 import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { options } from '../../utils/test/options'
+import { prefixes } from '@auto/utils/test/prefixes'
 
 test('git:writeWorkspacesPublishCommit: single package', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
@@ -14,14 +14,14 @@ test('git:writeWorkspacesPublishCommit: single package', async (t) => {
 
   await writeWorkspacesPublishCommit(
     {
-      name: '@ns/a',
+      name: 'a',
       dir: 'fakes/a',
       type: 'patch',
       version: '0.1.1',
       deps: null,
       devDeps: null
     },
-    options
+    prefixes
   )
 
   t.deepEquals(
@@ -32,7 +32,7 @@ test('git:writeWorkspacesPublishCommit: single package', async (t) => {
         [
           'commit',
           '-m',
-          `${options.requiredPrefixes.publish.value} a: v0.1.1`,
+          `${prefixes.required.publish.value} a: v0.1.1`,
           'fakes/a/package.json'
         ]
       ]
@@ -54,16 +54,16 @@ test('git:writeWorkspacesPublishCommit: no packages to publish', async (t) => {
 
   await writeWorkspacesPublishCommit(
     {
-      name: '@ns/a',
+      name: 'a',
       dir: 'fakes/a',
       type: null,
       version: null,
       deps: {
-        '@ns/b': '~0.2.0'
+        'b': '~0.2.0'
       },
       devDeps: null
     },
-    options
+    prefixes
   )
 
   t.deepEquals(

@@ -1,16 +1,17 @@
-import { TOptions, TParsedMessageType, TWorkspacesParsedMessage } from '@auto/utils/src/'
+import { TPrefixes } from '@auto/utils/src/'
 import { makeRegExp } from './suggest-filter'
+import { TParsedMessageType, TWorkspacesParsedMessage } from './types'
 
-export const parseWorkspacesCommitMessage = (message: string, packageNames: string[], options: TOptions): TWorkspacesParsedMessage | null => {
-  const prefixes: [TParsedMessageType, string][] = [
-    ['major', options.requiredPrefixes.major.value],
-    ['minor', options.requiredPrefixes.minor.value],
-    ['patch', options.requiredPrefixes.patch.value],
-    ['publish', options.requiredPrefixes.publish.value],
-    ['initial', options.requiredPrefixes.initial.value]
+export const parseWorkspacesCommitMessage = (message: string, packageNames: string[], prefixes: TPrefixes): TWorkspacesParsedMessage | null => {
+  const parsedPrefixes: [TParsedMessageType, string][] = [
+    ['major', prefixes.required.major.value],
+    ['minor', prefixes.required.minor.value],
+    ['patch', prefixes.required.patch.value],
+    ['publish', prefixes.required.publish.value],
+    ['initial', prefixes.required.initial.value]
   ]
 
-  for (const [type, value] of prefixes) {
+  for (const [type, value] of parsedPrefixes) {
     const regexp = new RegExp(`^${value}\\s(.+?):\\s((?:[\r\n]|.)+)$`, 'm')
     const result = message.match(regexp)
 
@@ -36,10 +37,8 @@ export const parseWorkspacesCommitMessage = (message: string, packageNames: stri
           return result
         }
 
-        const fullName = `${options.autoNamePrefix}${name}`
-
-        if (packageNames.includes(fullName)) {
-          result.push(fullName)
+        if (packageNames.includes(name)) {
+          result.push(name)
         }
 
         return result

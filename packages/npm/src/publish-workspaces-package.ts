@@ -1,16 +1,17 @@
 import execa from 'execa'
-import { TWorkspacesPackageBump, TOptions } from '@auto/utils/src/'
+import { TWorkspacesPackageBump } from '@auto/utils/src/'
 import { getRepoPackage } from '@auto/fs/src'
+import { TNpmOptions } from './types'
 
-export const publishWorkspacesPackage = async (bumpPackage: TWorkspacesPackageBump, userOptions: TOptions) => {
+export const publishWorkspacesPackage = async (bumpPackage: TWorkspacesPackageBump, npmOptions?: TNpmOptions) => {
   const packageJson = await getRepoPackage()
   const options = {
     registry: 'https://registry.npmjs.org/',
     ...(packageJson.publishConfig && packageJson.publishConfig.registry && {
       registry: packageJson.publishConfig.registry
     }),
-    ...(userOptions.npm && userOptions.npm.registry && {
-      registry: userOptions.npm.registry
+    ...(npmOptions && npmOptions.registry && {
+      registry: npmOptions.registry
     })
   }
 

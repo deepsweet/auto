@@ -4,10 +4,11 @@ import { promisify } from 'util'
 import { isDependencyObject, TWorkspacesPackageBump } from '@auto/utils/src/'
 import { getPackage } from './get-package'
 import { yarnInstall } from './yarn-install'
+import { TFsOptions } from './types'
 
 const pWriteFile = promisify(writeFile)
 
-export const writePackageDependencies = async (packageBump: TWorkspacesPackageBump) => {
+export const writePackageDependencies = async (packageBump: TWorkspacesPackageBump, options: TFsOptions) => {
   if (packageBump.deps === null && packageBump.devDeps === null) {
     return
   }
@@ -17,13 +18,17 @@ export const writePackageDependencies = async (packageBump: TWorkspacesPackageBu
 
   if (packageBump.deps !== null && isDependencyObject(packageJson.dependencies)) {
     for (const [depName, depRange] of Object.entries(packageBump.deps)) {
-      packageJson.dependencies[depName] = depRange
+      const fullDepName = `${options.autoNamePrefix}${depName}`
+
+      packageJson.dependencies[fullDepName] = depRange
     }
   }
 
   if (packageBump.devDeps !== null && isDependencyObject(packageJson.devDependencies)) {
     for (const [depName, depRange] of Object.entries(packageBump.devDeps)) {
-      packageJson.devDependencies[depName] = depRange
+      const fullDepName = `${options.autoNamePrefix}${depName}`
+
+      packageJson.devDependencies[fullDepName] = depRange
     }
   }
 

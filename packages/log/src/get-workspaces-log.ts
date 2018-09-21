@@ -1,12 +1,5 @@
-import {
-  compareMessageTypes,
-  removeAutoNamePrefix,
-  TWorkspacesGitBump,
-  TOptions,
-  TWorkspacesLog,
-  TWorkspacesPackageBump,
-  TWorkspacesLogMessage
-} from '@auto/utils/src/'
+import { compareMessageTypes, TWorkspacesGitBump, TWorkspacesPackageBump } from '@auto/utils/src/'
+import { TWorkspacesLog, TWorkspacesLogMessage } from './types'
 
 const getMessages = (gitBumps: TWorkspacesGitBump[], name: string) => {
   for (const bump of gitBumps) {
@@ -18,7 +11,7 @@ const getMessages = (gitBumps: TWorkspacesGitBump[], name: string) => {
   return []
 }
 
-export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TWorkspacesGitBump[], options: TOptions): TWorkspacesLog[] => {
+export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBumps: TWorkspacesGitBump[]): TWorkspacesLog[] => {
   return packageBumps.reduce((res, bump) => {
     if (bump.version === null || bump.type === null) {
       return res
@@ -27,9 +20,7 @@ export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBump
     let messages = getMessages(gitBumps, bump.name)
 
     if (bump.deps !== null) {
-      const bumpDepsNames = Object.keys(bump.deps)
-        .map((name) => removeAutoNamePrefix(name, options.autoNamePrefix))
-        .join(', ')
+      const bumpDepsNames = Object.keys(bump.deps).join(', ')
 
       return res.concat({
         name: bump.name,

@@ -11,3 +11,4 @@ export { writeWorkspacesDependenciesCommit } from './write-workspaces-dependenci
 export { makeRepoCommit } from './make-repo-commit'
 export { makeWorkspacesCommit } from './make-workspaces-commit'
 export { pushCommitsAndTags } from './push-commits-and-tags'
+export * from './types'

@@ -1,8 +1,20 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { options } from '@auto/utils/test/options'
-import { TOptions } from '@auto/utils/src'
+import { TSlackOptions } from '../src/types'
+import { prefixes } from '@auto/utils/test/prefixes'
+
+const slackOptions: TSlackOptions = {
+  token: 'token',
+  username: 'username',
+  channel: 'channel',
+  iconEmoji: 'emoji',
+  colors: {
+    major: 'major',
+    minor: 'minor',
+    patch: 'patch'
+  }
+}
 
 test('sendWorkspacesSlackMessage', async (t) => {
   const spy = createSpy(() => Promise.resolve())
@@ -18,7 +30,7 @@ test('sendWorkspacesSlackMessage', async (t) => {
   await sendWorkspacesSlackMessage(
     [
       {
-        name: '@ns/a',
+        name: 'a',
         version: '0.1.2',
         type: 'minor',
         messages: [
@@ -33,7 +45,7 @@ test('sendWorkspacesSlackMessage', async (t) => {
         ]
       },
       {
-        name: '@ns/b',
+        name: 'b',
         version: '1.2.3',
         type: 'minor',
         messages: [
@@ -48,8 +60,8 @@ test('sendWorkspacesSlackMessage', async (t) => {
         ]
       }
     ],
-    'token',
-    options
+    prefixes,
+    slackOptions
   )
 
   t.deepEquals(
@@ -67,11 +79,11 @@ test('sendWorkspacesSlackMessage', async (t) => {
           attachments: [
             {
               color: 'minor',
-              fields: [{ title: '@ns/a v0.1.2', value: '🌱 minor\n🌱 patch' }]
+              fields: [{ title: 'a v0.1.2', value: '🌱 minor\n🌱 patch' }]
             },
             {
               color: 'minor',
-              fields: [{ title: '@ns/b v1.2.3', value: '🌱 minor\n🌱 patch' }]
+              fields: [{ title: 'b v1.2.3', value: '🌱 minor\n🌱 patch' }]
             }
           ]
         }
@@ -98,7 +110,7 @@ test('sendWorkspacesSlackMessage: throws if there is no token', async (t) => {
     await sendWorkspacesSlackMessage(
       [
         {
-          name: '@ns/a',
+          name: 'a',
           version: '0.1.2',
           type: 'minor',
           messages: [
@@ -113,7 +125,7 @@ test('sendWorkspacesSlackMessage: throws if there is no token', async (t) => {
           ]
         },
         {
-          name: '@ns/b',
+          name: 'b',
           version: '1.2.3',
           type: 'minor',
           messages: [
@@ -128,71 +140,14 @@ test('sendWorkspacesSlackMessage: throws if there is no token', async (t) => {
           ]
         }
       ],
+      prefixes,
       // @ts-ignore
-      undefined,
-      options
+      { ...slackOptions, token: undefined }
     )
 
     t.fail('should not get here')
   } catch (e) {
     t.equals(e.message, 'Slack token is required')
-  }
-
-  unmock('../src/send-workspaces-slack-message')
-})
-
-test('sendWorkspacesSlackMessage: throws if there is slack options', async (t) => {
-  const spy = createSpy(() => Promise.resolve())
-
-  mock('../src/send-workspaces-slack-message', {
-    'request-promise-native': {
-      default: spy
-    }
-  })
-
-  const { sendWorkspacesSlackMessage } = await import('../src/send-workspaces-slack-message')
-
-  try {
-    await sendWorkspacesSlackMessage(
-      [
-        {
-          name: '@ns/a',
-          version: '0.1.2',
-          type: 'minor',
-          messages: [
-            {
-              type: 'minor',
-              value: 'minor'
-            },
-            {
-              type: 'patch',
-              value: 'patch'
-            }
-          ]
-        },
-        {
-          name: '@ns/b',
-          version: '1.2.3',
-          type: 'minor',
-          messages: [
-            {
-              type: 'minor',
-              value: 'minor'
-            },
-            {
-              type: 'patch',
-              value: 'patch'
-            }
-          ]
-        }
-      ],
-      'token',
-      {} as TOptions
-    )
-
-    t.fail('should not get here')
-  } catch (e) {
-    t.equals(e.message, 'Slack options is required')
   }
 
   unmock('../src/send-workspaces-slack-message')

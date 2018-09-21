@@ -1,7 +1,8 @@
 import semver from 'semver'
-import { TBumpType, TOptions } from '@auto/utils/src/'
+import { TBumpType } from '@auto/utils/src/'
+import { TBumpOptions } from './types'
 
-export const bumpVersion = (version: string, type: TBumpType, options: TOptions): string => {
+export const bumpVersion = (version: string, type: TBumpType, options: TBumpOptions): string => {
   const coercedVersion = semver.coerce(version)
 
   if (coercedVersion === null) {

@@ -1,9 +1,5 @@
-import {
-  compareMessageTypes,
-  TRepoGitBump,
-  TRepoLog,
-  TRepoPackageBump
-} from '@auto/utils/src/'
+import { compareMessageTypes, TRepoGitBump, TRepoPackageBump } from '@auto/utils/src/'
+import { TRepoLog } from './types'
 
 export const getRepoLog = (packageBump: TRepoPackageBump, gitBump: TRepoGitBump): TRepoLog => ({
   version: packageBump.version,
