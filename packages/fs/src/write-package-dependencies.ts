@@ -3,7 +3,6 @@ import { writeFile } from 'fs'
 import { promisify } from 'util'
 import { isDependencyObject, TWorkspacesOptions, TWorkspacesPackageBump } from '@auto/utils/src/'
 import { getPackage } from './get-package'
-import { yarnInstall } from './yarn-install'
 
 const pWriteFile = promisify(writeFile)
 
@@ -34,6 +33,4 @@ export const writePackageDependencies = async (packageBump: TWorkspacesPackageBu
   const packageData = JSON.stringify(packageJson, null, 2) + '\n'
 
   await pWriteFile(packageJsonPath, packageData, { encoding: 'utf8' })
-
-  await yarnInstall()
 }
