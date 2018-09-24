@@ -1,8 +1,10 @@
 import test from 'blue-tape'
 import { getWorkspacesPackagesBumps } from '../src/get-workspaces-packages-bumps'
 import { TBumpOptions } from '../src/types'
+import { TWorkspacesOptions } from '@auto/utils/src'
 
-const options: TBumpOptions = { zeroBreakingChangeType: 'major' }
+const bumpOptions: TBumpOptions = { zeroBreakingChangeType: 'major' }
+const workspacesOptions: TWorkspacesOptions = { autoNamePrefix: '@ns/' }
 
 test('bump:getPackageBumps: single package', (t) => {
   t.deepEquals(
@@ -11,7 +13,7 @@ test('bump:getPackageBumps: single package', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         }
@@ -19,7 +21,8 @@ test('bump:getPackageBumps: single package', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -40,7 +43,7 @@ test('bump:getPackageBumps: single package', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         }
@@ -48,7 +51,8 @@ test('bump:getPackageBumps: single package', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -69,7 +73,7 @@ test('bump:getPackageBumps: single package', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.2.1'
           }
         }
@@ -77,7 +81,8 @@ test('bump:getPackageBumps: single package', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -102,21 +107,21 @@ test('bump:getPackageBumps: multiple independent packages', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '0.2.1'
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '1.2.1'
           }
         }
@@ -126,7 +131,8 @@ test('bump:getPackageBumps: multiple independent packages', (t) => {
         { name: 'b', type: 'minor', messages: [] },
         { name: 'c', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -167,17 +173,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -185,7 +191,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -216,17 +223,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.2'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -234,7 +241,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -265,17 +273,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.2'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -283,7 +291,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -314,17 +323,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         }
@@ -332,7 +341,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -363,17 +373,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -381,7 +391,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -412,17 +423,17 @@ test('bump:getPackageBumps: b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -430,7 +441,8 @@ test('bump:getPackageBumps: b -> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -465,17 +477,17 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -484,7 +496,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         { name: 'b', type: 'patch', messages: [] },
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -515,17 +528,17 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -534,7 +547,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         { name: 'b', type: 'major', messages: [] },
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -565,17 +579,17 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -584,7 +598,8 @@ test('bump:getPackageBumps: self + b -> a', (t) => {
         { name: 'b', type: 'patch', messages: [] },
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -619,17 +634,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -637,7 +652,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -668,17 +684,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -686,7 +702,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -717,17 +734,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -735,7 +752,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -766,17 +784,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         }
@@ -784,7 +802,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -815,17 +834,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^1.1.0'
+              '@ns/a': '^1.1.0'
             }
           }
         }
@@ -833,7 +852,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -864,17 +884,17 @@ test('bump:getPackageBumps: b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^1.1.0'
+              '@ns/a': '^1.1.0'
             }
           }
         }
@@ -882,7 +902,8 @@ test('bump:getPackageBumps: b |> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -917,27 +938,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -945,7 +966,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -986,27 +1008,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -1014,7 +1036,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1055,27 +1078,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -1083,7 +1106,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1124,27 +1148,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         }
@@ -1152,7 +1176,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1193,27 +1218,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.2.3'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '2.3.4',
             dependencies: {
-              a: '1.2.3'
+              '@ns/a': '1.2.3'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '3.4.5',
             dependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -1221,7 +1246,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1262,27 +1288,27 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.2.3'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '2.3.4',
             dependencies: {
-              a: '1.2.3'
+              '@ns/a': '1.2.3'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '3.4.5',
             dependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -1290,7 +1316,8 @@ test('bump:getPackageBumps: b -> a, c -> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1335,27 +1362,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         }
@@ -1363,7 +1390,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1404,27 +1432,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -1432,7 +1460,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1473,27 +1502,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         }
@@ -1501,7 +1530,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1542,27 +1572,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         }
@@ -1570,7 +1600,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1611,27 +1642,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.2.3'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '2.3.4',
             devDependencies: {
-              a: '1.2.3'
+              '@ns/a': '1.2.3'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '3.4.5',
             devDependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -1639,7 +1670,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1680,27 +1712,27 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.2.3'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '2.3.4',
             devDependencies: {
-              a: '1.2.3'
+              '@ns/a': '1.2.3'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '3.4.5',
             devDependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         }
@@ -1708,7 +1740,8 @@ test('bump:getPackageBumps: b |> a, c |> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1753,27 +1786,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -1781,7 +1814,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1822,27 +1856,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -1850,7 +1884,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1891,27 +1926,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -1919,7 +1954,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -1960,27 +1996,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -1988,7 +2024,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2029,27 +2066,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2057,7 +2094,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2098,27 +2136,27 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2126,7 +2164,8 @@ test('bump:getPackageBumps: c -> b -> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2171,27 +2210,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2199,7 +2238,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2230,27 +2270,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2258,7 +2298,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2289,27 +2330,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '~0.1.0'
+              '@ns/a': '~0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2317,7 +2358,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2348,27 +2390,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2376,7 +2418,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2407,27 +2450,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '1.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^1.0.0'
+              '@ns/a': '^1.0.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2435,7 +2478,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2466,27 +2510,27 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.1'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '^0.1.0'
+              '@ns/a': '^0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2494,7 +2538,8 @@ test('bump:getPackageBumps: C |> b |> a', (t) => {
       [
         { name: 'a', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2529,30 +2574,30 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             dependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2560,7 +2605,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2603,30 +2649,30 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             dependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2635,7 +2681,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2678,30 +2725,30 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             dependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2710,7 +2757,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2753,30 +2801,30 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             dependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2786,7 +2834,8 @@ test('bump:getPackageBumps: c -> b -> a -> c', (t) => {
         { name: 'b', type: 'major', messages: [] },
         { name: 'c', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2833,30 +2882,30 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             devDependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2864,7 +2913,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
       [
         { name: 'a', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2895,30 +2945,30 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             devDependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -2927,7 +2977,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -2968,30 +3019,30 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             devDependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -3000,7 +3051,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'patch', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -3041,30 +3093,30 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0',
             devDependencies: {
-              c: '2.3.4'
+              '@ns/c': '2.3.4'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3',
             devDependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             }
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -3074,7 +3126,8 @@ test('bump:getPackageBumps: c |> b |> a |> c', (t) => {
         { name: 'b', type: 'major', messages: [] },
         { name: 'c', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -3121,27 +3174,27 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3'
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             },
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -3150,7 +3203,8 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
         { name: 'a', type: 'patch', messages: [] },
         { name: 'b', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -3191,27 +3245,27 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3'
           }
         },
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             },
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         }
@@ -3220,7 +3274,8 @@ test('bump:getPackageBumps: c |> b, c -> a', (t) => {
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {
@@ -3265,7 +3320,7 @@ test('bump:getPackageBumps: throw', (t) => {
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         }
@@ -3273,7 +3328,8 @@ test('bump:getPackageBumps: throw', (t) => {
       [
         { name: 'b', type: 'minor', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     /Unable to find package/,
     'not existing package'
@@ -3289,27 +3345,27 @@ test('bump:getPackageBumps: sort', (t) => {
         c: {
           dir: '/fakes/c',
           json: {
-            name: 'c',
+            name: '@ns/c',
             version: '2.3.4',
             dependencies: {
-              a: '0.1.0'
+              '@ns/a': '0.1.0'
             },
             devDependencies: {
-              b: '1.2.3'
+              '@ns/b': '1.2.3'
             }
           }
         },
         b: {
           dir: '/fakes/b',
           json: {
-            name: 'b',
+            name: '@ns/b',
             version: '1.2.3'
           }
         },
         a: {
           dir: '/fakes/a',
           json: {
-            name: 'a',
+            name: '@ns/a',
             version: '0.1.0'
           }
         }
@@ -3318,7 +3374,8 @@ test('bump:getPackageBumps: sort', (t) => {
         { name: 'a', type: 'minor', messages: [] },
         { name: 'b', type: 'major', messages: [] }
       ],
-      options
+      bumpOptions,
+      workspacesOptions
     ),
     [
       {

@@ -4,13 +4,13 @@ import {
   TWorkspacesGitBump,
   TWorkspacesPackageBump,
   TBumpType,
-  TPackages
+  TPackages, TWorkspacesOptions
 } from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
 import { TBumpOptions } from './types'
 
-export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspacesGitBump[], options: TBumpOptions): TWorkspacesPackageBump[] => {
+export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspacesGitBump[], bumpOptions: TBumpOptions, workspacesOptions: TWorkspacesOptions): TWorkspacesPackageBump[] => {
   for (const bump of bumps) {
     if (!Reflect.has(packages, bump.name)) {
       throw new Error(`Unable to find package ${bump.name} in packages`)
@@ -30,7 +30,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
   }
 
   const bumpDependents = (name: string, version: string, type: TBumpType): void => {
-    const dependents = getDependentsOf(packages, name)
+    const dependents = getDependentsOf(packages, name, workspacesOptions)
 
     if (dependents === null) {
       return
@@ -43,7 +43,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       let bumpedVersion = null
 
       if (dependent.range !== null) {
-        const tempRange = bumpRange(dependent.range, version, type, options)
+        const tempRange = bumpRange(dependent.range, version, type, bumpOptions)
         const stackRange = getStackDepsRange(dependent.name, name)
 
         // if bumped range is different from the range from stack (existing or not) then bump
@@ -53,7 +53,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       }
 
       if (dependent.devRange !== null) {
-        bumpedDevRange = bumpRange(dependent.devRange, version, type, options)
+        bumpedDevRange = bumpRange(dependent.devRange, version, type, bumpOptions)
       }
 
       // if no ranges were bumped then there is no need to proceed
@@ -63,7 +63,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
 
       // if range was bumped then dependent version should be bumped as well
       if (bumpedRange !== null) {
-        bumpedVersion = bumpVersion(dependentPackage.json.version, type, options)
+        bumpedVersion = bumpVersion(dependentPackage.json.version, type, bumpOptions)
       }
 
       if (Reflect.has(bumpStack, dependent.name)) {
@@ -137,14 +137,14 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
 
       bumpStack[bump.name] = {
         ...bumpStackItem,
-        version: bumpVersion(packageItem.json.version, bump.type, options),
+        version: bumpVersion(packageItem.json.version, bump.type, bumpOptions),
         type: bump.type
       }
     } else {
       bumpStack[bump.name] = {
         name: bump.name,
         dir: packageItem.dir,
-        version: bumpVersion(packageItem.json.version, bump.type, options),
+        version: bumpVersion(packageItem.json.version, bump.type, bumpOptions),
         type: bump.type,
         deps: null,
         devDeps: null
