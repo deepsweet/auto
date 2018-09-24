@@ -65,6 +65,13 @@
     "@auto/utils" "^0.0.13"
     esm "^3.0.82"
 
+"@auto/workspaces@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@auto/workspaces/-/workspaces-0.0.18.tgz#1e6a7c87b6f8c7cf3f6be5553ad43aaa650c4fe4"
+  dependencies:
+    "@auto/utils" "^0.0.14"
+    esm "^3.0.82"
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
