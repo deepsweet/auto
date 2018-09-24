@@ -1,9 +1,9 @@
 import test from 'blue-tape'
 import { mock, unmock, deleteFromCache } from 'mocku'
 import { createFsFromVolume, Volume } from 'memfs'
-import { TFsOptions } from '../src/types'
+import { TWorkspacesOptions } from '@auto/utils/src'
 
-const options: TFsOptions = {
+const options: TWorkspacesOptions = {
   autoNamePrefix: '@ns/'
 }
 const rootDir = process.cwd()

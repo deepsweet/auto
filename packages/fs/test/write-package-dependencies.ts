@@ -2,9 +2,9 @@ import test from 'blue-tape'
 import { mock, unmock } from 'mocku'
 import { createFsFromVolume, Volume } from 'memfs'
 import { createSpy, getSpyCalls } from 'spyfn'
-import { TFsOptions } from '../src'
+import { TWorkspacesOptions } from '@auto/utils/src'
 
-const options: TFsOptions = {
+const options: TWorkspacesOptions = {
   autoNamePrefix: '@ns/'
 }
 const rootDir = process.cwd()

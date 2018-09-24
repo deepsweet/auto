@@ -1,14 +1,13 @@
 import path from 'path'
 import { writeFile } from 'fs'
 import { promisify } from 'util'
-import { isDependencyObject, TWorkspacesPackageBump } from '@auto/utils/src/'
+import { isDependencyObject, TWorkspacesOptions, TWorkspacesPackageBump } from '@auto/utils/src/'
 import { getPackage } from './get-package'
 import { yarnInstall } from './yarn-install'
-import { TFsOptions } from './types'
 
 const pWriteFile = promisify(writeFile)
 
-export const writePackageDependencies = async (packageBump: TWorkspacesPackageBump, options: TFsOptions) => {
+export const writePackageDependencies = async (packageBump: TWorkspacesPackageBump, options: TWorkspacesOptions) => {
   if (packageBump.deps === null && packageBump.devDeps === null) {
     return
   }

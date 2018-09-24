@@ -1,10 +1,8 @@
-import { TPackages } from '@auto/utils/src/'
+import { removeAutoNamePrefix, TPackages, TWorkspacesOptions } from '@auto/utils/src/'
 import { getWorkspacesPackageDirs } from './get-workspaces-package-dirs'
 import { getPackage } from './get-package'
-import { removeAutoNamePrefix } from './remove-auto-name-prefix'
-import { TFsOptions } from './types'
 
-export const getWorkspacesPackages = async (options: TFsOptions): Promise<TPackages> => {
+export const getWorkspacesPackages = async (options: TWorkspacesOptions): Promise<TPackages> => {
   const dirs = await getWorkspacesPackageDirs()
 
   return dirs.reduce(
