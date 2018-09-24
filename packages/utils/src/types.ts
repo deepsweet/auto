@@ -1,5 +1,9 @@
 import { TJsonMap } from 'typeon'
 
+export type TWorkspacesOptions = {
+  autoNamePrefix: string
+}
+
 export type TBumpType = 'major' | 'minor' | 'patch'
 
 export type TPrefix = {
