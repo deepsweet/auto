@@ -19,6 +19,14 @@
     request "^2.88.0"
     request-promise-native "^1.0.5"
 
+"@auto/npm@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@auto/npm/-/npm-0.0.21.tgz#25bea9edb430fa000260934ab23a83fb1f79cd14"
+  dependencies:
+    "@auto/fs" "^0.0.12"
+    esm "^3.0.82"
+    execa "^1.0.0"
+
 "@auto/utils@^0.0.13":
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/@auto/utils/-/utils-0.0.13.tgz#6e7e9cd91e3cc2e0de6072165561dcc07b9e8475"
