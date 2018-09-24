@@ -52,24 +52,11 @@
   dependencies:
     esm "^3.0.82"
 
-"@auto/utils@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@auto/utils/-/utils-0.0.14.tgz#35b94ab93ec99876957d0cd4752cb164c22f62ab"
-  dependencies:
-    esm "^3.0.82"
-
 "@auto/workspaces@^0.0.17":
   version "0.0.17"
   resolved "https://registry.yarnpkg.com/@auto/workspaces/-/workspaces-0.0.17.tgz#133ae5b5646638c8130dba3646df1f8faff120f0"
   dependencies:
     "@auto/utils" "^0.0.13"
-    esm "^3.0.82"
-
-"@auto/workspaces@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@auto/workspaces/-/workspaces-0.0.18.tgz#1e6a7c87b6f8c7cf3f6be5553ad43aaa650c4fe4"
-  dependencies:
-    "@auto/utils" "^0.0.14"
     esm "^3.0.82"
 
 "@babel/code-frame@^7.0.0":
