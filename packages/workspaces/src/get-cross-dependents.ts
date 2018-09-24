@@ -1,4 +1,4 @@
-import { isDependencyObject, TPackageJson, TPackages } from '@auto/utils/src/'
+import { isDependencyObject, TPackageJson, TPackages, TWorkspacesOptions } from '@auto/utils/src/'
 import { TCrossDependents } from './types'
 
 const isDependent = (pkg: TPackageJson, dependsOnName: string): boolean => {
@@ -25,17 +25,18 @@ const getDevDependencyRange = ({ devDependencies }: TPackageJson, name: string) 
     ? devDependencies[name]
     : null
 
-export const getCrossDependents = (packages: TPackages): TCrossDependents =>
+export const getCrossDependents = (packages: TPackages, options: TWorkspacesOptions): TCrossDependents =>
   Object.keys(packages).reduce(
     (pkgs, name) => {
+      const fullName = `${options.autoNamePrefix}${name}`
       const dependentNames = Object.keys(packages)
-        .filter((depName) => isDependent(packages[depName].json, name))
+        .filter((depName) => isDependent(packages[depName].json, fullName))
 
       if (dependentNames.length > 0) {
         pkgs[name] = dependentNames.map((depName) => ({
           name: depName,
-          range: getDependencyRange(packages[depName].json, name),
-          devRange: getDevDependencyRange(packages[depName].json, name)
+          range: getDependencyRange(packages[depName].json, fullName),
+          devRange: getDevDependencyRange(packages[depName].json, fullName)
         }))
       }
 
