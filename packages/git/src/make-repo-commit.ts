@@ -3,6 +3,7 @@
 import prompts from 'prompts'
 import execa from 'execa'
 import { TPrefixes } from '@auto/utils/src'
+import { toLowerCase } from './utils'
 
 export const makeRepoCommit = async (prefixes: TPrefixes) => {
   const { prefix } = await prompts({
@@ -38,7 +39,7 @@ export const makeRepoCommit = async (prefixes: TPrefixes) => {
     [
       'commit',
       '-m',
-      `${prefix} ${message}`
+      `${prefix} ${toLowerCase(message.trim())}`
     ],
     {
       stdout: process.stdout,

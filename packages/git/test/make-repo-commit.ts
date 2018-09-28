@@ -84,3 +84,33 @@ test('git:makeRepoCommit: should throw on message undefined', async (t) => {
 
   unmock('../src/make-repo-commit')
 })
+
+test('git:makeRepoCommit lowercase first letter in message', async (t) => {
+  const execaSpy = createSpy(() => Promise.resolve())
+  const promptsSpy = createSpy(({ index }) => {
+    if (index === 0) {
+      return Promise.resolve({ prefix: 'prefix' })
+    }
+
+    return Promise.resolve({ message: 'My Message' })
+  })
+
+  mock('../src/make-repo-commit', {
+    execa: { default: execaSpy },
+    prompts: { default: promptsSpy }
+  })
+
+  const { makeRepoCommit } = await import('../src/make-repo-commit')
+
+  await makeRepoCommit(prefixes)
+
+  t.deepEquals(
+    getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
+    [
+      ['git', ['commit', '-m', 'prefix my Message']]
+    ],
+    'should write proper message'
+  )
+
+  unmock('../src/make-repo-commit')
+})

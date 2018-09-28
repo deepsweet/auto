@@ -4,6 +4,7 @@ import prompts from 'prompts'
 import execa from 'execa'
 import { TPackages, TPrefixes } from '@auto/utils/src/'
 import { suggestFilter } from './suggest-filter'
+import { toLowerCase } from './utils'
 
 export const makeWorkspacesCommit = async (packages: TPackages, prefixes: TPrefixes) => {
   const { prefix } = await prompts({
@@ -73,7 +74,7 @@ export const makeWorkspacesCommit = async (packages: TPackages, prefixes: TPrefi
     [
       'commit',
       '-m',
-      `${prefix} ${name}${message}`
+      `${prefix} ${name}${toLowerCase(message.trim())}`
     ],
     {
       stdout: process.stdout,
