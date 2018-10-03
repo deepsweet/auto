@@ -22,7 +22,7 @@ test('git:getCommitMessages', async (t) => {
   t.deepEquals(
     getSpyCalls(execaSpy).map((call) => call.slice(0, 2)),
     [
-      ['git', ['log', '--pretty=format:%s']]
+      ['git', ['log', '--pretty=format:%s', '--no-merges', '--first-parent']]
     ],
     'should spawn git with arguments'
   )
