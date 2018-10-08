@@ -4,19 +4,16 @@ import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
 const vol = Volume.fromJSON({
-  [`${rootDir}/package.json`]: ''
+  [`${rootDir}/package.json`]: JSON.stringify({
+    name: '@ns/a',
+    version: '1.0.0'
+  })
 })
 const fs = createFsFromVolume(vol)
 
 test('fs:getPackage', async (t) => {
   mock('../src/get-package', {
-    [`${rootDir}/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0'
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { getPackage } = await import('../src/get-package')

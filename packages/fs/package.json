@@ -25,6 +25,12 @@
   "dependencies": {
     "@auto/utils": "^0.0.15",
     "esm": "^3.0.82",
-    "fast-glob": "^2.2.2"
+    "fast-glob": "^2.2.2",
+    "graceful-fs": "^4.1.11",
+    "p-all": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/graceful-fs": "^4.1.2",
+    "@types/p-all": "^1.0.0"
   }
 }

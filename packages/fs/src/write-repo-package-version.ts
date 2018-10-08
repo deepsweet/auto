@@ -1,5 +1,5 @@
 import path from 'path'
-import { writeFile } from 'fs'
+import { writeFile } from 'graceful-fs'
 import { promisify } from 'util'
 import { TRepoPackageBump } from '@auto/utils/src/'
 import { getPackage } from './get-package'

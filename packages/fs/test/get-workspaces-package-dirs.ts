@@ -3,21 +3,21 @@ import { mock, unmock, deleteFromCache } from 'mocku'
 import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
-const vol = Volume.fromJSON({
-  [`${rootDir}/fakes/a/package.json`]: '',
-  [`${rootDir}/fakes/b/readme.md`]: '',
-  [`${rootDir}/fakes/c/package.json`]: ''
-})
-const fs = createFsFromVolume(vol)
 
 test('fs:getWorkspacesPackageDirs workspaces[]', async (t) => {
+  const vol = Volume.fromJSON({
+    [`${rootDir}/package.json`]: JSON.stringify({
+      workspaces: ['fakes/*']
+    }),
+    [`${rootDir}/fakes/a/package.json`]: '',
+    [`${rootDir}/fakes/b/readme.md`]: '',
+    [`${rootDir}/fakes/c/package.json`]: ''
+  })
+  const fs = createFsFromVolume(vol)
+
   mock('../src/get-workspaces-package-dirs', {
-    [`${rootDir}/package.json`]: {
-      default: {
-        workspaces: ['fakes/*']
-      }
-    },
-    fs
+    fs,
+    'graceful-fs': fs
   })
   deleteFromCache('fast-glob')
 
@@ -35,15 +35,21 @@ test('fs:getWorkspacesPackageDirs workspaces[]', async (t) => {
 })
 
 test('fs:getWorkspacesPackageDirs workspaces.packages[]', async (t) => {
-  mock('../src/get-workspaces-package-dirs', {
-    [`${rootDir}/package.json`]: {
-      default: {
-        workspaces: {
-          packages: ['fakes/*']
-        }
+  const vol = Volume.fromJSON({
+    [`${rootDir}/package.json`]: JSON.stringify({
+      workspaces: {
+        packages: ['fakes/*']
       }
-    },
-    fs
+    }),
+    [`${rootDir}/fakes/a/package.json`]: '',
+    [`${rootDir}/fakes/b/readme.md`]: '',
+    [`${rootDir}/fakes/c/package.json`]: ''
+  })
+  const fs = createFsFromVolume(vol)
+
+  mock('../src/get-workspaces-package-dirs', {
+    fs,
+    'graceful-fs': fs
   })
 
   const { getWorkspacesPackageDirs } = await import('../src/get-workspaces-package-dirs')
@@ -60,11 +66,17 @@ test('fs:getWorkspacesPackageDirs workspaces.packages[]', async (t) => {
 })
 
 test('fs:getWorkspacesPackageDirs no workspaces', async (t) => {
+  const vol = Volume.fromJSON({
+    [`${rootDir}/package.json`]: JSON.stringify({}),
+    [`${rootDir}/fakes/a/package.json`]: '',
+    [`${rootDir}/fakes/b/readme.md`]: '',
+    [`${rootDir}/fakes/c/package.json`]: ''
+  })
+  const fs = createFsFromVolume(vol)
+
   mock('../src/get-workspaces-package-dirs', {
-    [`${rootDir}/package.json`]: {
-      default: {}
-    },
-    fs
+    fs,
+    'graceful-fs': fs
   })
 
   const { getWorkspacesPackageDirs } = await import('../src/get-workspaces-package-dirs')
@@ -81,13 +93,19 @@ test('fs:getWorkspacesPackageDirs no workspaces', async (t) => {
 })
 
 test('fs:getWorkspacesPackageDirs no workspaces.packages', async (t) => {
+  const vol = Volume.fromJSON({
+    [`${rootDir}/package.json`]: JSON.stringify({
+      workspaces: {}
+    }),
+    [`${rootDir}/fakes/a/package.json`]: '',
+    [`${rootDir}/fakes/b/readme.md`]: '',
+    [`${rootDir}/fakes/c/package.json`]: ''
+  })
+  const fs = createFsFromVolume(vol)
+
   mock('../src/get-workspaces-package-dirs', {
-    [`${rootDir}/package.json`]: {
-      default: {
-        workspaces: {}
-      }
-    },
-    fs
+    fs,
+    'graceful-fs': fs
   })
 
   const { getWorkspacesPackageDirs } = await import('../src/get-workspaces-package-dirs')

@@ -6,18 +6,15 @@ const rootDir = process.cwd()
 
 test('fs:writeWorkspacesPackageVersion: single version bump', async (t) => {
   const vol = Volume.fromJSON({
-    [`${rootDir}/fakes/a/package.json`]: ''
+    [`${rootDir}/fakes/a/package.json`]: JSON.stringify({
+      name: '@ns/a',
+      version: '1.0.0'
+    })
   })
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-workspaces-package-version', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0'
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
@@ -48,22 +45,19 @@ test('fs:writeWorkspacesPackageVersion: single version bump', async (t) => {
 
 test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
   const vol = Volume.fromJSON({
-    [`${rootDir}/fakes/a/package.json`]: ''
+    [`${rootDir}/fakes/a/package.json`]: JSON.stringify({
+      name: '@ns/a',
+      version: '1.0.0',
+      dependencies: {
+        '@ns/b': '0.0.1',
+        '@ns/c': '0.0.2'
+      }
+    })
   })
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-workspaces-package-version', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0',
-        dependencies: {
-          '@ns/b': '0.0.1',
-          '@ns/c': '0.0.2'
-        }
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
@@ -101,22 +95,19 @@ test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
 
 test('fs:writeWorkspacesPackageVersion: ignore devDependencies', async (t) => {
   const vol = Volume.fromJSON({
-    [`${rootDir}/fakes/a/package.json`]: ''
+    [`${rootDir}/fakes/a/package.json`]: JSON.stringify({
+      name: '@ns/a',
+      version: '1.0.0',
+      devDependencies: {
+        '@ns/b': '0.0.1',
+        '@ns/c': '0.0.2'
+      }
+    })
   })
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-workspaces-package-version', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0',
-        devDependencies: {
-          '@ns/b': '0.0.1',
-          '@ns/c': '0.0.2'
-        }
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
@@ -162,13 +153,7 @@ test('fs:writeWorkspacesPackageVersion: no version bump', async (t) => {
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-workspaces-package-version', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0'
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')

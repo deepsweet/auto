@@ -1,23 +1,27 @@
 import { removeAutoNamePrefix, TPackages, TWorkspacesOptions } from '@auto/utils/src/'
 import { getWorkspacesPackageDirs } from './get-workspaces-package-dirs'
 import { getPackage } from './get-package'
+import pAll from 'p-all'
+
+const MAX_OPEN_FILES = 100
 
 export const getWorkspacesPackages = async (options: TWorkspacesOptions): Promise<TPackages> => {
   const dirs = await getWorkspacesPackageDirs()
+  const packages = await pAll(
+    dirs.map((dir) => () => getPackage(dir)),
+    { concurrency: MAX_OPEN_FILES }
+  )
+  const shortNames = packages.map((pkg) => removeAutoNamePrefix(pkg.name, options.autoNamePrefix))
 
   return dirs.reduce(
-    async (prev, dir) => {
-      const packages = await prev
-      const packageJson = await getPackage(dir)
-      const shortName = removeAutoNamePrefix(packageJson.name, options.autoNamePrefix)
-
-      packages[shortName] = {
+    (res, dir, i) => {
+      res[shortNames[i]] = {
         dir,
-        json: packageJson
+        json: packages[i]
       }
 
-      return packages
+      return res
     },
-    Promise.resolve({} as TPackages)
+    {} as TPackages
   )
 }

@@ -18,13 +18,7 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-package-dependencies', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0'
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
@@ -55,22 +49,19 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
 
 test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
   const vol = Volume.fromJSON({
-    [`${rootDir}/fakes/a/package.json`]: ''
+    [`${rootDir}/fakes/a/package.json`]: JSON.stringify({
+      name: '@ns/a',
+      version: '1.0.0',
+      dependencies: {
+        '@ns/b': '0.0.1',
+        '@ns/c': '0.0.2'
+      }
+    })
   })
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-package-dependencies', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0',
-        dependencies: {
-          '@ns/b': '0.0.1',
-          '@ns/c': '0.0.2'
-        }
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
@@ -108,22 +99,19 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
 
 test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) => {
   const vol = Volume.fromJSON({
-    [`${rootDir}/fakes/a/package.json`]: ''
+    [`${rootDir}/fakes/a/package.json`]: JSON.stringify({
+      name: '@ns/a',
+      version: '1.0.0',
+      devDependencies: {
+        '@ns/b': '0.0.1',
+        '@ns/c': '0.0.2'
+      }
+    })
   })
   const fs = createFsFromVolume(vol)
 
   mock('../src/write-package-dependencies', {
-    [`${rootDir}/fakes/a/package.json`]: {
-      default: {
-        name: '@ns/a',
-        version: '1.0.0',
-        devDependencies: {
-          '@ns/b': '0.0.1',
-          '@ns/c': '0.0.2'
-        }
-      }
-    },
-    fs
+    'graceful-fs': fs
   })
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
