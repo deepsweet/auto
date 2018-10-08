@@ -1,7 +1,8 @@
 import fastGlob from 'fast-glob'
+import { dirname } from 'path'
 import { getPackage } from './get-package'
 
-export const getWorkspacesPackageDirs = async () => {
+export const getWorkspacesPackageDirs = async (): Promise<string[]> => {
   const { workspaces } = await getPackage(process.cwd())
   let globs = null
 
@@ -17,9 +18,13 @@ export const getWorkspacesPackageDirs = async () => {
     throw new Error('`workspaces.packages` field in `package.json` is required')
   }
 
-  return fastGlob(globs, {
-    onlyDirectories: true,
-    onlyFiles: false,
+  globs = globs.map((glob) => `${glob}/package.json`)
+
+  const files = await fastGlob(globs, {
+    onlyDirectories: false,
+    onlyFiles: true,
     absolute: true
-  }) as Promise<string[]>
+  }) as string[]
+
+  return files.map(dirname)
 }

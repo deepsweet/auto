@@ -5,7 +5,7 @@ import { createFsFromVolume, Volume } from 'memfs'
 const rootDir = process.cwd()
 const vol = Volume.fromJSON({
   [`${rootDir}/fakes/a/package.json`]: '',
-  [`${rootDir}/fakes/b/package.json`]: '',
+  [`${rootDir}/fakes/b/readme.md`]: '',
   [`${rootDir}/fakes/c/package.json`]: ''
 })
 const fs = createFsFromVolume(vol)
@@ -17,9 +17,6 @@ test('fs:getWorkspacesPackageDirs workspaces[]', async (t) => {
         workspaces: ['fakes/*']
       }
     },
-    [`${rootDir}/fakes/a/package.json`]: '',
-    [`${rootDir}/fakes/b/package.json`]: '',
-    [`${rootDir}/fakes/c/package.json`]: '',
     fs
   })
   deleteFromCache('fast-glob')
@@ -29,7 +26,6 @@ test('fs:getWorkspacesPackageDirs workspaces[]', async (t) => {
     await getWorkspacesPackageDirs(),
     [
       `${rootDir}/fakes/a`,
-      `${rootDir}/fakes/b`,
       `${rootDir}/fakes/c`
     ],
     'should return packages directories'
@@ -47,9 +43,6 @@ test('fs:getWorkspacesPackageDirs workspaces.packages[]', async (t) => {
         }
       }
     },
-    [`${rootDir}/fakes/a/package.json`]: '',
-    [`${rootDir}/fakes/b/package.json`]: '',
-    [`${rootDir}/fakes/c/package.json`]: '',
     fs
   })
 
@@ -58,7 +51,6 @@ test('fs:getWorkspacesPackageDirs workspaces.packages[]', async (t) => {
     await getWorkspacesPackageDirs(),
     [
       `${rootDir}/fakes/a`,
-      `${rootDir}/fakes/b`,
       `${rootDir}/fakes/c`
     ],
     'should return packages directories'
