@@ -1,10 +1,5 @@
 import test from 'blue-tape'
 import { getDependentsOf } from '../src/get-dependents-of'
-import { TWorkspacesOptions } from '@auto/utils/src'
-
-const options: TWorkspacesOptions = {
-  autoNamePrefix: '@ns/'
-}
 
 test('workspaces:getDependentsOf circular cross dependencies', async (t) => {
   const packages = {
@@ -37,8 +32,14 @@ test('workspaces:getDependentsOf circular cross dependencies', async (t) => {
     }
   }
 
+  const crossDependents = {
+    a: [{ name: 'b', range: '^0.1.0', devRange: null }],
+    b: [{ name: 'c', range: '^0.2.0', devRange: null }],
+    c: [{ name: 'a', range: '^0.3.0', devRange: null }]
+  }
+
   t.deepEquals(
-    await getDependentsOf(packages, 'a', options),
+    await getDependentsOf(crossDependents, packages, 'a'),
     [{ name: 'b', range: '^0.1.0', devRange: null }],
     'circular cross dependencies'
   )
@@ -69,8 +70,10 @@ test('workspaces:getDependentsOf no dependents', async (t) => {
     }
   }
 
+  const crossDependents = {}
+
   t.deepEquals(
-    await getDependentsOf(packages, 'a', options),
+    await getDependentsOf(crossDependents, packages, 'a'),
     null,
     'no dependents'
   )
