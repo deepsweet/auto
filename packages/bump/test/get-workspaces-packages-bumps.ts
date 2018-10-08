@@ -3412,3 +3412,157 @@ test('bump:getPackageBumps: sort', (t) => {
 
   t.end()
 })
+
+test('bump:getPackageBumps: transitive dep patch', (t) => {
+  t.deepEquals(
+    getWorkspacesPackagesBumps(
+      {
+        c: {
+          dir: '/fakes/c',
+          json: {
+            name: '@ns/c',
+            version: '2.3.4',
+            dependencies: {
+              '@ns/a': '^0.1.0',
+              '@ns/b': '^0.0.0'
+            }
+          }
+        },
+        b: {
+          dir: '/fakes/b',
+          json: {
+            name: '@ns/b',
+            version: '0.0.0',
+            dependencies: {
+              '@ns/a': '^0.1.0'
+            }
+          }
+        },
+        a: {
+          dir: '/fakes/a',
+          json: {
+            name: '@ns/a',
+            version: '0.1.0'
+          }
+        }
+      },
+      [
+        { name: 'b', type: 'minor', messages: [] },
+        { name: 'a', type: 'patch', messages: [] }
+      ],
+      bumpOptions,
+      workspacesOptions
+    ),
+    [
+      {
+        name: 'a',
+        dir: '/fakes/a',
+        version: '0.1.1',
+        type: 'patch',
+        deps: null,
+        devDeps: null
+      },
+      {
+        name: 'b',
+        dir: '/fakes/b',
+        version: '0.1.0',
+        type: 'minor',
+        deps: {
+          a: '^0.1.1'
+        },
+        devDeps: null
+      },
+      {
+        name: 'c',
+        dir: '/fakes/c',
+        version: '2.4.0',
+        type: 'minor',
+        deps: {
+          b: '^0.1.0',
+          a: '^0.1.1'
+        },
+        devDeps: null
+      }
+    ],
+    'should properly bump'
+  )
+
+  t.end()
+})
+
+test('bump:getPackageBumps: transitive devDep patch', (t) => {
+  t.deepEquals(
+    getWorkspacesPackagesBumps(
+      {
+        c: {
+          dir: '/fakes/c',
+          json: {
+            name: '@ns/c',
+            version: '2.3.4',
+            devDependencies: {
+              '@ns/a': '^0.1.0',
+              '@ns/b': '^0.0.0'
+            }
+          }
+        },
+        b: {
+          dir: '/fakes/b',
+          json: {
+            name: '@ns/b',
+            version: '0.0.0',
+            dependencies: {
+              '@ns/a': '^0.1.0'
+            }
+          }
+        },
+        a: {
+          dir: '/fakes/a',
+          json: {
+            name: '@ns/a',
+            version: '0.1.0'
+          }
+        }
+      },
+      [
+        { name: 'b', type: 'minor', messages: [] },
+        { name: 'a', type: 'patch', messages: [] }
+      ],
+      bumpOptions,
+      workspacesOptions
+    ),
+    [
+      {
+        name: 'a',
+        dir: '/fakes/a',
+        version: '0.1.1',
+        type: 'patch',
+        deps: null,
+        devDeps: null
+      },
+      {
+        name: 'b',
+        dir: '/fakes/b',
+        version: '0.1.0',
+        type: 'minor',
+        deps: {
+          a: '^0.1.1'
+        },
+        devDeps: null
+      },
+      {
+        name: 'c',
+        dir: '/fakes/c',
+        version: null,
+        type: null,
+        deps: null,
+        devDeps: {
+          b: '^0.1.0',
+          a: '^0.1.1'
+        }
+      }
+    ],
+    'should properly bump'
+  )
+
+  t.end()
+})

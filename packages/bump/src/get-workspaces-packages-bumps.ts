@@ -1,10 +1,11 @@
-import { getDependentsCount, getDependentsOf } from '@auto/workspaces/src/'
+import { getCrossDependents, getDependentsCount, getDependentsOf } from '@auto/workspaces/src/'
 import {
   compareReleaseTypes,
-  TWorkspacesGitBump,
-  TWorkspacesPackageBump,
   TBumpType,
-  TPackages, TWorkspacesOptions
+  TPackages,
+  TWorkspacesGitBump,
+  TWorkspacesOptions,
+  TWorkspacesPackageBump
 } from '@auto/utils/src/'
 import { bumpRange } from './bump-range'
 import { bumpVersion } from './bump-version'
@@ -17,20 +18,11 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
     }
   }
 
+  const crossDependents = getCrossDependents(packages, workspacesOptions)
   const bumpStack: { [name: string]: TWorkspacesPackageBump } = {}
 
-  const getStackDepsRange = (name: string, depName: string): string | null => {
-    if (!Reflect.has(bumpStack, name)) {
-      return null
-    }
-
-    const stackItem = bumpStack[name]
-
-    return stackItem.deps !== null ? stackItem.deps[depName] : null
-  }
-
-  const bumpDependents = (name: string, version: string, type: TBumpType): void => {
-    const dependents = getDependentsOf(packages, name, workspacesOptions)
+  const bumpDependents = (name: string, version: string, prevType: TBumpType | null, type: TBumpType): void => {
+    const dependents = getDependentsOf(crossDependents, packages, name)
 
     if (dependents === null) {
       return
@@ -43,17 +35,16 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       let bumpedVersion = null
 
       if (dependent.range !== null) {
-        const tempRange = bumpRange(dependent.range, version, type, bumpOptions)
-        const stackRange = getStackDepsRange(dependent.name, name)
-
         // if bumped range is different from the range from stack (existing or not) then bump
-        if (tempRange !== stackRange) {
-          bumpedRange = tempRange
+        if (compareReleaseTypes(prevType, type) < 0) {
+          bumpedRange = bumpRange(dependent.range, version, type, bumpOptions)
         }
       }
 
       if (dependent.devRange !== null) {
-        bumpedDevRange = bumpRange(dependent.devRange, version, type, bumpOptions)
+        if (compareReleaseTypes(prevType, type) < 0) {
+          bumpedDevRange = bumpRange(dependent.devRange, version, type, bumpOptions)
+        }
       }
 
       // if no ranges were bumped then there is no need to proceed
@@ -66,8 +57,12 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
         bumpedVersion = bumpVersion(dependentPackage.json.version, type, bumpOptions)
       }
 
+      let dependentPrevType: TBumpType | null = null
+
       if (Reflect.has(bumpStack, dependent.name)) {
         const bumpStackItem = bumpStack[dependent.name]
+
+        dependentPrevType = bumpStackItem.type
 
         if (bumpedVersion !== null && compareReleaseTypes(bumpStackItem.type, type) < 0) {
           bumpStackItem.version = bumpedVersion
@@ -118,13 +113,14 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       }
 
       if (bumpedVersion !== null) {
-        bumpDependents(dependent.name, dependentPackage.json.version, type)
+        bumpDependents(dependent.name, dependentPackage.json.version, dependentPrevType, type)
       }
     }
   }
 
   for (const bump of bumps) {
     const packageItem = packages[bump.name]
+    let prevType: TBumpType | null = null
 
     if (Reflect.has(bumpStack, bump.name)) {
       const bumpStackItem = bumpStack[bump.name]
@@ -134,6 +130,8 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       if (compareReleaseTypes(bumpStackItem.type, bump.type) >= 0) {
         continue
       }
+
+      prevType = bumpStackItem.type
 
       bumpStack[bump.name] = {
         ...bumpStackItem,
@@ -151,7 +149,7 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       }
     }
 
-    bumpDependents(bump.name, packageItem.json.version, bump.type)
+    bumpDependents(bump.name, packageItem.json.version, prevType, bump.type)
   }
 
   return Object.values(bumpStack)
