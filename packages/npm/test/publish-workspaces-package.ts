@@ -2,13 +2,17 @@ import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
 
-const rootDir = process.cwd()
-
 test('npm:publishWorkspacesPackage', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
   mock('../src/publish-workspaces-package', {
-    execa: { default: execaSpy }
+    execa: { default: execaSpy },
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'baz',
+        version: '1.2.3'
+      })
+    }
   })
 
   const { publishWorkspacesPackage } = await import('../src/publish-workspaces-package')
@@ -39,7 +43,13 @@ test('npm:publishWorkspacesPackage', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
   mock('../src/publish-workspaces-package', {
-    execa: { default: execaSpy }
+    execa: { default: execaSpy },
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'baz',
+        version: '1.2.3'
+      })
+    }
   })
 
   const { publishWorkspacesPackage } = await import('../src/publish-workspaces-package')
@@ -74,12 +84,14 @@ test('npm:publishWorkspacesPackage', async (t) => {
 
   mock('../src/publish-workspaces-package', {
     execa: { default: execaSpy },
-    [`${rootDir}/package.json`]: {
-      default: {
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'baz',
+        version: '1.2.3',
         publishConfig: {
           registry: 'https://my-registry'
         }
-      }
+      })
     }
   })
 
@@ -112,12 +124,14 @@ test('npm:publishWorkspacesPackage', async (t) => {
 
   mock('../src/publish-workspaces-package', {
     execa: { default: execaSpy },
-    [`${rootDir}/package.json`]: {
-      default: {
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'baz',
+        version: '1.2.3',
         publishConfig: {
           registry: 'https://my-registry'
         }
-      }
+      })
     }
   })
 

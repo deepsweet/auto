@@ -2,19 +2,20 @@
 import test from 'blue-tape'
 import { createSpy, getSpyCalls } from 'spyfn'
 import { mock, unmock } from 'mocku'
-import { createFsFromVolume, Volume } from 'memfs'
 
 const rootDir = process.cwd()
-const vol = Volume.fromJSON({
-  [`${rootDir}/fake/package.json`]: ''
-})
-const fs = createFsFromVolume(vol)
 
 test('npm:publishRepoPackage, default', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
   mock('../src/publish-repo-package', {
-    execa: { default: execaSpy }
+    execa: { default: execaSpy },
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'a',
+        version: '1.2.3'
+      })
+    }
   })
 
   const { publishRepoPackage } = await import('../src/publish-repo-package')
@@ -36,7 +37,13 @@ test('npm:publishRepoPackage, user provided registry', async (t) => {
   const execaSpy = createSpy(() => Promise.resolve())
 
   mock('../src/publish-repo-package', {
-    execa: { default: execaSpy }
+    execa: { default: execaSpy },
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'a',
+        version: '1.2.3'
+      })
+    }
   })
 
   const { publishRepoPackage } = await import('../src/publish-repo-package')
@@ -61,12 +68,14 @@ test('npm:publishRepoPackage, packageJson registry', async (t) => {
 
   mock('../src/publish-repo-package', {
     execa: { default: execaSpy },
-    [`${rootDir}/package.json`]: {
-      default: {
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'a',
+        version: '1.2.3',
         publishConfig: {
           registry: 'https://my-registry'
         }
-      }
+      })
     }
   })
 
@@ -90,12 +99,14 @@ test('npm:publishRepoPackage, priority test', async (t) => {
 
   mock('../src/publish-repo-package', {
     execa: { default: execaSpy },
-    [`${rootDir}/package.json`]: {
-      default: {
+    '@auto/fs/src': {
+      getRepoPackage: () => Promise.resolve({
+        name: 'a',
+        version: '1.2.3',
         publishConfig: {
           registry: 'https://publish-config-registry'
         }
-      }
+      })
     }
   })
 
