@@ -28,6 +28,10 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
       return
     }
 
+    if (compareReleaseTypes(prevType, type) >= 0) {
+      return
+    }
+
     for (const dependent of dependents) {
       const dependentPackage = packages[dependent.name]
       let bumpedRange = null
@@ -36,25 +40,12 @@ export const getWorkspacesPackagesBumps = (packages: TPackages, bumps: TWorkspac
 
       if (dependent.range !== null) {
         // if bumped range is different from the range from stack (existing or not) then bump
-        if (compareReleaseTypes(prevType, type) < 0) {
-          bumpedRange = bumpRange(dependent.range, version, type, bumpOptions)
-        }
+        bumpedRange = bumpRange(dependent.range, version, type, bumpOptions)
+        bumpedVersion = bumpVersion(dependentPackage.json.version, type, bumpOptions)
       }
 
       if (dependent.devRange !== null) {
-        if (compareReleaseTypes(prevType, type) < 0) {
-          bumpedDevRange = bumpRange(dependent.devRange, version, type, bumpOptions)
-        }
-      }
-
-      // if no ranges were bumped then there is no need to proceed
-      if (bumpedRange === null && bumpedDevRange === null) {
-        continue
-      }
-
-      // if range was bumped then dependent version should be bumped as well
-      if (bumpedRange !== null) {
-        bumpedVersion = bumpVersion(dependentPackage.json.version, type, bumpOptions)
+        bumpedDevRange = bumpRange(dependent.devRange, version, type, bumpOptions)
       }
 
       let dependentPrevType: TBumpType | null = null
