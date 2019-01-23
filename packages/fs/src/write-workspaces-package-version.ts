@@ -6,12 +6,16 @@ import { getPackage } from './get-package'
 
 const pWriteFile = promisify(writeFile)
 
-export const writeWorkspacesPackageVersion = async (packageBump: TWorkspacesPackageBump) => {
-  if (packageBump.version !== null) {
-    const packageJsonPath = path.join(packageBump.dir, 'package.json')
-    const packageJson = await getPackage(packageBump.dir)
+export const writeWorkspacesPackageVersion = async (packageBumps: TWorkspacesPackageBump[]) => {
+  for (const bump of packageBumps) {
+    if (bump.version === null) {
+      continue
+    }
 
-    packageJson.version = packageBump.version
+    const packageJsonPath = path.join(bump.dir, 'package.json')
+    const packageJson = await getPackage(bump.dir)
+
+    packageJson.version = bump.version
 
     const packageData = JSON.stringify(packageJson, null, 2) + '\n'
 

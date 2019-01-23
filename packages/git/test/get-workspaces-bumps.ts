@@ -284,6 +284,49 @@ test('git:getWorkspacesBumps multiple packages', async (t) => {
   unmock('../src/get-workspaces-bumps')
 })
 
+test('git:getWorkspacesBumps multiple packages in one commit', async (t) => {
+  mock('../src/get-workspaces-bumps', {
+    './get-commit-messages': {
+      getCommitMessages: () => Promise.resolve([
+        `${prefixes.required.patch.value} foo: patch`,
+        `${prefixes.required.major.value} foo: breaking`,
+        `${prefixes.required.patch.value} bar: patch`,
+        `${prefixes.required.publish.value} foo, bar: release`,
+        `${prefixes.required.major.value} bar: breaking`,
+        `${prefixes.required.initial.value} foo: initial`,
+        `${prefixes.required.initial.value} bar: initial`
+      ])
+    }
+  })
+
+  const { getWorkspacesBumps } = await import('../src/get-workspaces-bumps')
+
+  t.deepEquals(
+    await getWorkspacesBumps(packages, prefixes, gitOptions),
+    [{
+      name: 'foo',
+      type: 'major',
+      messages: [{
+        type: 'patch',
+        value: 'patch'
+      }, {
+        type: 'major',
+        value: 'breaking'
+      }]
+    }, {
+      name: 'bar',
+      type: 'patch',
+      messages: [{
+        type: 'patch',
+        value: 'patch'
+      }]
+    }] as TWorkspacesGitBump[],
+    'bump as major && patch'
+  )
+
+  unmock('../src/get-workspaces-bumps')
+})
+
 test('git:getWorkspacesBumps star symbol', async (t) => {
   mock('../src/get-workspaces-bumps', {
     './get-commit-messages': {

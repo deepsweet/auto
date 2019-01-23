@@ -2,18 +2,18 @@ import execa from 'execa'
 import path from 'path'
 import { TPrefixes, TWorkspacesPackageBump } from '@auto/utils/src/'
 
-export const writeWorkspacesDependenciesCommit = async (packageBump: TWorkspacesPackageBump, prefixes: TPrefixes) => {
-  if (packageBump.deps !== null || packageBump.devDeps !== null) {
-    const packageJsonPath = path.join(packageBump.dir, 'package.json')
-    const prefix = prefixes.required.dependencies.value
+export const writeWorkspacesDependenciesCommit = async (packageBumps: TWorkspacesPackageBump[], prefixes: TPrefixes) => {
+  const bumps = packageBumps.filter((bump) => bump.deps !== null || bump.devDeps !== null)
+  const packageJsonPaths = bumps.map((bump) => path.join(bump.dir, 'package.json'))
 
+  if (bumps.length > 0) {
     await execa(
       'git',
       [
         'commit',
         '-m',
-        `${prefix} ${packageBump.name}: upgrade dependencies`,
-        packageJsonPath
+        `${prefixes.required.dependencies.value} upgrade dependencies`,
+        ...packageJsonPaths
       ],
       {
         stdout: null,

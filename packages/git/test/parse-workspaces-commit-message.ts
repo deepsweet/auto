@@ -205,5 +205,19 @@ test('git:parseWorkspacesCommitMessage', (t) => {
     'return foo, baz'
   )
 
+  t.deepEquals(
+    parseWorkspacesCommitMessage(
+      `${prefixes.required.initial.value} foo, baz:`,
+      ['foo', 'bar'],
+      prefixes
+    ),
+    {
+      names: ['foo'],
+      type: 'initial',
+      message: ''
+    },
+    'empty message'
+  )
+
   t.end()
 })
