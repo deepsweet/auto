@@ -21,34 +21,12 @@
     esm "^3.0.82"
     fast-glob "^2.2.2"
 
-"@auto/fs@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@auto/fs/-/fs-0.0.16.tgz#bf367be4edd73426c67959c3b74296692f3db7dc"
-  integrity sha512-MT/MdgyX+MXhMxBjttbbmjIqE0C6FcKbUvzl15TLNE+RXAVHe/WtZQ0dqe3hdg/fV81vMXRd4xhmBNS8KCsA6Q==
-  dependencies:
-    "@auto/utils" "^0.0.15"
-    esm "^3.0.82"
-    fast-glob "^2.2.2"
-    graceful-fs "^4.1.11"
-    p-all "^1.0.0"
-
 "@auto/git@^0.0.22":
   version "0.0.22"
   resolved "https://registry.yarnpkg.com/@auto/git/-/git-0.0.22.tgz#6a03be56c17a6af0c11ca6a0a21c5b44d954ccc4"
   integrity sha512-lhs+56xCL0aW1Xw8FdNB92a5+FcEyuMHHgujkaZgIWoXInr5Ez/LFtv2bKimotjH4uKA+xDleiBtOgMECD5v5Q==
   dependencies:
     "@auto/utils" "^0.0.13"
-    escape-string-regexp "^1.0.5"
-    esm "^3.0.82"
-    execa "^1.0.0"
-    prompts "^1.1.0"
-
-"@auto/git@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@auto/git/-/git-0.0.28.tgz#e87fe2e8342d9a9f060a51e1fbb0487ec2623bb9"
-  integrity sha512-YmR85ufCk4pm1qmkkDN2at7pMvzv72QevZStKTb7LTOUBUJuydeIMlPk2lrqMXyhTrirvnL1z/XwSPPOgsUyng==
-  dependencies:
-    "@auto/utils" "^0.0.15"
     escape-string-regexp "^1.0.5"
     esm "^3.0.82"
     execa "^1.0.0"

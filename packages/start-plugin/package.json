@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "@auto/bump": "^0.0.22",
-    "@auto/fs": "^0.0.16",
-    "@auto/git": "^0.0.28",
+    "@auto/fs": "^0.0.17",
+    "@auto/git": "^0.0.29",
     "@auto/log": "^0.0.16",
-    "@auto/npm": "^0.0.26",
+    "@auto/npm": "^0.0.27",
     "@start/plugin": "^0.2.1",
     "prompts": "^1.1.1"
   },
