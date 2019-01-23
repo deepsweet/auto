@@ -81,7 +81,7 @@ test('git:writeWorkspacesPublishCommit: multiple packages', async (t) => {
           '-m',
           `${prefixes.required.publish.value} a, b: release`,
           'fakes/a/package.json',
-          'fakes/b/package.json',
+          'fakes/b/package.json'
         ]
       ]
     ],

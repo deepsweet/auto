@@ -68,6 +68,6 @@ export const parseWorkspacesCommitMessage = (commitText: string, packageNames: s
   return {
     type,
     names,
-    message,
+    message
   }
 }

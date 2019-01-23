@@ -166,7 +166,7 @@ test('git:writeWorkspacesDependenciesCommit: multiple packages', async (t) => {
           '-m',
           `${prefixes.required.dependencies.value} upgrade dependencies`,
           'fakes/b/package.json',
-          'fakes/c/package.json',
+          'fakes/c/package.json'
         ]
       ]
     ],

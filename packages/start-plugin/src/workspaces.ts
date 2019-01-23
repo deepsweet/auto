@@ -94,7 +94,7 @@ export const writeWorkspacesPackagesBumps = (prefixes: TPrefixes, workspacesOpti
     const { writePackageDependencies, writeWorkspacesPackageVersion } = await import('@auto/fs/src')
     const {
       writeWorkspacesDependenciesCommit,
-      writeWorkspacesPublishCommit,
+      writeWorkspacesPublishCommit
       // writeWorkspacesPublishTag
     } = await import('@auto/git/src')
     const { packagesBumps, logMessage } = props as TWorkspacesPluginData & StartPluginPropsAfter
