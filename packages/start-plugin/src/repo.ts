@@ -77,7 +77,7 @@ export const writeRepoPackageBump = (prefixes: TPrefixes) =>
     const {
       writeRepoPublishCommit,
       writeRepoPublishTag
-    } = await import('@auto/git')
+    } = await import('@auto/git/src')
     const { packageBump, logMessage } = props as TRepoPluginData & StartPluginPropsAfter
 
     await writeRepoPackageVersion(packageBump)
