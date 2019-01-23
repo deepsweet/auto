@@ -1041,6 +1041,11 @@
   resolved "https://registry.yarnpkg.com/@types/p-all/-/p-all-1.0.0.tgz#0549a0cc8f7bcd2cb6b2c282442669d0412925ce"
   integrity sha512-ZaM7VBS9kzAcDPB7YkoQWYxujUQyblUsjBmVaSO0igkoO7/Sus+cIoriD8/8RPpCOFnyPU1SfDDB5hH+i4S9Eg==
 
+"@types/prompts@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@types/prompts/-/prompts-1.2.0.tgz#891e73f735ad5e82e8adae3a99424128e105fb62"
+  integrity sha512-7JXpT2rSd4hqd2oBWU1wfEW6x6gX+qPH+gLzGEx+My3wcb67K9Rc02xNQRVn67phusmXm5Yqn4oTP2OW1G5zdQ==
+
 "@types/request-promise-native@^1.0.15":
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/@types/request-promise-native/-/request-promise-native-1.0.15.tgz#5b3369fc6aaf9e7fef7b6b688aef4c5759623e16"
