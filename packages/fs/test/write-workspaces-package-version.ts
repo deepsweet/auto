@@ -19,14 +19,14 @@ test('fs:writeWorkspacesPackageVersion: single version bump', async (t) => {
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
-  await writeWorkspacesPackageVersion({
+  await writeWorkspacesPackageVersion([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
     devDeps: null
-  })
+  }])
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
@@ -62,7 +62,7 @@ test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
-  await writeWorkspacesPackageVersion({
+  await writeWorkspacesPackageVersion([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
@@ -72,7 +72,7 @@ test('fs:writeWorkspacesPackageVersion: ignore dependencies', async (t) => {
       'c': '0.0.3'
     },
     devDeps: null
-  })
+  }])
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
@@ -112,7 +112,7 @@ test('fs:writeWorkspacesPackageVersion: ignore devDependencies', async (t) => {
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
-  await writeWorkspacesPackageVersion({
+  await writeWorkspacesPackageVersion([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
@@ -122,7 +122,7 @@ test('fs:writeWorkspacesPackageVersion: ignore devDependencies', async (t) => {
       'b': '0.0.2',
       'c': '0.0.3'
     }
-  })
+  }])
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
@@ -158,14 +158,14 @@ test('fs:writeWorkspacesPackageVersion: no version bump', async (t) => {
 
   const { writeWorkspacesPackageVersion } = await import('../src/write-workspaces-package-version')
 
-  await writeWorkspacesPackageVersion({
+  await writeWorkspacesPackageVersion([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: null,
     type: null,
     deps: null,
     devDeps: null
-  })
+  }])
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)

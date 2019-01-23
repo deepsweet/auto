@@ -23,14 +23,14 @@ test('fs:writePackageDependencies: ignore version bump', async (t) => {
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
-  await writePackageDependencies({
+  await writePackageDependencies([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
     type: null,
     deps: null,
     devDeps: null
-  }, options)
+  }], options)
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
@@ -66,7 +66,7 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
-  await writePackageDependencies({
+  await writePackageDependencies([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
@@ -76,7 +76,7 @@ test('fs:writePackageDependencies: multiple dependencies bump', async (t) => {
       'c': '0.0.3'
     },
     devDeps: null
-  }, options)
+  }], options)
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
@@ -116,7 +116,7 @@ test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) =>
 
   const { writePackageDependencies } = await import('../src/write-package-dependencies')
 
-  await writePackageDependencies({
+  await writePackageDependencies([{
     name: 'a',
     dir: `${rootDir}/fakes/a`,
     version: '1.0.1',
@@ -126,7 +126,7 @@ test('fs:writePackageDependencies: multiple dev dependencies bump', async (t) =>
       'b': '0.0.2',
       'c': '0.0.3'
     }
-  }, options)
+  }], options)
 
   const packageData = fs.readFileSync(`${rootDir}/fakes/a/package.json`, 'utf8') as string
   const packageJson = JSON.parse(packageData)
