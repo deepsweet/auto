@@ -61,7 +61,7 @@ test('getWorkspacesLog', (t) => {
         messages: [
           {
             type: 'dependencies',
-            value: 'upgrade dependencies: b, c'
+            value: 'upgrade dependencies'
           }
         ]
       }
@@ -143,7 +143,7 @@ test('getWorkspacesLog', (t) => {
           },
           {
             type: 'dependencies',
-            value: 'upgrade dependencies: b, c'
+            value: 'upgrade dependencies'
           }
         ]
       }

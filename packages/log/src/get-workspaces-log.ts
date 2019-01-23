@@ -20,8 +20,6 @@ export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBump
     let messages = getMessages(gitBumps, bump.name)
 
     if (bump.deps !== null) {
-      const bumpDepsNames = Object.keys(bump.deps).join(', ')
-
       return res.concat({
         name: bump.name,
         version: bump.version,
@@ -30,7 +28,7 @@ export const getWorkspacesLog = (packageBumps: TWorkspacesPackageBump[], gitBump
           ...messages.sort((a, b) => compareMessageTypes(b.type, a.type)),
           {
             type: 'dependencies',
-            value: `upgrade dependencies: ${bumpDepsNames}`
+            value: `upgrade dependencies`
           } as TWorkspacesLogMessage
         ]
       })
