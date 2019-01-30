@@ -80,3 +80,8 @@ export type TWorkspacesPackageBump = {
     [name: string]: string
   } | null
 }
+
+export type TPrompt = {
+  title: string,
+  value: string
+}

@@ -23,6 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
+    "escape-string-regexp": "^1.0.5",
     "esm": "^3.0.82"
   }
 }

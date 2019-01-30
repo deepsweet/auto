@@ -1,15 +1,5 @@
-import escapeStringRegexp from 'escape-string-regexp'
-
-export type TPrompt = {
-  title: string,
-  value: string
-}
-
-export const makeRegExp = (input: string) => {
-  const escapedInput = escapeStringRegexp(input).replace(/\\\*/g, '.*')
-
-  return new RegExp(escapedInput)
-}
+import { makeRegExp } from './make-regexp'
+import { TPrompt } from './types'
 
 export const suggestFilter = (noPackageMessage: string) =>
   (input: string, choices: TPrompt[]): Promise<TPrompt[]> => {

@@ -2,8 +2,7 @@
 // @ts-ignore
 import prompts from 'prompts'
 import execa from 'execa'
-import { TPackages, TPrefixes } from '@auto/utils/src/'
-import { suggestFilter } from './suggest-filter'
+import { TPackages, TPrefixes, suggestFilter } from '@auto/utils/src'
 import { toLowerCase } from './utils'
 
 export const makeWorkspacesCommit = async (packages: TPackages, prefixes: TPrefixes) => {

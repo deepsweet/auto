@@ -1,5 +1,4 @@
-import { TPrefixes } from '@auto/utils/src/'
-import { makeRegExp } from './suggest-filter'
+import { TPrefixes, makeRegExp } from '@auto/utils/src'
 import { TParsedMessageType, TWorkspacesParsedMessage } from './types'
 
 export const parseWorkspacesCommitMessage = (commitText: string, packageNames: string[], prefixes: TPrefixes): TWorkspacesParsedMessage | null => {
