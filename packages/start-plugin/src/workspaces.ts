@@ -75,7 +75,7 @@ export const publishWorkspacesPrompt = (prefixes: TPrefixes) =>
     }
   })
 
-export const buildBumpedPackages = (task: (...args: any[]) => StartPlugin<{}, {}>) =>
+export const buildBumpedPackages = (task: (...args: any[]) => StartPlugin<{}, void>) =>
   plugin<TWorkspacesPluginData, void>('buildBumpedPackages', ({ reporter }) => async ({ packagesBumps }) => {
     const path = await import('path')
 
