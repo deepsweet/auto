@@ -984,6 +984,11 @@
   dependencies:
     "@babel/runtime" "^7.0.0"
 
+"@start/plugin@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@start/plugin/-/plugin-0.3.0.tgz#5ab467ffee002bd0d7ddd11297917609da6e2c14"
+  integrity sha512-srZRzoQy4I3JZqYMtE934BFNnEY1coxwJGLL+TQ+R1AiMMtiUFM30B/ihrtg+88XymnXjZGXXRM+ensR75jweA==
+
 "@start/reporter-verbose@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@start/reporter-verbose/-/reporter-verbose-0.1.0.tgz#24d0b5dce8bbde58c0895c76ccd1aac1ec8e9dc9"

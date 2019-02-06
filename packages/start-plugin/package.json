@@ -27,7 +27,7 @@
     "@auto/git": "^0.0.29",
     "@auto/log": "^0.0.17",
     "@auto/npm": "^0.0.27",
-    "@start/plugin": "^0.2.1",
+    "@start/plugin": "^0.3.0",
     "prompts": "^1.1.1"
   },
   "devDependencies": {
