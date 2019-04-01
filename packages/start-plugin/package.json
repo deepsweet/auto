@@ -10,7 +10,8 @@
     "Alex Feinstein <psxcode@gmail.com> (https://github.com/psxcode)"
   ],
   "license": "MIT",
-  "main": "build/index.js",
+  "main": "build/esm-loader.js",
+  "module": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
     "build/"
