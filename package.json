@@ -18,7 +18,7 @@
     "mocku": "^0.4.0",
     "spyfn": "^0.1.1",
     "typeon": "^0.1.1",
-    "typescript": "^3.0.3"
+    "typescript": "^3.4.1"
   },
   "eslintConfig": {
     "extends": "@deepsweet/eslint-config-node-ts",
