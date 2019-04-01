@@ -40,7 +40,7 @@ export const getRepoPackageBumps = (prefixes: TPrefixes, gitOptions: TGitOptions
   })
 
 export const publishRepoPrompt = (prefixes: TPrefixes) =>
-  plugin<TRepoPluginData, void>('publishRepoPrompt', () => async ({ packageBump, gitBump }) => {
+  plugin<TRepoPluginData, any>('publishRepoPrompt', () => async ({ packageBump, gitBump }) => {
     const { getRepoLog } = await import('@auto/log/src')
     const { default: prompts } = await import('prompts')
 
@@ -71,7 +71,7 @@ export const publishRepoPrompt = (prefixes: TPrefixes) =>
   })
 
 export const writeRepoPackageBump = (prefixes: TPrefixes) =>
-  plugin<TRepoPluginData, void>('writeRepoPackageBump', ({ logMessage }) => async ({ packageBump }) => {
+  plugin<TRepoPluginData, any>('writeRepoPackageBump', ({ logMessage }) => async ({ packageBump }) => {
     const { writeRepoPackageVersion } = await import('@auto/fs/src')
     const {
       writeRepoPublishCommit,
@@ -96,7 +96,7 @@ export const publishRepoPackageBump = (npmOptions?: TNpmOptions) =>
   })
 
 export const sendRepoSlackMessage = (prefixes: TPrefixes, slackOptions: TSlackOptions, transformFn?: (log: TRepoLog) => TRepoLog) =>
-  plugin<TRepoPluginData, void>('sendRepoSlackMessage', () => async ({ packageBump, gitBump }) => {
+  plugin<TRepoPluginData, any>('sendRepoSlackMessage', () => async ({ packageBump, gitBump }) => {
     const { getRepoLog, sendRepoSlackMessage: send } = await import('@auto/log/src')
     let log = getRepoLog(packageBump, gitBump)
 
@@ -108,7 +108,7 @@ export const sendRepoSlackMessage = (prefixes: TPrefixes, slackOptions: TSlackOp
   })
 
 export const makeRepoGithubRelease = (prefixes: TPrefixes, githubOptions: TGithubOptions) =>
-  plugin<TRepoPluginData, void>('makeRepoGithubRelease', () => async ({ packageBump, gitBump }) => {
+  plugin<TRepoPluginData, any>('makeRepoGithubRelease', () => async ({ packageBump, gitBump }) => {
     const { getRepoLog, makeRepoGithubRelease: make } = await import('@auto/log/src')
 
     const log = getRepoLog(packageBump, gitBump)

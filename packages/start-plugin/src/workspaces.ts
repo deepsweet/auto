@@ -43,7 +43,7 @@ export const getWorkspacesPackagesBumps = (prefixes: TPrefixes, gitOptions: TGit
   })
 
 export const publishWorkspacesPrompt = (prefixes: TPrefixes) =>
-  plugin<TWorkspacesPluginData, void>('publishWorkspacesPrompt', () => async ({ packagesBumps, gitBumps }) => {
+  plugin<TWorkspacesPluginData, any>('publishWorkspacesPrompt', () => async ({ packagesBumps, gitBumps }) => {
     const { getWorkspacesLog } = await import('@auto/log/src')
     const { default: prompts } = await import('prompts')
 
@@ -76,7 +76,7 @@ export const publishWorkspacesPrompt = (prefixes: TPrefixes) =>
   })
 
 export const buildBumpedPackages = (task: (...args: any[]) => StartPlugin<{}, void>) =>
-  plugin<TWorkspacesPluginData, void>('buildBumpedPackages', ({ reporter }) => async ({ packagesBumps }) => {
+  plugin<TWorkspacesPluginData, any>('buildBumpedPackages', ({ reporter }) => async ({ packagesBumps }) => {
     const path = await import('path')
 
     for (const bump of packagesBumps) {
@@ -88,7 +88,7 @@ export const buildBumpedPackages = (task: (...args: any[]) => StartPlugin<{}, vo
   })
 
 export const writeWorkspacesPackagesBumps = (prefixes: TPrefixes, workspacesOptions: TWorkspacesOptions) =>
-  plugin<TWorkspacesPluginData, void>('writeWorkspacesPackagesBumps', ({ logMessage }) => async ({ packagesBumps }) => {
+  plugin<TWorkspacesPluginData, any>('writeWorkspacesPackagesBumps', ({ logMessage }) => async ({ packagesBumps }) => {
     const { writePackageDependencies, writeWorkspacesPackageVersion } = await import('@auto/fs/src')
     const {
       writeWorkspacesDependenciesCommit,
@@ -113,7 +113,7 @@ export const writeWorkspacesPackagesBumps = (prefixes: TPrefixes, workspacesOpti
   })
 
 export const publishWorkspacesPackagesBumps = (npmOptions?: TNpmOptions) =>
-  plugin<TWorkspacesPluginData, void>('publishWorkspacesPackagesBumps', () => async ({ packagesBumps }) => {
+  plugin<TWorkspacesPluginData, any>('publishWorkspacesPackagesBumps', () => async ({ packagesBumps }) => {
     const { publishWorkspacesPackage } = await import('@auto/npm/src')
 
     for (const bump of packagesBumps) {
@@ -122,7 +122,7 @@ export const publishWorkspacesPackagesBumps = (npmOptions?: TNpmOptions) =>
   })
 
 export const sendWorkspacesSlackMessage = (prefixes: TPrefixes, slackOptions: TSlackOptions, transformFn?: (logs: TWorkspacesLog[]) => TWorkspacesLog[]) =>
-  plugin<TWorkspacesPluginData, void>('sendWorkspacesSlackMessage', () => async ({ packagesBumps, gitBumps }) => {
+  plugin<TWorkspacesPluginData, any>('sendWorkspacesSlackMessage', () => async ({ packagesBumps, gitBumps }) => {
     const { getWorkspacesLog, sendWorkspacesSlackMessage: send } = await import('@auto/log/src')
 
     let logs = getWorkspacesLog(packagesBumps, gitBumps)
@@ -135,7 +135,7 @@ export const sendWorkspacesSlackMessage = (prefixes: TPrefixes, slackOptions: TS
   })
 
 export const makeWorkspacesGithubReleases = (prefixes: TPrefixes, githubOptions: TGithubOptions) =>
-  plugin<TWorkspacesPluginData, void>('makeWorkspacesGithubReleases', () => async ({ packagesBumps, gitBumps }) => {
+  plugin<TWorkspacesPluginData, any>('makeWorkspacesGithubReleases', () => async ({ packagesBumps, gitBumps }) => {
     const { getWorkspacesLog, makeWorkspacesGithubReleases: make } = await import('@auto/log/src')
 
     const logs = getWorkspacesLog(packagesBumps, gitBumps)
