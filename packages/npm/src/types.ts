@@ -1,3 +1,4 @@
 export type TNpmOptions = {
-  registry?: string
+  registry?: string,
+  publishSubDirectory?: string,
 }
