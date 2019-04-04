@@ -27,7 +27,7 @@
     "@auto/fs": "^0.0.17",
     "@auto/git": "^0.0.29",
     "@auto/log": "^0.0.17",
-    "@auto/npm": "^0.0.27",
+    "@auto/npm": "^0.0.28",
     "@start/plugin": "^0.3.0",
     "prompts": "^1.1.1"
   },
