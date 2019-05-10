@@ -23,13 +23,13 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.15",
+    "@auto/utils": "^0.1.0",
     "esm": "^3.0.82",
     "execa": "^1.0.0",
-    "prompts": "^1.1.0"
+    "prompts": "^2.0.4"
   },
   "devDependencies": {
-    "@types/escape-string-regexp": "^1.0.0",
+    "@types/escape-string-regexp": "^2.0.1",
     "@types/execa": "^0.9.0"
   }
 }
