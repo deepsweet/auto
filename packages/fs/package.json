@@ -23,14 +23,14 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.15",
+    "@auto/utils": "^0.1.0",
     "esm": "^3.0.82",
     "fast-glob": "^2.2.2",
     "graceful-fs": "^4.1.11",
-    "p-all": "^1.0.0"
+    "p-all": "^2.1.0"
   },
   "devDependencies": {
     "@types/graceful-fs": "^4.1.2",
-    "@types/p-all": "^1.0.0"
+    "@types/p-all": "^2.0.0"
   }
 }
