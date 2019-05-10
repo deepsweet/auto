@@ -23,12 +23,12 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.15",
-    "@auto/workspaces": "^0.0.20",
+    "@auto/utils": "^0.1.0",
+    "@auto/workspaces": "^0.1.0",
     "esm": "^3.0.82",
-    "semver": "^5.5.1"
+    "semver": "^6.0.0"
   },
   "devDependencies": {
-    "@types/semver": "^5.5.0"
+    "@types/semver": "^6.0.0"
   }
 }
