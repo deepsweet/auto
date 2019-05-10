@@ -23,7 +23,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/utils": "^0.0.15",
+    "@auto/utils": "^0.1.0",
     "esm": "^3.0.82",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
