@@ -1,0 +1,17 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/bump/package.json",
+        "packages/fs/package.json",
+        "packages/git/package.json",
+        "packages/log/package.json",
+        "packages/npm/package.json",
+        "packages/start-plugin/package.json",
+        "packages/utils/package.json",
+        "packages/workspaces/package.json"
+      ]
+    }
+  }
+}
