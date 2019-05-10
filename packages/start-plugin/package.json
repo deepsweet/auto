@@ -23,15 +23,15 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@auto/bump": "^0.0.22",
-    "@auto/fs": "^0.0.17",
-    "@auto/git": "^0.0.29",
-    "@auto/log": "^0.0.17",
-    "@auto/npm": "^0.0.28",
+    "@auto/bump": "^0.2.0",
+    "@auto/fs": "^0.1.0",
+    "@auto/git": "^0.1.0",
+    "@auto/log": "^0.2.0",
+    "@auto/npm": "^0.1.0",
     "@start/plugin": "^0.3.0",
-    "prompts": "^1.1.1"
+    "prompts": "^2.0.4"
   },
   "devDependencies": {
-    "@types/prompts": "^1.2.0"
+    "@types/prompts": "^2.4.0"
   }
 }
