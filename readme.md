@@ -1,5 +1,7 @@
 # auto
 
+**:warning: Project has been transferred to [NexTools metarepo](https://github.com/nextools/metarepo/tree/master/packages/auto)**
+
 [![tests](https://flat.badgen.net/travis/deepsweet/auto/master?label=tests)](https://travis-ci.org/deepsweet/auto) [![coverage](https://flat.badgen.net/codecov/c/github/deepsweet/auto/master)](https://codecov.io/github/deepsweet/auto)
 
 Set of helpers for managing and developing (mono)repos.
